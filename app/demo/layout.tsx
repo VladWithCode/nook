@@ -1,0 +1,26 @@
+"use client";
+
+import { Header } from "@/src/components/layout/header";
+import Intro from "./Intro";
+
+export default function RootLayout({ children }: React.PropsWithChildren) {
+    return (
+        <>
+            <Header />
+            <main id="main-content">
+                <div className="fixed top-0 left-0 w-full h-full z-0 bg-gray-200 pointer-events-none">
+                    <div
+                        className="absolute -top-10 -left-10 w-[calc(100%+20rem)] h-[calc(100%+20rem)] bg-[url(/noise.png)] bg-center will-change-transform"
+                        style={{
+                            animation: "bg-noise 1s infinite steps(2)",
+                        } as React.CSSProperties}
+                    ></div>
+                </div>
+                <div className="relative z-10">
+                    {children}
+                </div>
+            </main>
+            <Intro />
+        </>
+    );
+}
