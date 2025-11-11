@@ -8,7 +8,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         <>
             <Header />
             <main id="main-content">
-                <div className="fixed top-0 left-0 w-full h-full z-0 bg-gray-200 pointer-events-none">
+                <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
                     <div
                         className="absolute -top-10 -left-10 w-[calc(100%+20rem)] h-[calc(100%+20rem)] bg-[url(/noise.png)] bg-center will-change-transform"
                         style={{
