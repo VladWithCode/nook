@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useIntroStore } from './Intro';
 import { NookLogo } from '@/src/components/svg/nook';
-import { AArrowDown, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,7 +69,7 @@ export default function PinnedScrollSections() {
                     <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/40 p-6">
                         <h1 className="text-7xl mx-auto mt-auto">
                             <div className="sr-only">Nook: minuciosa perfección</div>
-                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40" />
+                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40" animateIn={true} />
                         </h1>
                         <div className="mt-auto">
                             <p id="continue-reading" className="flex flex-col items-center text-sm text-gray-200">
