@@ -5,7 +5,7 @@ import { MenuIcon } from "lucide-react";
 
 export function Header() {
     return (
-        <header className="absolute top-0 inset-x-0 z-30 flex items-center">
+        <header className="fixed top-0 inset-x-0 z-30 flex items-center">
             <div className="px-4">
                 <Link href="/" className="py-2">
                     <NookLogo className="h-6" />

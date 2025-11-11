@@ -104,7 +104,7 @@ export default function Intro({ }) {
         >
             <div id="intro-overlay" className="absolute inset-0 z-10 bg-main translate-y-full"></div>
             <div id="intro-content" className="relative z-0 text-center space-y-8">
-                <div className="w-64 h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div className="w-64 h-2 rounded-full overflow-hidden">
                     <div
                         className="h-full bg-linear-to-r from-purple-500 to-pink-500 transition-all duration-300 ease-out"
                         style={{ width: `${Math.min(progress, 100)}%` }}
