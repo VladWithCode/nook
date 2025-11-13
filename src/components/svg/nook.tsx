@@ -82,7 +82,7 @@ export function NookLogo(
 
     return (
         <svg
-            className={cn("fill-white aspect-2/1", className)}
+            className={cn("fill-current aspect-2/1", className)}
             id="nook-logo"
             viewBox="0 0 539.8 261.8"
             ref={logoRef}

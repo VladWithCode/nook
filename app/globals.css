@@ -41,6 +41,9 @@
 @theme {
     --color-main: oklch(0.6803 0.0704 211.83);
     --color-main-foreground: oklch(0.985 0.002 247.839);
+
+    --font-main: var(--font-main), Arial, Helvetica, sans-serif;
+    --font-secondary: var(--font-secondary);
 }
 
 @theme inline {
@@ -94,6 +97,8 @@ body {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-main), Arial, Helvetica, sans-serif;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 .dark {
