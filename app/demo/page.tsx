@@ -111,10 +111,37 @@ export default function PinnedScrollSections() {
                 stagger: 0.1,
                 duration: 0.5,
                 scrollTrigger: {
-                    trigger: squaresSectRef.current,
-                    start: "5% bottom",
+                    trigger: squaresSectRef.current.querySelector("[data-squares-grid]"),
+                    start: "top bottom",
                 }
             });
+
+            if (document.body) {
+                const bodyBgTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: squaresSectRef.current.querySelector("[data-squares-grid]"),
+                        start: "5% bottom",
+                        onEnter: () => {
+                            bodyBgTl.play();
+                        },
+                        onLeave: () => {
+                            bodyBgTl.reverse();
+                        },
+                        onEnterBack: () => {
+                            bodyBgTl.play();
+                        },
+                        onLeaveBack: () => {
+                            bodyBgTl.reverse();
+                        }
+                    }
+                });
+                bodyBgTl.to(document.body, {
+                    background: "oklch(0.13 0.028 261.692)",
+                    color: "oklch(0.985 0.002 247.839)",
+                    duration: 0.5,
+                    ease: "power3.inOut"
+                })
+            }
         }
 
         if (squaresSect2Ref.current) {
@@ -127,33 +154,6 @@ export default function PinnedScrollSections() {
                     trigger: squaresSect2Ref.current,
                     start: "5% bottom",
                 }
-            })
-        }
-
-        if (document.body) {
-            const bodyBgTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: squaresSectRef.current,
-                    start: "5% bottom",
-                    onEnter: () => {
-                        bodyBgTl.play();
-                    },
-                    onLeave: () => {
-                        bodyBgTl.reverse();
-                    },
-                    onEnterBack: () => {
-                        bodyBgTl.play();
-                    },
-                    onLeaveBack: () => {
-                        bodyBgTl.reverse();
-                    }
-                }
-            });
-            bodyBgTl.to(document.body, {
-                background: "oklch(0.13 0.028 261.692)",
-                color: "oklch(0.985 0.002 247.839)",
-                duration: 0.5,
-                ease: "power3.inOut"
             })
         }
     }, { scope: containerRef, dependencies: [animatePage] });
@@ -266,7 +266,7 @@ export default function PinnedScrollSections() {
             </section>
             <section className="px-6" ref={squaresSectRef}>
                 <h2 className="font-secondary text-6xl font-light pt-6 pb-24">Creamos experiencias para hacerte notar y ayudarte a crecer</h2>
-                <div className="grid grid-cols-6 gap-3">
+                <div className="grid grid-cols-6 gap-3" data-squares-grid>
                     {
                         [1, 2, 3, -1, 4, 5, 6, 7, 8, 9, -2, 10].map(v => {
                             if (v < 0) {
@@ -291,7 +291,7 @@ export default function PinnedScrollSections() {
                     }
                 </div>
                 <p className="font-secondary text-center py-12">
-                    Nuestra experiencia nos ha dado una envidiable reputación por siempre dar ese factor "WOW",
+                    Nuestra experiencia nos ha dado una envidiable reputación por siempre dar ese factor &quot;WOW&quot;,
                     apoyada con diseño inteligente y bien pensado enfocado a darte la mayor ganancia sobre tu
                     inversión.
                 </p>
