@@ -62,7 +62,25 @@ export default function PinnedScrollSections() {
                 gsap.set(section, {
                     zIndex: sections.length - i,
                 });
-                gsap.to("#hero-video", { opacity: 1, scale: 1, delay: 0.1 });
+                const animations = getSectionAnimations(section);
+                const tl = gsap.timeline({
+                    defaults: { duration: 0.5, ease: "power3.inOut" },
+                });
+                for (const animation of animations) {
+                    if (!animation.toVars) {
+                        continue;
+                    }
+                    const elt = animation.globalSelector
+                        ? document.querySelectorAll(animation.element)
+                        : section.querySelectorAll(animation.element);
+
+                    if (animation.fromVars) {
+                        tl.fromTo(elt, animation.fromVars, animation.toVars, animation.position);
+                        continue;
+                    }
+
+                    tl.to(elt, animation.toVars, animation.position);
+                }
             } else {
                 const outAnimations = getSectionAnimations(sections[i - 1]);
                 for (const animation of outAnimations) {
@@ -162,24 +180,29 @@ export default function PinnedScrollSections() {
         <div ref={containerRef} className="relative">
             <div className="h-screen w-full grid grid-cols-1 grid-rows-1 [&>section]:col-start-1 [&>section]:row-start-1" ref={mainScrollRef}>
                 <section className="h-full w-full" data-animation="hero" data-animation-tl="main">
-                    <video id="hero-video" className="absolute inset-0 z-0 h-full w-full object-cover" autoPlay loop muted>
+                    <video id="hero-video" className="absolute inset-0 z-0 h-full w-full object-cover" autoPlay loop muted playsInline>
                         <source src="/demo_vid_hero.mp4" type="video/mp4" />
                     </video>
-                    <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/40 p-6">
-                        <h1 className="text-7xl mx-auto mt-auto">
-                            <div className="sr-only">Nook: minuciosa perfección</div>
+                    <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6">
+                        <h1 className="flex flex-col gap-6 text-7xl mx-auto mt-auto">
                             <NookLogo id="start-hero-logo" className="aspect-2/1 h-40" animateIn={true} />
+                            <div className="flex text-center text-2xl mx-auto">
+                                <i className="sr-only">Nook:</i>
+                                <div className="opacity-0" data-animate="hero-slogan">minuciosa</div>
+                                <span className="inline-block h-0">&nbsp;</span>
+                                <div className="opacity-0" data-animate="hero-slogan">perfección</div>
+                            </div>
                         </h1>
                         <div className="mt-auto">
-                            <p id="continue-reading" className="flex flex-col items-center text-sm text-gray-200">
+                            <Button id="continue-reading" className="flex flex-col items-center text-sm text-gray-200 animate-bounce" variant="ghost">
                                 <span className="sr-only">Continua leyendo</span>
-                                <ChevronDown className="relative z-0" />
-                                <ChevronDown className="relative z-10 -mt-4" />
-                            </p>
+                                <ChevronDown className="relative size-4 z-0" />
+                                <ChevronDown className="relative size-4 z-10 -mt-4.5" />
+                            </Button>
                         </div>
                     </div>
                 </section>
-                <section className="h-full w-full" data-animation="social-proof" data-animation-tl="main">
+                <section className="h-full w-full flex flex-col pt-[5vh]" data-animation="social-proof" data-animation-tl="main">
                     <ul className="flex gap-6 px-6 py-[15vw] [&>li]:flex-1">
                         {
                             awards.map((award, i) => (
@@ -197,9 +220,9 @@ export default function PinnedScrollSections() {
                         <Button className="rounded-full border border-current capitalize" variant="ghost" data-animate="button">
                             Ve nuestro trabajo
                         </Button>
-                        <div className="flex w-full justify-end" data-animate="logo">
-                            <NookLogo className="h-24 w-auto" />
-                        </div>
+                    </div>
+                    <div className="flex w-full justify-end px-6 py-6 mt-auto" data-animate="logo">
+                        <NookLogo className="h-24 w-auto" />
                     </div>
                 </section>
                 <section className="h-full w-full flex flex-col items-center justify-center" data-animation="duck" data-animation-tl="main">
@@ -216,7 +239,7 @@ export default function PinnedScrollSections() {
                 </section>
             </div>
             <PortfolioSection />
-            <section className="w-full px-6">
+            <section className="w-full px-6 overflow-hidden">
                 <h2 className="text-3xl">Campañas desctacadas</h2>
                 <ScrollArea className="w-full">
                     <ul className="flex gap-6 py-24">
@@ -333,10 +356,11 @@ function getSectionAnimations(section: HTMLElement): TSectionAnimation[] {
                 fromVars: { opacity: 0, scale: 97 },
                 exitVars: { opacity: 0, scale: 1.05 },
             }, {
-                element: "#start-hero-logo",
-                toVars: { opacity: 1, scale: 1 },
-                exitVars: { opacity: 0, scale: 0.8 },
-                position: "<",
+                element: '[data-animate="hero-slogan"]',
+                toVars: { y: "0rem", opacity: 1 },
+                fromVars: { y: "-1.5rem", opacity: 0 },
+                exitVars: { y: "1.5rem", opacity: 0 },
+                position: "<25%"
             }, {
                 element: "&",
                 toVars: { opacity: 1 },
