@@ -492,17 +492,16 @@ type TAwardProps = {
     award: {
         label: string;
         icon: React.ReactNode;
+        title: string;
         href: string;
     }
 }
 function AwardItem({ award }: TAwardProps) {
     return (
         <li>
-            <a href={award.href}>
-                <figure>
-                    {award.icon}
-                </figure>
-                <span className="text-xs">{award.label}</span>
+            <a className="flex flex-col gap-2" href={award.href}>
+                <span className="text-4xl">{award.title}</span>
+                <span className="text-sm font-secondary">{award.label}</span>
             </a>
         </li>
     );
@@ -511,17 +510,20 @@ function AwardItem({ award }: TAwardProps) {
 const awards = [
     {
         label: "Design and branding agency of the year.",
+        title: "Crea",
         icon: <Copy1 />,
         href: "#"
     },
     {
         label: "Agency of the year.",
+        title: "Innova",
         icon: <Copy1 />,
         href: "#"
     },
     {
         label: "Digital innovation agency of the year finalist.",
         icon: <Copy1 />,
+        title: "Crece",
         href: "#"
     }
 ];
