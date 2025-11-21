@@ -181,7 +181,7 @@ export default function PinnedScrollSections() {
             <div className="h-screen w-full grid grid-cols-1 grid-rows-1 [&>section]:col-start-1 [&>section]:row-start-1" ref={mainScrollRef}>
                 <section className="h-full w-full" data-animation="hero" data-animation-tl="main">
                     <video id="hero-video" className="absolute inset-0 z-0 h-full w-full object-cover" autoPlay loop muted playsInline>
-                        <source src="/demo_vid_hero.mp4" type="video/mp4" />
+                        <source src="/nook_hero.webm" type="video/webm" />
                     </video>
                     <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6">
                         <h1 className="flex flex-col gap-6 text-7xl mx-auto mt-auto">
