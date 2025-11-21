@@ -2,6 +2,7 @@
 
 import { Header } from "@/src/components/layout/header";
 import Intro from "./Intro";
+import { Footer } from "@/src/components/layout/footer";
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
     return (
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
                     {children}
                 </div>
             </main>
+            <Footer />
             <Intro />
         </>
     );
