@@ -41,7 +41,30 @@ export default function PinnedScrollSections() {
     }, [])
 
     useGSAP(() => {
-        if (!containerRef.current || !mainScrollRef.current || !animatePage || !window.document) {
+        if (!containerRef.current || !mainScrollRef.current || !window.document) {
+            return;
+        }
+
+        if (!animatePage) {
+            const vects = containerRef.current.querySelectorAll("#start-hero-logo [data-animatable-vector]") as NodeListOf<SVGGeometryElement> | null;
+            if (!vects) {
+                return;
+            }
+            for (const vect of vects) {
+                const len = vect.getTotalLength();
+                gsap.to(vect, {
+                    strokeDasharray: len,
+                    strokeDashoffset: len,
+                    fill: "none",
+                    stroke: "white",
+                    strokeWidth: 1
+                })
+            }
+
+            gsap.set("#start-hero-logo #line1", { width: 0, transformOrigin: "left center" });
+            gsap.set("#start-hero-logo #line2", { width: 0, transformOrigin: "left center" });
+            gsap.set("#start-hero-logo #circle_g ellipse", { rx: 0, ry: 0 });
+            gsap.set('[data-animate="hero-slogan"]', { y: "-1em", opacity: 0 });
             return;
         }
 
@@ -59,28 +82,37 @@ export default function PinnedScrollSections() {
         const sections = containerRef.current.querySelectorAll<HTMLElement>('section[data-animation-tl="main"]');
         sections.forEach((section, i) => {
             if (i === 0) {
-                gsap.set(section, {
-                    zIndex: sections.length - i,
-                });
-                const animations = getSectionAnimations(section);
-                const tl = gsap.timeline({
-                    defaults: { duration: 0.5, ease: "power3.inOut" },
-                });
-                for (const animation of animations) {
-                    if (!animation.toVars) {
-                        continue;
-                    }
-                    const elt = animation.globalSelector
-                        ? document.querySelectorAll(animation.element)
-                        : section.querySelectorAll(animation.element);
-
-                    if (animation.fromVars) {
-                        tl.fromTo(elt, animation.fromVars, animation.toVars, animation.position);
-                        continue;
-                    }
-
-                    tl.to(elt, animation.toVars, animation.position);
-                }
+                const hTl = gsap.timeline({ defaults: { duration: 1.5, ease: "power3.inOut" } });
+                hTl.to(section.querySelector("#hero-video"), {
+                    opacity: 1,
+                    scale: 1,
+                })
+                    .to("#start-hero-logo [data-animatable-vector]", {
+                        strokeDashoffset: 0,
+                        stagger: 0.2,
+                    }, "<25%")
+                    .to("#start-hero-logo [data-animatable-vector]", {
+                        fill: "white",
+                        duration: 0.4,
+                        stagger: 0.05,
+                    })
+                    .to("#start-hero-logo #line2", {
+                        width: 104.5, duration: 0.5
+                    }, "<")
+                    .to("#start-hero-logo #line1", {
+                        width: 118.1, duration: 0.5
+                    }, "<25%")
+                    .to("#start-hero-logo #circle_g ellipse", {
+                        rx: 22.1,
+                        ry: 21.9,
+                        duration: 0.5,
+                        stagger: 0.05
+                    }, "<")
+                    .to(section.querySelectorAll('[data-animate="hero-slogan"]'), {
+                        opacity: 1,
+                        y: "0rem",
+                        stagger: 0.05,
+                    }, "<");
             } else {
                 const outAnimations = getSectionAnimations(sections[i - 1]);
                 for (const animation of outAnimations) {
@@ -185,12 +217,12 @@ export default function PinnedScrollSections() {
                     </video>
                     <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6">
                         <h1 className="flex flex-col gap-6 text-7xl mx-auto mt-auto">
-                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40" animateIn={true} />
+                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40" />
                             <div className="flex text-center text-2xl mx-auto">
                                 <i className="sr-only">Nook:</i>
-                                <div className="opacity-0" data-animate="hero-slogan">minuciosa</div>
+                                <div className="" data-animate="hero-slogan">minuciosa</div>
                                 <span className="inline-block h-0">&nbsp;</span>
-                                <div className="opacity-0" data-animate="hero-slogan">perfección</div>
+                                <div className="" data-animate="hero-slogan">perfección</div>
                             </div>
                         </h1>
                         <div className="mt-auto">
@@ -358,9 +390,7 @@ function getSectionAnimations(section: HTMLElement): TSectionAnimation[] {
             }, {
                 element: '[data-animate="hero-slogan"]',
                 toVars: { y: "0rem", opacity: 1 },
-                fromVars: { y: "-1.5rem", opacity: 0 },
                 exitVars: { y: "1.5rem", opacity: 0 },
-                position: "<25%"
             }, {
                 element: "&",
                 toVars: { opacity: 1 },
