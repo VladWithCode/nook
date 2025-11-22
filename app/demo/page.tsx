@@ -247,7 +247,13 @@ export default function PinnedScrollSections() {
                     </div>
                     <div className="space-y-6 pt-8 px-6">
                         <p className="font-light text-xl" data-animate="paragraph">
-                            BASIC/DEPT® is a global branding and digital design agency building products, services, and eCommerce experiences that turn cultural values into company value.
+                            <span className="inline-block pr-2 pl-1">
+                                <NookLogo className="h-8" />
+                            </span>
+                            <span className="font-secondary font-medium">
+                                es una agencia digital mexicana que impulsa negocios con precisión quirúrgica.
+                                Diseñamos marcas, campañas y experiencias que convierten cada detalle en crecimiento real.
+                            </span>
                         </p>
                         <Button className="rounded-full border border-current capitalize" variant="ghost" data-animate="button">
                             Ve nuestro trabajo
@@ -509,19 +515,19 @@ function AwardItem({ award }: TAwardProps) {
 
 const awards = [
     {
-        label: "Design and branding agency of the year.",
+        label: "Diseño que convierte ideas en impacto real.",
         title: "Crea",
         icon: <Copy1 />,
         href: "#"
     },
     {
-        label: "Agency of the year.",
+        label: "Estrategias que redefinen cómo crece tu marca.",
         title: "Innova",
         icon: <Copy1 />,
         href: "#"
     },
     {
-        label: "Digital innovation agency of the year finalist.",
+        label: "Impulso digital que acelera tu negocio.",
         icon: <Copy1 />,
         title: "Crece",
         href: "#"
