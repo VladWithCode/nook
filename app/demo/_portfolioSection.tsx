@@ -63,7 +63,7 @@ const portfolioItems = [
         titleIconAsMainImg: true,
         description: "Campañas digitales enfocadas en conversión y presencia local en Durango.",
         src: portfolioImg2,
-        sourceType: "image",
+        sourceType: null,
         mimeType: null,
     } as const,
     {
@@ -87,7 +87,7 @@ const portfolioItems = [
 ] as const;
 
 function ItemMedia({ item }: { item: typeof portfolioItems[number] }) {
-    switch (item.sourceType) {
+    switch (item.sourceType as any) {
         case "image":
             return (
                 <Image src={item.src} alt={item.description} className="h-full w-full object-cover scale-105" width={720} height={900} />
@@ -100,7 +100,7 @@ function ItemMedia({ item }: { item: typeof portfolioItems[number] }) {
                     loop
                     autoPlay
                     playsInline>
-                    <source src={item.src} type={item.mimeType} />
+                    <source src={item.src as string} type={item.mimeType as string} />
                 </video>
             );
         case null:
