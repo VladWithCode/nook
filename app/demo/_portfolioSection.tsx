@@ -24,7 +24,7 @@ export function PortfolioSection() {
                                     <span className={item.titleIcon && !item.titleIconAsMainImg ? "sr-only" : undefined}>{item.title}</span>
                                     {
                                         !item.titleIconAsMainImg && item.titleIcon
-                                            ? item.titleIcon
+                                            ? (item as unknown as any).titleIcon
                                             : null
                                     }
                                 </h3>
@@ -63,7 +63,7 @@ const portfolioItems = [
         titleIconAsMainImg: true,
         description: "Campañas digitales enfocadas en conversión y presencia local en Durango.",
         src: portfolioImg2,
-        sourceType: null,
+        sourceType: "image",
         mimeType: null,
     } as const,
     {
