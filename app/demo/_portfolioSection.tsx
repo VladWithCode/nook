@@ -1,8 +1,8 @@
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import portfolioImg1 from './horsect_1.webp';
 import portfolioImg2 from './horsect_2.webp';
 import Image from 'next/image';
 import { BydLogo } from '@/src/components/svg/byd';
+import calienteDeDgo from './caliente_de_durango.webp';
 
 export function PortfolioSection() {
     return (
@@ -14,11 +14,16 @@ export function PortfolioSection() {
                             <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6" key={item.title}>
                                 <div className="w-full aspect-3/4 overflow-hidden">
                                     <ItemMedia item={item} />
+                                    {
+                                        item.titleIconAsMainImg
+                                            ? item.titleIcon
+                                            : null
+                                    }
                                 </div>
                                 <h3 className="text-xl font-secondary uppercase">
-                                    <span className={item.titleIcon ? "sr-only" : undefined}>{item.title}</span>
+                                    <span className={item.titleIcon && !item.titleIconAsMainImg ? "sr-only" : undefined}>{item.title}</span>
                                     {
-                                        item.titleIcon
+                                        !item.titleIconAsMainImg && item.titleIcon
                                             ? item.titleIcon
                                             : null
                                     }
@@ -37,28 +42,37 @@ export function PortfolioSection() {
 const portfolioItems = [
     {
         title: "Byd Durango",
-        // titleIcon: <BydLogo className="h-6" />,
-        titleIcon: null,
+        titleIcon: (
+            <div className="h-full flex flex-col">
+                <BydLogo className="w-full my-auto" />
+            </div>
+        ),
+        titleIconAsMainImg: true,
         description: "Una experiencia digital creada para impulsar la nueva era de movilidad eléctrica en México.",
-        src: portfolioImg1,
-        sourceType: "image",
-        mimeType: "image/webp",
+        src: "",
+        sourceType: null,
+        mimeType: null,
     } as const,
     {
         title: "Caliente MX",
-        titleIcon: null,
+        titleIcon: (
+            <div className="h-full flex flex-col">
+                <Image src={calienteDeDgo} alt="Logo de Caliente de Durango" />
+            </div>
+        ),
+        titleIconAsMainImg: true,
         description: "Campañas digitales enfocadas en conversión y presencia local en Durango.",
         src: portfolioImg2,
-        sourceType: "image",
-        mimeType: "image/webp",
+        sourceType: null,
+        mimeType: null,
     } as const,
     {
         title: "Q&R",
         titleIcon: null,
         description: "Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.",
-        src: "/horsect_3.mp4",
+        src: "/qnr.webm",
         sourceType: "video",
-        mimeType: "video/mp4",
+        mimeType: "video/webm",
     } as const,
     {
         title: "Puedes ser tú",
@@ -78,10 +92,17 @@ function ItemMedia({ item }: { item: typeof portfolioItems[number] }) {
             );
         case "video":
             return (
-                <video className="h-full w-full object-cover scale-105" muted loop autoPlay playsInline>
+                <video
+                    className="h-full w-full object-cover scale-105"
+                    muted
+                    loop
+                    autoPlay
+                    playsInline>
                     <source src={item.src} type={item.mimeType} />
                 </video>
             );
+        case null:
+            return null;
 
         default:
             return (
