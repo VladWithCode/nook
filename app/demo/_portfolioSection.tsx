@@ -81,8 +81,8 @@ const portfolioItems = [
         titleIconAsMainImg: false,
         description: "Identidad visual y estrategia digital para tu negocio!.",
         src: "",
-        sourceType: null,
-        mimeType: "video/mp4",
+        sourceType: "",
+        mimeType: "",
     } as const
 ] as const;
 
