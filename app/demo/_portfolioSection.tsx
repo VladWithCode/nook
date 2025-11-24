@@ -69,6 +69,7 @@ const portfolioItems = [
     {
         title: "Q&R",
         titleIcon: null,
+        titleIconAsMainImg: false,
         description: "Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.",
         src: "/qnr.webm",
         sourceType: "video",
@@ -77,6 +78,7 @@ const portfolioItems = [
     {
         title: "Puedes ser tú",
         titleIcon: null,
+        titleIconAsMainImg: false,
         description: "Identidad visual y estrategia digital para tu negocio!.",
         src: "",
         sourceType: null,
