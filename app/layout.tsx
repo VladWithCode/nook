@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Header } from "@/src/components/layout/header";
+import { Footer } from "@/src/components/layout/footer";
+import Intro from "./Intro";
 
 const mainFont = localFont({
     src: [
@@ -37,7 +40,22 @@ export default function RootLayout({
             <body
                 className={`relative z-0 ${mainFont.variable} ${secondaryFont.variable} antialiased bg-black`}
             >
-                {children}
+                <Header />
+                <main id="main-content">
+                    <div className="fixed inset-0 w-screen h-dvh z-0 pointer-events-none">
+                        <div
+                            className="absolute -top-10 -left-10 w-[calc(100%+20rem)] h-[calc(100%+20rem)] bg-[url(/noise.png)] bg-center will-change-transform"
+                            style={{
+                                animation: "bg-noise 1s infinite steps(2)",
+                            } as React.CSSProperties}
+                        ></div>
+                    </div>
+                    <div className="relative z-10">
+                        {children}
+                    </div>
+                </main>
+                <Footer />
+                <Intro />
             </body>
         </html>
     );

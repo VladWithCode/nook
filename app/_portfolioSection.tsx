@@ -1,7 +1,6 @@
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import portfolioImg2 from './horsect_2.webp';
 import Image from 'next/image';
-import { BydLogo } from '@/src/components/svg/byd';
 import calienteDeDgo from './caliente_de_durango.webp';
 
 export function PortfolioSection() {
@@ -11,8 +10,8 @@ export function PortfolioSection() {
                 <ul className="relative flex gap-6">
                     {
                         portfolioItems.map((item) => (
-                            <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6" key={item.title}>
-                                <div className="w-full aspect-3/4 overflow-hidden">
+                            <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6 px-px" key={item.title}>
+                                <div className="w-full aspect-3/4 rounded-sm overflow-hidden shadow-lg">
                                     <ItemMedia item={item} />
                                     {
                                         item.titleIconAsMainImg
@@ -20,15 +19,15 @@ export function PortfolioSection() {
                                             : null
                                     }
                                 </div>
-                                <h3 className="text-xl font-secondary uppercase">
+                                <h3 className="text-xl uppercase">
                                     <span className={item.titleIcon && !item.titleIconAsMainImg ? "sr-only" : undefined}>{item.title}</span>
                                     {
                                         !item.titleIconAsMainImg && item.titleIcon
-                                            ? (item as unknown as any).titleIcon
+                                            ? (item as any).titleIcon
                                             : null
                                     }
                                 </h3>
-                                <p className="text-sm text-current/75 w-[60%] uppercase">{item.description}</p>
+                                <p className="text-sm text-current/60 font-secondary uppercase">{item.description}</p>
                             </li>
                         ))
                     }
@@ -41,23 +40,24 @@ export function PortfolioSection() {
 
 const portfolioItems = [
     {
-        title: "Byd Durango",
-        titleIcon: (
-            <div className="h-full flex flex-col">
-                <BydLogo className="w-full my-auto" />
-            </div>
-        ),
-        titleIconAsMainImg: true,
+        title: "BYD Durango",
+        // titleIcon: (
+        //     <div className="h-full flex flex-col p-4">
+        //         <BydLogo className="w-full my-auto" />
+        //     </div>
+        // ),
+        titleIcon: null,
+        titleIconAsMainImg: false,
         description: "Una experiencia digital creada para impulsar la nueva era de movilidad eléctrica en México.",
-        src: "",
-        sourceType: null,
-        mimeType: null,
+        src: "/byd.webm",
+        sourceType: "video",
+        mimeType: "video/webm",
     } as const,
     {
         title: "Caliente MX",
         titleIcon: (
-            <div className="h-full flex flex-col">
-                <Image src={calienteDeDgo} alt="Logo de Caliente de Durango" />
+            <div className="h-full flex flex-col p-4">
+                <Image className="w-full my-auto" src={calienteDeDgo} alt="Logo de Caliente de Durango" />
             </div>
         ),
         titleIconAsMainImg: true,

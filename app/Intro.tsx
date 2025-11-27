@@ -52,7 +52,7 @@ export default function Intro({ }) {
                     clearInterval(interval);
                     return 100;
                 }
-                return prev + Math.random() * 10; // This should make the intro last around 1s minimum
+                return prev + Math.random() * 100; // This should make the intro last around 1s minimum
             });
         }, 100);
 

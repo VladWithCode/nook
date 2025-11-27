@@ -3,9 +3,9 @@ import { NookLogo } from "../svg/nook";
 
 export function Footer() {
     return (
-        <footer className="relative bottom-0 inset-x-0 z-0 px-6 pt-[15vw] pb-[25vw] bg-primary text-primary-foreground overflow-hidden space-y-8">
+        <footer className="relative bottom-0 inset-x-0 z-0 bg-primary text-primary-foreground overflow-hidden space-y-12 px-6 pt-[15vw] pb-[25vw]">
             <div className="absolute right-0 top-12 -translate-y-1/2 z-0">
-                <DuckSVG className="h-full w-full transform-3d transform-[rotateY(180deg)_rotateZ(35deg)_translate(-10%,50%)] text-stone-200/20" />
+                <DuckSVG className="h-full w-full transform-3d transform-[rotateY(180deg)_rotateZ(40deg)_translate(-6%,50%)] text-stone-200/20" />
             </div>
             <div className="relative z-10 space-y-4">
                 <h2 className="flex flex-col gap-1 text-2xl">
