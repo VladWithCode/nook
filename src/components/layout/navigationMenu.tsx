@@ -28,7 +28,7 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
                         <NookLogo className="h-24" />
                     </Link>
                     <nav>
-                        <ul className="text-3xl text-center uppercase space-y-6">
+                        <ul className="text-3xl text-center capitalize space-y-6">
                             {/* <li> */}
                             {/*     <Link href="/">Inicio</Link> */}
                             {/* </li> */}
