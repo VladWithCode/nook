@@ -24,12 +24,14 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
             </div>
             {isOpen ? (
                 <div className="fixed inset-0 z-50 flex flex-col items-center gap-20 bg-main px-12 py-[25vw]">
-                    <NookLogo className="h-24" />
+                    <Link href="/">
+                        <NookLogo className="h-24" />
+                    </Link>
                     <nav>
                         <ul className="text-3xl text-center uppercase space-y-6">
-                            <li>
-                                <Link href="/">Inicio</Link>
-                            </li>
+                            {/* <li> */}
+                            {/*     <Link href="/">Inicio</Link> */}
+                            {/* </li> */}
                             <li>
                                 <Link href="/diseno-y-creatividad">Diseño y Creatividad</Link>
                             </li>
