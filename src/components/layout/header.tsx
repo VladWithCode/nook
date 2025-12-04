@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { NookLogo } from "../svg/nook";
-import { Button } from "@/components/ui/button";
-import { MenuIcon } from "lucide-react";
+import { NavigationMenu } from "./navigationMenu";
 
 export function Header() {
     return (
@@ -11,11 +10,7 @@ export function Header() {
                     <NookLogo className="h-6" />
                 </Link>
             </div>
-            <div className="ml-auto">
-                <Button variant="ghost">
-                    <MenuIcon className="size-6" />
-                </Button>
-            </div>
+            <NavigationMenu />
         </header>
     );
 }
