@@ -38,7 +38,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`relative z-0 ${mainFont.variable} ${secondaryFont.variable} antialiased bg-black`}
+                className={`relative z-0 ${mainFont.variable} ${secondaryFont.variable} antialiased bg-black text-gray-50`}
             >
                 <Header />
                 <main id="main-content">

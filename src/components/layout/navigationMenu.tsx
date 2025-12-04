@@ -23,7 +23,7 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
                 </Button>
             </div>
             {isOpen ? (
-                <div className="fixed inset-0 z-50 flex flex-col items-center gap-20 bg-main px-12 py-[25vw]">
+                <div className="fixed inset-0 z-50 flex flex-col items-center gap-20 bg-main text-gray-50 px-12 py-[25vw]">
                     <Link href="/">
                         <NookLogo className="h-24" />
                     </Link>
