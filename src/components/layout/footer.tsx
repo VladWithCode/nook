@@ -1,29 +1,28 @@
+import Link from "next/link";
 import { DuckSVG } from "../svg/duck";
 import { NookLogo } from "../svg/nook";
 
 export function Footer() {
     return (
-        <footer className="relative bottom-0 inset-x-0 z-0 bg-primary text-primary-foreground overflow-hidden space-y-12 px-6 pt-[15vw] pb-[25vw]">
+        <footer className="relative bottom-0 inset-x-0 z-0 bg-primary text-primary-foreground overflow-hidden space-y-12 px-6 pt-[15vw]">
             <div className="absolute right-0 top-12 -translate-y-1/2 z-0">
                 <DuckSVG className="h-full w-full transform-3d transform-[rotateY(180deg)_rotateZ(40deg)_translate(-6%,50%)] text-stone-200/20" />
             </div>
-            <div className="relative z-10 space-y-4">
-                <h2 className="flex flex-col gap-1 text-2xl">
-                    <div className="">
-                        <NookLogo className="h-10" />
-                    </div>
-                    <span className="text-xs">
-                        <i className="sr-only">Nook:</i>
-                        <span className="inline-block">minuciosa</span>
-                        &nbsp;
-                        <span className="inline-block">perfección</span>
-                    </span>
-                </h2>
-                <div className="text-current/80">
-                    <p className="">Nos encantaría ayudarte a lograr tus ambiciones.</p>
-                    <p>Trabajemos juntos.</p>
-                    <a href="mailto:negocios@nook.com" className="text-lg text-primary-foreground underline underline-offset-2 mt-1">negocios@nook.com</a>
+            <h2 className="flex flex-col gap-1 text-2xl">
+                <div className="">
+                    <NookLogo className="h-10" />
                 </div>
+                <span className="text-xs">
+                    <i className="sr-only">Nook:</i>
+                    <span className="inline-block">minuciosa</span>
+                    &nbsp;
+                    <span className="inline-block">perfección</span>
+                </span>
+            </h2>
+            <div className="text-xl text-current/80">
+                <p>Nos encantaría ayudarte a lograr tus ambiciones.</p>
+                <p>Trabajemos juntos.</p>
+                <a href="mailto:negocios@nook.com" className="text-primary-foreground underline underline-offset-2 mt-1">negocios@nook.com</a>
             </div>
             <div className="space-y-4">
                 <div className="space-y-2">
@@ -63,6 +62,17 @@ export function Footer() {
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div className="text-center text-current/40 text-xs uppercase bg-slate-950 -mx-6 px-6 pt-6 pb-3 space-y-1.5">
+                <p className="">NÖOK&copy; 2025</p>
+                <ul className="flex justify-center gap-3">
+                    <li>
+                        <Link href="/terminos">Terminos de Servicio</Link>
+                    </li>
+                    <li>
+                        <Link href="/privacidad">Politica de Privacidad</Link>
+                    </li>
+                </ul>
             </div>
         </footer>
     );
