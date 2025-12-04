@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useCallback, useState } from "react";
 import { NookLogo } from "../svg/nook";
 import { DuckSVG } from "../svg/duck";
+import { useIntroStore } from "@/app/Intro";
 
 export type TNavigationMenuProps = {
     isOpen?: boolean;
@@ -14,7 +15,11 @@ export type TNavigationMenuProps = {
 
 export function NavigationMenu({ }: TNavigationMenuProps) {
     const [isOpen, setIsOpen] = useState(false)
-    const onNavigationCb = useCallback(() => setIsOpen(false), [setIsOpen])
+    const triggerReplay = useIntroStore((state) => state.triggerReplay)
+    const onNavigationCb = useCallback(() => {
+        setIsOpen(false)
+        triggerReplay()
+    }, [setIsOpen])
 
     return (
         <>

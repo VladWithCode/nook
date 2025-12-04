@@ -10,16 +10,19 @@ export type TIntroStore = {
     isIntroDone: boolean;
     isPageReady: boolean;
     shouldHideIntro: boolean;
+    shouldReplay: boolean;
     callbacks: Array<() => void>;
     setIsIntroDone: (value: boolean) => void;
     setIsPageReady: (value: boolean, cbs: Array<() => void>) => void;
     setShouldHideIntro: (value: boolean) => void;
+    triggerReplay: () => void;
 }
 
 export const useIntroStore = create<TIntroStore>((set) => ({
     isIntroDone: false,
     isPageReady: false,
     shouldHideIntro: false,
+    shouldReplay: false,
     callbacks: [],
     setIsIntroDone: (value) => {
         set({ isIntroDone: value });
@@ -30,6 +33,14 @@ export const useIntroStore = create<TIntroStore>((set) => ({
     setShouldHideIntro: (value) => {
         set({ shouldHideIntro: value });
     },
+    triggerReplay: () => {
+        set({
+            shouldReplay: true,
+            isIntroDone: false,
+            isPageReady: false,
+            shouldHideIntro: false
+        });
+    },
 }))
 
 export default function Intro({ }) {
@@ -39,12 +50,20 @@ export default function Intro({ }) {
         isIntroDone,
         isPageReady,
         shouldHideIntro,
+        shouldReplay,
         callbacks,
         setIsIntroDone,
         setShouldHideIntro
     } = useIntroStore();
 
     useEffect(() => {
+        if (shouldReplay) {
+            const resetProgress = () => setProgress(0);
+            resetProgress();
+            useIntroStore.setState({ shouldReplay: false });
+            return;
+        }
+
         // Simulate loading progress
         const interval = setInterval(() => {
             setProgress(prev => {
@@ -57,7 +76,7 @@ export default function Intro({ }) {
         }, 100);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [shouldReplay]);
 
     const finishIntroEvt = useEffectEvent((p: number) => {
         if (p >= 100) {
@@ -67,6 +86,14 @@ export default function Intro({ }) {
     useEffect(() => {
         finishIntroEvt(progress)
     }, [progress])
+
+    useEffect(() => {
+        if (shouldReplay) {
+            const resetProgress = () => setProgress(0);
+            resetProgress();
+            setTimeout(() => useIntroStore.setState({ shouldReplay: false }), 100);
+        }
+    }, [shouldReplay]);
 
     useGSAP(() => {
         if (!isPageReady || !isIntroDone) {
