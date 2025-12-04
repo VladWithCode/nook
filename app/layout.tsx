@@ -42,7 +42,7 @@ export default function RootLayout({
             >
                 <Header />
                 <main id="main-content">
-                    <div className="fixed inset-0 w-screen h-dvh z-0 pointer-events-none">
+                    <div className="fixed inset-0 w-screen h-dvh z-0 pointer-events-none overflow-hidden">
                         <div
                             className="absolute -top-10 -left-10 w-[calc(100%+20rem)] h-[calc(100%+20rem)] bg-[url(/noise.png)] bg-center will-change-transform"
                             style={{
