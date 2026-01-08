@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/src/components/layout/header";
 import { Footer } from "@/src/components/layout/footer";
-import Intro from "./Intro";
+import IntroWrapper from "./IntroWrapper";
 
 const mainFont = localFont({
     src: [
@@ -55,7 +55,7 @@ export default function RootLayout({
                     </div>
                 </main>
                 <Footer />
-                <Intro />
+                <IntroWrapper />
             </body>
         </html>
     );

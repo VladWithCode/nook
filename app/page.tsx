@@ -4,7 +4,7 @@ import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useIntroStore } from './Intro';
+import { MainIntroAnimation, useIntroStore } from './Intro';
 import { NookLogo } from '@/src/components/svg/nook';
 import { ChevronDown } from 'lucide-react';
 import { Copy1 } from '@/src/components/svg/cpy_icons';
@@ -29,22 +29,14 @@ export default function PinnedScrollSections() {
     const mainScrollRef = useRef<HTMLDivElement>(null);
     const squaresSectRef = useRef<HTMLDivElement>(null);
     const squaresSect2Ref = useRef<HTMLDivElement>(null);
-    const [animatePage, setAnimatePage] = useState(false);
-    const { setIsPageReady } = useIntroStore();
-
-    const setReadyEvt = useEffectEvent(() => {
-        setIsPageReady(true, [() => setAnimatePage(true)]);
-    })
-    useEffect(() => {
-        setReadyEvt();
-    }, [])
+    const isIntroDone = useIntroStore(state => state.isIntroDone);
 
     useGSAP(() => {
-        if (!containerRef.current || !mainScrollRef.current || !window.document) {
+        if (!containerRef.current || !mainScrollRef.current) {
             return;
         }
 
-        if (!animatePage) {
+        if (!isIntroDone) {
             const vects = containerRef.current.querySelectorAll("#start-hero-logo [data-animatable-vector]") as NodeListOf<SVGGeometryElement> | null;
             if (!vects) {
                 return;
@@ -205,7 +197,7 @@ export default function PinnedScrollSections() {
                 }
             })
         }
-    }, { scope: containerRef, dependencies: [animatePage] });
+    }, { scope: containerRef, dependencies: [isIntroDone] });
 
     return (
         <div ref={containerRef} className="relative">
