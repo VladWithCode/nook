@@ -5,6 +5,7 @@ import { AnimatedLogoLoad } from '@/src/components/logo/animatedLogoLoad';
 import { create } from 'zustand';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { cn } from '@/lib/utils';
 
 export type TIntroStore = {
     progress: number;
@@ -31,6 +32,9 @@ export const useIntroStore = create<TIntroStore>((set, get) => ({
     wrapperRef: createRef<HTMLDivElement>(),
     callbacks: [],
     setProgress: (value) => {
+        if (value === 0) {
+            set({ progress: 0 });
+        }
         const newPg = get().progress + value || 0;
         if (newPg >= 100) {
             set({ progress: 100 });
@@ -42,13 +46,13 @@ export const useIntroStore = create<TIntroStore>((set, get) => ({
     },
     setIntroComponent: (value) => {
         set({ introComponent: value });
+    },
+    setIsIntroDone: (value) => {
+        set({ isIntroDone: value });
         const callbacks = get().callbacks;
         for (const cb of callbacks) {
             cb();
         }
-    },
-    setIsIntroDone: (value) => {
-        set({ isIntroDone: value });
     },
     setShouldHideIntro: (value) => {
         set({ shouldHideIntro: value });
@@ -65,34 +69,39 @@ export const useIntroStore = create<TIntroStore>((set, get) => ({
     },
 }))
 
-export default function Intro({ }) {
+export default function Intro() {
     const loaderRef = useRef(null);
     const {
         introComponent,
         shouldHideIntro,
         shouldReplay,
         setProgress,
-        setIsIntroDone,
         setWrapperRef,
     } = useIntroStore();
 
     useEffect(() => {
         setWrapperRef(loaderRef);
-    }, []);
+    }, [setWrapperRef]);
 
     const setProgressEvt = useEffectEvent((p: number) => {
         return setProgress(p);
     });
-    const finishIntroEvt = useEffectEvent(() => {
-        setIsIntroDone(true);
-    })
+    const { contextSafe } = useGSAP({ scope: loaderRef });
+    const resetIntroComponent = useEffectEvent(contextSafe(() => {
+        gsap.set(document.getElementById("intro-wrapper"), {
+            clearProps: "all",
+        });
+        gsap.set("*", {
+            clearProps: "all",
+        });
+    }));
     useEffect(() => {
         if (shouldReplay) {
             // Reset progress
             setProgressEvt(0);
             // TODO: Find a better place for this
             useIntroStore.setState({ shouldReplay: false });
-            return;
+            resetIntroComponent();
         }
 
         // Simulate loading progress
@@ -100,21 +109,16 @@ export default function Intro({ }) {
             const newPg = setProgressEvt(Math.random() * 10);
             if (newPg >= 100) {
                 clearInterval(interval);
-                finishIntroEvt();
             }
         }, 100);
 
         return () => clearInterval(interval);
     }, [shouldReplay]);
 
-    if (shouldHideIntro) {
-        return null;
-    }
-
     return (
         <div
             ref={loaderRef}
-            className="fixed inset-0 z-60 bg-main flex flex-col items-center justify-center"
+            className={cn("fixed inset-0 w-full h-full z-60 bg-main flex flex-col items-center justify-center overflow-hidden", shouldHideIntro && "hidden")}
             id="intro-wrapper"
         >
             {introComponent}
@@ -136,14 +140,16 @@ export function MainIntroAnimation() {
             return;
         }
 
-        const tl = gsap.timeline({ defaults: { duration: 0.5, ease: "power1.inOut" } });
+        const tl = gsap.timeline();
         tl.to("#intro-overlay", {
             y: "0%",
+            duration: 0.8,
         })
             .to(wrapperRef.current, {
                 y: "-100%",
+                duration: 0.2,
                 onComplete: () => setIsIntroDone(true),
-            }, "-=80%");
+            }, "-=80%")
     }, { scope: wrapperRef, dependencies: [progress] });
 
     return (
@@ -152,7 +158,7 @@ export function MainIntroAnimation() {
             <div id="intro-content" className="relative z-0 text-center space-y-8">
                 <div className="w-64 h-2 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-linear-to-r from-purple-500 to-pink-500 transition-all duration-300 ease-out"
+                        className="h-full bg-linear-to-r from-purple-500 to-pink-500 transition-[width] duration-300 ease-out"
                         style={{ width: `${Math.min(progress, 100)}%` }}
                     />
                 </div>

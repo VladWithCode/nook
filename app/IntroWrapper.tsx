@@ -1,31 +1,36 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Intro, { MainIntroAnimation, useIntroStore } from "./Intro";
-import { useEffect } from "react";
+import { useEffect, useEffectEvent } from "react";
 
 export default function IntroWrapper() {
     const pathname = usePathname();
     const setIntroComponent = useIntroStore((state) => state.setIntroComponent);
     const triggerReplay = useIntroStore((state) => state.triggerReplay);
-
+    const introComponentEvt = useEffectEvent((c: React.ReactElement) => {
+        setIntroComponent(c);
+    });
+    const replayEvt = useEffectEvent(() => {
+        triggerReplay();
+    });
     useEffect(() => {
         switch (pathname) {
             case "/proximamente":
-                setIntroComponent(<MainIntroAnimation />);
+                introComponentEvt(<MainIntroAnimation />);
                 break;
             case "/diseno-y-creatividad":
-                setIntroComponent(<MainIntroAnimation />);
+                introComponentEvt(<MainIntroAnimation />);
                 break;
             case "/produccion-y-medios":
-                setIntroComponent(<MainIntroAnimation />);
+                introComponentEvt(<MainIntroAnimation />);
                 break;
             default:
             case "/":
-                setIntroComponent(<MainIntroAnimation />);
+                introComponentEvt(<MainIntroAnimation />);
                 break;
         }
-        triggerReplay();
-    }, [pathname, setIntroComponent, triggerReplay]);
+        replayEvt();
+    }, [pathname]);
 
     return <Intro />;
 }
