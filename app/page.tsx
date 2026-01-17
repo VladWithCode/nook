@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useEffectEvent, useRef, useState } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { MainIntroAnimation, useIntroStore } from './Intro';
+import { useIntroStore } from './Intro';
 import { NookLogo } from '@/src/components/svg/nook';
 import { ChevronDown } from 'lucide-react';
 import { Copy1 } from '@/src/components/svg/cpy_icons';
@@ -30,9 +30,10 @@ export default function PinnedScrollSections() {
     const squaresSectRef = useRef<HTMLDivElement>(null);
     const squaresSect2Ref = useRef<HTMLDivElement>(null);
     const isIntroDone = useIntroStore(state => state.isIntroDone);
+    const shouldReplay = useIntroStore(state => state.shouldReplay);
 
     useGSAP(() => {
-        if (!containerRef.current || !mainScrollRef.current) {
+        if (!containerRef.current || !mainScrollRef.current || shouldReplay) {
             return;
         }
 
@@ -197,7 +198,7 @@ export default function PinnedScrollSections() {
                 }
             })
         }
-    }, { scope: containerRef, dependencies: [isIntroDone] });
+    }, { scope: containerRef, dependencies: [isIntroDone, shouldReplay] });
 
     return (
         <div ref={containerRef} className="relative">
