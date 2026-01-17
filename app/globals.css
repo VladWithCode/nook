@@ -145,6 +145,11 @@ body {
         @apply bg-background text-foreground w-screen overflow-x-hidden overflow-y-auto;
     }
 
+    .animated-grid {
+        transform: translateX(calc((25vw + (var(--spacing) * 5)) * -1));
+    }
+}
+
 .marquee {
     &>h1 {
         @apply translate-x-0;
