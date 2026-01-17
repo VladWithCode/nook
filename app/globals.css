@@ -144,6 +144,25 @@ body {
     body {
         @apply bg-background text-foreground w-screen overflow-x-hidden overflow-y-auto;
     }
+
+.marquee {
+    &>h1 {
+        @apply translate-x-0;
+        animation: marquee 3s linear infinite;
+        -webkit-text-stroke: 1px var(--color-gray-50);
+        text-stroke: 1px var(--color-gray-50);
+        color: transparent;
+    }
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(-10%);
+    }
+
+    100% {
+        transform: translateX(-121%);
+    }
 }
 
 @keyframes bg-noise {
