@@ -22,7 +22,7 @@ export default function Page() {
             <div className="text-foreground pb-[20vw]" ref={containerRef}>
                 <section className="relative z-10 h-svh overflow-hidden">
                     <div className="absolute inset-0 h-full w-full z-0">
-                        <video src="/proximamente.mp4" className="w-full h-full object-cover"></video>
+                        <video src="/byd.webm" className="w-full h-full object-cover" muted autoPlay playsInline loop></video>
                         <div className="absolute z-10 top-1/2 left-1/2 -translate-1/2 flex flex-col justify-center text-stone-50">
                             <button className="">
                                 <PlayCircle className="size-20" strokeWidth="0.5" />
