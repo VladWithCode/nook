@@ -19,7 +19,7 @@ export default function Page() {
 
     return (
         <>
-            <div className="text-foreground pb-[20vw]" ref={containerRef}>
+            <div className="text-foreground" ref={containerRef}>
                 <section className="relative z-10 h-svh overflow-hidden">
                     <div className="absolute inset-0 h-full w-full z-0">
                         <video src="/byd.webm" className="w-full h-full object-cover" muted autoPlay playsInline loop></video>
@@ -42,17 +42,52 @@ export default function Page() {
                     </div>
                 </section>
                 <section className="relative bg-main text-stone-700 px-8 py-12 space-y-6 z-0">
-                    <p className="text-2xl font-extrabold font-secondary uppercase">Obten un vistazo de nuestros proyectos en construcción</p>
-                    <Link href="/" className="flex gap-2.5 tracking-wider uppercase">Ver proyectos <ArrowRight /></Link>
+                    <p className="text-2xl font-extrabold font-secondary uppercase">Tu exito es nuestro exito. Por eso, nuestra oferta esta enfocada en darte en mayor valor por tu inversión.</p>
+                    <Link href="/" className="flex gap-2.5 tracking-wider uppercase">Ver Paquetes <ArrowRight /></Link>
                 </section>
                 <section className="relative bg-stone-900 text-stone-50 px-6 py-12 space-y-6 z-0">
-                    <p className="text-2xl font-extrabold font-secondary uppercase pr-4">Obten un vistazo de nuestros proyectos en construcción</p>
-                    <Link href="/" className="flex gap-2.5 tracking-wider uppercase">Ver proyectos <ArrowRight /></Link>
+                    <p className="text-2xl font-extrabold font-secondary uppercase pr-4 text-right">Posiciona tu negocio, se la primera opción para tus clientes.</p>
                 </section>
-                <section className="text-main p-8 space-y-8">
-                    <div className="aspect-4/5 bg-main"></div>
-                    <h2 className="text-4xl font-secondary font-extrabold uppercase">Convertimos las metas y objetivos en realidad</h2>
-                    <Link href="/" className="flex gap-2.5 tracking-wider uppercase">Leer más <ArrowRight /></Link>
+                <section className="p-8 space-y-8">
+                    <div className="aspect-4/5 flex flex-col bg-main text-stone-50 p-6 rounded-lg">
+                        <h2 className="text-4xl font-secondary font-extrabold uppercase mb-6">Plan Básico</h2>
+                        <ul className="space-y-3 list-disc list-inside">
+                            <li>Diseño de marca</li>
+                            <li>Estrategias de crecimiento</li>
+                            <li>Planificación de ventas</li>
+                            <li>Gestión de clientes</li>
+                            <li>Marketing digital</li>
+                        </ul>
+                        <p className="text-4xl mt-auto">$5,000 MXN/mes</p>
+                    </div>
+                    <div className="aspect-4/5 flex flex-col bg-stone-900 text-stone-50 p-6 rounded-lg">
+                        <h2 className="text-4xl font-secondary font-extrabold uppercase mb-6">Plan Avanzado</h2>
+                        <ul className="space-y-3 list-disc list-inside">
+                            <li>Incluye servicios del plan Básico</li>
+                            <li>Diseño de marca</li>
+                            <li>Estrategias de crecimiento</li>
+                            <li>Planificación de ventas</li>
+                            <li>Gestión de clientes</li>
+                            <li>Marketing digital</li>
+                        </ul>
+                        <p className="text-4xl mt-auto">$8,500 MXN/mes</p>
+                    </div>
+                    <div className="aspect-4/5 flex flex-col bg-special text-stone-50 p-6 rounded-lg">
+                        <h2 className="text-4xl font-secondary font-extrabold uppercase mb-6">Plan Enterprise</h2>
+                        <ul className="space-y-3 list-disc list-inside">
+                            <li>Incluye servicios del plan Avanzado</li>
+                            <li>Diseño de marca</li>
+                            <li>Estrategias de crecimiento</li>
+                            <li>Planificación de ventas</li>
+                            <li>Gestión de clientes</li>
+                            <li>Marketing digital</li>
+                        </ul>
+                        <p className="text-4xl mt-auto">$14,000 MXN/mes</p>
+                    </div>
+                </section>
+                <section className="flex flex-col justify-center items-center gap-8 bg-gray-800 px-6 py-20">
+                    <button className="bg-main px-8 py-2 rounded-full text-xl text-stone-50 uppercase">Contratar ahora</button>
+                    <button className="bg-stone-50 px-8 py-2 rounded-full text-xl text-stone-900 uppercase">Volver al inicio</button>
                 </section>
             </div>
         </>

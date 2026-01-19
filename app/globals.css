@@ -42,6 +42,8 @@
     --color-main: oklch(0.6803 0.0704 211.83);
     --color-main-foreground: oklch(0.985 0.002 247.839);
 
+    --color-special: oklch(0.7048 0.1209 86.29);
+
     --font-main: var(--font-main), Arial, Helvetica, sans-serif;
     --font-secondary: var(--font-secondary);
 }
@@ -151,22 +153,14 @@ body {
 }
 
 .marquee {
+    width: 400vw;
+    overflow: hidden;
+
     &>h1 {
         @apply translate-x-0;
-        animation: marquee 3s linear infinite;
         -webkit-text-stroke: 1px var(--color-gray-50);
         text-stroke: 1px var(--color-gray-50);
         color: transparent;
-    }
-}
-
-@keyframes marquee {
-    0% {
-        transform: translateX(-10%);
-    }
-
-    100% {
-        transform: translateX(-121%);
     }
 }
 
