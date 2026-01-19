@@ -36,16 +36,16 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
                             {/*     <Link href="/" onClick={onNavigationCb}>Inicio</Link> */}
                             {/* </li> */}
                             <li>
-                                <Link href="/diseno-y-creatividad" onClick={onNavigationCb}>Diseño y Creatividad</Link>
+                                <Link href="/nuestros-servicios" onClick={onNavigationCb}>Nuestros Servicios</Link>
                             </li>
                             <li>
-                                <Link href="/produccion-y-medios" onClick={onNavigationCb}>Producción y Medios</Link>
+                                <Link href="/nuestro-trabajo" onClick={onNavigationCb}>Nuestro Trabajo</Link>
                             </li>
                             <li>
-                                <Link href="/estrategia-y-experencia" onClick={onNavigationCb}>Estrategia y Experiencia</Link>
+                                <Link href="/acerca-de-nosotros" onClick={onNavigationCb}>Acerca de Nöok</Link>
                             </li>
                             <li>
-                                <Link href="/descargas-y-activaciones" onClick={onNavigationCb}>Descargas y Activaciones</Link>
+                                <Link href="/contacto" onClick={onNavigationCb}>Contacto</Link>
                             </li>
                         </ul>
                     </nav>
