@@ -10,9 +10,9 @@
     will-change: transform;
     background: hsl(calc(1turn * var(--p)), 80%, 80%);
     background: linear-gradient(35deg, #555, black);
-    border: solid 4px #999;
+    border: solid 2px rgb(10 10 10);
     transform-origin: bottom right;
-    transform: rotate(-0.25turn) rotate(calc(1turn * var(--p))) skewX(30deg) translateX(0%) translateY(0%);
+    transform: rotate(-0.25turn) rotate(calc(1turn * var(--p))) skewX(200deg) translateX(0%) translateY(0%);
 }
 
 .shutter.animate>.flap {
@@ -21,7 +21,7 @@
 
 @keyframes shutterClick {
     100% {
-        transform: rotate(-0.5turn) rotate(calc(1turn * var(--p))) skewX(30deg) translateX(-100%) translateY(90%);
+        transform: rotate(-0.5turn) rotate(calc(1turn * var(--p))) skewX(200deg) translateX(-100%) translateY(90%);
     }
 }
 
