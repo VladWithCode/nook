@@ -1,10 +1,21 @@
 'use client';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { ArrowRight, PlayCircle } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
 
 export default function Page() {
     const containerRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        gsap.to(".marquee h1", {
+            duration: 2.5,
+            x: "-=100vw",
+            ease: "none",
+            repeat: -1,
+        })
+    }, { scope: containerRef, dependencies: [] });
 
     return (
         <>
@@ -23,9 +34,11 @@ export default function Page() {
                     </div>
                 </section>
                 <section className="relative z-10">
-                    <div className="absolute -bottom-6 inset-x-0 z-10 w-full flex items-center gap-12 overflow-hidden marquee">
-                        <h1 className="text-6xl font-extrabold uppercase">PROXIMAMENTE</h1>
-                        <h1 className="text-6xl font-extrabold uppercase">PROXIMAMENTE</h1>
+                    <div className="absolute -bottom-6 inset-x-0 z-10 w-full flex items-center overflow-hidden marquee">
+                        <h1 className="w-screen text-6xl font-extrabold uppercase text-center">POSICIONATE</h1>
+                        <h1 className="w-screen text-6xl font-extrabold uppercase text-center">POSICIONATE</h1>
+                        <h1 className="w-screen text-6xl font-extrabold uppercase text-center">POSICIONATE</h1>
+                        <h1 className="w-screen text-6xl font-extrabold uppercase text-center">POSICIONATE</h1>
                     </div>
                 </section>
                 <section className="relative bg-main text-stone-700 px-8 py-12 space-y-6 z-0">
