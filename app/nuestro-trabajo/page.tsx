@@ -118,14 +118,14 @@ export default function Page() {
                 <div className="flap" style={{ "--i": 2 } as React.CSSProperties}></div>
                 <div className="flap" style={{ "--i": 1 } as React.CSSProperties}></div>
             </div>
-            <div className="" ref={scrollSectionRef}>
-                <div className="relative z-10 bg-gray-950 text-stone-50 px-6 pt-16 pb-8">
-                    <h1 className="relative flex items-center z-0">
-                        <div className="sr-only">Nöok</div>
-                        <NookLogo className="h-16 opacity-60" />
-                    </h1>
-                </div>
-                <div className="text-stone-50 px-2 space-y-[35vw]" data-sections-wrapper>
+            <div className="py-[10vh]" ref={scrollSectionRef}>
+                {/* <div className="relative z-10 bg-gray-950 text-stone-50 px-6 pt-16 pb-8"> */}
+                {/*     <h1 className="relative flex items-center z-0"> */}
+                {/*         <div className="sr-only">Nöok</div> */}
+                {/*         <NookLogo className="h-16 opacity-60" /> */}
+                {/*     </h1> */}
+                {/* </div> */}
+                <div className="text-stone-50 px-2 space-y-[10vw]" data-sections-wrapper>
                     {
                         sections.map((section) => (
                             <GallerySection key={section.title} sectionData={section} />
@@ -139,14 +139,14 @@ export default function Page() {
 
 function GallerySection({ sectionData }: { sectionData: typeof sections[0] }) {
     return (
-        <div className="space-y-24" data-animatable-section>
+        <div className="space-y-10" data-animatable-section>
             <h2
                 className="relative z-10 row-start-1 bg-gray-950 text-4xl font-bold font-secondary p-4 translate-y-6 opacity-0 scale-95 text-current/60"
                 data-animatable-title
             >
                 {sectionData.title}
             </h2>
-            <div className="relative z-0 row-start-2 flex flex-col justify-center gap-[50vw] px-6 pb-8" data-animatable-media-wrapper>
+            <div className="relative z-0 row-start-2 flex flex-col justify-center gap-[25vw] px-6 pb-8" data-animatable-media-wrapper>
                 {
                     sectionData.media.map((media, i) => <GalleryMediaRow
                         media={media}
