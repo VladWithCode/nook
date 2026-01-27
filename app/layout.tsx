@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/src/components/layout/header";
 import { Footer } from "@/src/components/layout/footer";
 import IntroWrapper from "./IntroWrapper";
+import { Toaster } from "@/src/components/layout/toaster";
 
 const mainFont = localFont({
     src: [
@@ -18,12 +19,22 @@ const mainFont = localFont({
 const secondaryFont = localFont({
     src: [
         {
-            path: "../public/fonts/myriad_variable_c.ttf",
+            path: "../public/fonts/myriad_vf.ttf",
         },
     ],
     variable: "--font-secondary",
     display: "swap",
 });
+
+const secondaryFontItalic = localFont({
+    src: [
+        {
+            path: "../public/fonts/myriad_vf_italic.ttf",
+        },
+    ],
+    variable: "--font-secondary-italic",
+    display: "swap",
+})
 
 export const metadata: Metadata = {
     title: "Nook: Minuciosa Perfección",
@@ -56,6 +67,7 @@ export default function RootLayout({
                 </main>
                 <Footer />
                 <IntroWrapper />
+                <Toaster />
             </body>
         </html>
     );
