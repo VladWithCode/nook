@@ -6,29 +6,41 @@ import gsap from "gsap";
 import { Mail, Phone } from "lucide-react";
 import { TeamCarousel } from "./teamCarousel";
 import { ContactForm } from "./contactForm";
+import { ScrollTrigger } from "gsap/all";
+import { useIntroStore } from "../Intro";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const isIntroDone = useIntroStore(state => state.isIntroDone);
+
     useGSAP(() => {
-        if (!containerRef.current) {
+        if (!isIntroDone) {
             return;
         }
 
-        const tl = gsap.timeline({ defaults: { duration: 0.8, ease: "power1.inOut" } });
-        tl.to("body", {
-            color: "oklch(0.13 0.028 261.692)",
-            duration: 0.5,
-            ease: "power3.inOut"
-        })
-    }, {});
+        ScrollTrigger.batch("[data-animatable-card]", {
+            batchMax: 6,
+            onEnter: (batch) => {
+                gsap.to(batch, {
+                    autoAlpha: 1,
+                    y: "0rem",
+                    scale: 1,
+                    stagger: 0.05,
+                    duration: 0.8,
+                })
+            },
+        });
+    }, { scope: containerRef, dependencies: [isIntroDone] });
 
     return (
-        <div className="relative text-foreground pb-[20vw]" ref={containerRef}>
+        <div className="relative bg-main text-foreground pb-[20vw]" ref={containerRef}>
             <div className="fixed inset-0 w-full h-full z-0">
             </div>
             <div className="relative z-10 p-6 pt-14 space-y-1 text-stone-50">
                 <section className="space-y-1">
-                    <div className="flex items-center justify-between bg-stone-800/90 p-4 rounded-md">
+                    <div className="flex items-center justify-between bg-black/75 p-4 rounded-md animatable-card" data-animatable-card>
                         <p className="flex flex-col font-secondary leading-tight">
                             <span className="font-bold">Teléfono</span>
                             <span className="text-current/80">+52 618 291 9510</span>
@@ -37,7 +49,7 @@ export default function Page() {
                             <Phone className="size-5" />
                         </a>
                     </div>
-                    <div className="flex items-center justify-between bg-stone-800/90 p-4 rounded-md">
+                    <div className="flex items-center justify-between bg-black/75 p-4 rounded-md animatable-card" data-animatable-card>
                         <p className="flex flex-col font-secondary leading-tight">
                             <span className="font-bold">Correo Electrónico</span>
                             <span className="text-current/80">contacto@nookcreativo.mx</span>
@@ -46,7 +58,7 @@ export default function Page() {
                             <Mail className="size-5" />
                         </a>
                     </div>
-                    <div className="relative w-full aspect-square bg-stone-800/90 rounded-md overflow-hidden">
+                    <div className="relative w-full aspect-square bg-black/75 rounded-md overflow-hidden animatable-card" data-animatable-card>
                         <iframe
                             className="absolute inset-0 z-0 w-full h-full overflow-hidden object-cover opacity-90"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227.80060299908374!2d-104.643469825387!3d24.002498011523645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x869bb9ee2648f965%3A0x67d72edb3d7d8299!2sPlaza%20San%20Sebasti%C3%A1n!5e0!3m2!1ses-419!2smx!4v1769123700550!5m2!1ses-419!2smx"
@@ -57,11 +69,11 @@ export default function Page() {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade">
                         </iframe>
-                        <div className="relative z-10 h-full flex flex-col justify-end bg-linear-to-t from-stone-900/90 from-10% to-transparent to-60%">
+                        <div className="relative z-10 h-full flex flex-col justify-end bg-linear-to-t from-stone-900/75 from-10% to-transparent to-60%">
                             <p className="text-3xl p-4">Calle Nazas 100, Real Country, 34162 Durango, Dgo.</p>
                         </div>
                     </div>
-                    <div className="relative w-full bg-stone-800/90 rounded-md p-4 space-y-12">
+                    <div className="relative w-full bg-black/75 rounded-md p-4 space-y-12 animatable-card" data-animatable-card>
                         <p className="font-secondary font-medium text-current/80">
                             Abierto de 9:00 a 18:00 horas.
                         </p>
@@ -73,8 +85,10 @@ export default function Page() {
                             <span>Viernes</span>
                         </h3>
                     </div>
-                    <TeamCarousel />
-                    <div className="relative bg-stone-800/90 rounded-md p-4 space-y-12">
+                    <div className="animatable-card" data-animatable-card>
+                        <TeamCarousel />
+                    </div>
+                    <div className="relative bg-black/75 rounded-md p-4 space-y-12 animatable-card" data-animatable-card>
                         <h1 className="text-4xl">Contactanos</h1>
                         <ContactForm />
                     </div>

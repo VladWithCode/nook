@@ -149,6 +149,11 @@ body {
 
     .animated-grid {
         transform: translateX(calc((25vw + (var(--spacing) * 5)) * -1));
+
+    }
+
+    .animatable-card {
+        @apply invisible opacity-0 translate-y-12 scale-70;
     }
 }
 
