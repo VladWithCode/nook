@@ -34,13 +34,34 @@ export function ContactForm() {
         },
     })
 
-    function onSubmit(data: z.infer<typeof formSchema>) {
-        console.log(data);
+    async function onSubmit(data: z.infer<typeof formSchema>) {
         setIsLoading(true);
-        setTimeout(() => {
-            toast.success("¡Gracias por contactarnos!");
+        
+        try {
+            const response = await fetch('/api/contacto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                console.log('WhatsApp messages sent successfully:', result.data);
+                toast.success("¡Gracias por contactarnos! Te hemos enviado un mensaje por WhatsApp.");
+                form.reset();
+            } else {
+                console.error('WhatsApp API error:', result.error);
+                toast.error("Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.");
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            toast.error("Error de conexión. Por favor, verifica tu internet e intenta nuevamente.");
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     }
 
     return (
