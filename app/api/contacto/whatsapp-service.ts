@@ -83,13 +83,6 @@ export async function postCloudAPIMessage({
             });
         }
 
-        if (templateData.headerVariables) {
-            templateComponents.push({
-                type: 'header',
-                parameters: templateData.headerVariables,
-            });
-        }
-
         requestBody.template = {
             name: templateData.name,
             components: templateComponents,
@@ -121,10 +114,10 @@ export async function sendWhatsAppContactRequest({
     name,
     phone,
 }: WhatsAppContactRequest) {
-    const vDate: TemplateVariable = {
-        type: 'text',
-        text: dateToLongDate(new Date()),
-    };
+    // const vDate: TemplateVariable = {
+    //     type: 'text',
+    //     text: dateToLongDate(new Date()),
+    // };
     const vName: TemplateVariable = {
         type: 'text',
         text: name,
@@ -136,7 +129,7 @@ export async function sendWhatsAppContactRequest({
 
     const templateData = {
         name: 'contact_request_nook',
-        bodyVariables: [vName, vDate, vPhone],
+        bodyVariables: [vName, vPhone],
     };
 
     const notificationsPhone = process.env.WHATSAPP_NOTIFICATIONS_PHONE;

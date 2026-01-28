@@ -36,7 +36,7 @@ export function ContactForm() {
 
     async function onSubmit(data: z.infer<typeof formSchema>) {
         setIsLoading(true);
-        
+
         try {
             const response = await fetch('/api/contacto', {
                 method: 'POST',
@@ -49,15 +49,13 @@ export function ContactForm() {
             const result = await response.json();
 
             if (result.success) {
-                console.log('WhatsApp messages sent successfully:', result.data);
                 toast.success("¡Gracias por contactarnos! Te hemos enviado un mensaje por WhatsApp.");
                 form.reset();
             } else {
-                console.error('WhatsApp API error:', result.error);
                 toast.error("Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.");
             }
         } catch (error) {
-            console.error('Network error:', error);
+            console.error('Contact form error:', error);
             toast.error("Error de conexión. Por favor, verifica tu internet e intenta nuevamente.");
         } finally {
             setIsLoading(false);
