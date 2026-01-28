@@ -37,7 +37,7 @@ export const useIntroStore = create<TIntroStore>((set, get) => ({
         }
         const newPg = get().progress + value || 0;
         if (newPg >= 100) {
-            set({ progress: 100, isIntroDone: true });
+            set({ progress: 100 });
         } else {
             set({ progress: newPg });
         }
