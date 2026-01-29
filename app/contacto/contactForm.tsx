@@ -163,7 +163,7 @@ function ContactFormFeedback({ isOpen, setIsOpen, success, errorMsg }: {
 }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className="bg-black/75 border-current/30 backdrop-blur-sm">
+            <DialogContent className="bg-black/90 border-current/30 backdrop-blur-sm">
                 <DialogHeader>
                     <DialogTitle className="">{success
                         ? "Se ha enviado tu solicitud"
