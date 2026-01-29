@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -25,6 +26,9 @@ const formSchema = z.object({
 
 export function ContactForm() {
     const [isLoading, setIsLoading] = useState(false);
+    const [showFeedback, setShowFeedback] = useState(false);
+    const [requestSuccess, setRequestSuccess] = useState(false);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -49,14 +53,15 @@ export function ContactForm() {
             const result = await response.json();
 
             if (result.success) {
-                toast.success("¡Gracias por contactarnos! Te hemos enviado un mensaje por WhatsApp.");
+                setRequestSuccess(true);
+                setShowFeedback(true);
                 form.reset();
             } else {
-                toast.error("Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.");
+                setErrorMsg("Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente más tarde.");
             }
         } catch (error) {
             console.error('Contact form error:', error);
-            toast.error("Error de conexión. Por favor, verifica tu internet e intenta nuevamente.");
+            setErrorMsg("Error de conexión. Por favor, verifica tu internet e intenta nuevamente.");
         } finally {
             setIsLoading(false);
         }
@@ -140,6 +145,44 @@ export function ContactForm() {
                 <LoaderCircle className="size-16 stroke-current/80 animate-spin" />
                 <p className="text-lg text-current/80">Enviando...</p>
             </div>
+            <ContactFormFeedback
+                isOpen={showFeedback}
+                setIsOpen={setShowFeedback}
+                success={requestSuccess}
+                errorMsg={errorMsg}
+            />
         </form>
+    );
+}
+
+function ContactFormFeedback({ isOpen, setIsOpen, success, errorMsg }: {
+    isOpen: boolean;
+    setIsOpen: (value: boolean) => void;
+    success: boolean;
+    errorMsg: string | null;
+}) {
+    return (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogContent className="bg-black/75 border-current/30 backdrop-blur-sm">
+                <DialogHeader>
+                    <DialogTitle className="">{success
+                        ? "Se ha enviado tu solicitud"
+                        : errorMsg || "Ocurrió un error"
+                    }</DialogTitle>
+                </DialogHeader>
+                <DialogDescription className="text-center font-secondary font-medium">{success
+                    ? "¡Gracias por contactarnos! Pronto te contactaremos."
+                    : errorMsg || "Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente."
+                }</DialogDescription>
+                <DialogFooter>
+                    <Button
+                        className="bg-main font-bold text-base"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Continuar
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     );
 }
