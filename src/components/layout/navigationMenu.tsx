@@ -30,7 +30,7 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
                     <Link href="/" onClick={onNavigationCb}>
                         <NookLogo className="h-24" />
                     </Link>
-                    <nav>
+                    <nav className="relative z-10">
                         <ul className="text-3xl text-center capitalize space-y-6">
                             {/* <li> */}
                             {/*     <Link href="/" onClick={onNavigationCb}>Inicio</Link> */}
@@ -49,7 +49,7 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
                             </li>
                         </ul>
                     </nav>
-                    <nav>
+                    <nav className="relative z-10">
                         <ul className="flex gap-2 text-sm font-secondary uppercase underline underline-offset-2">
                             <li>
                                 <Link href="/privacidad" onClick={onNavigationCb}>Política de Privacidad</Link>
