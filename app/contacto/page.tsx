@@ -41,21 +41,21 @@ export default function Page() {
             <div className="relative z-10 text-stone-50">
                 <section className="grid grid-cols-1 p-6 pt-14 gap-1 md:grid-cols-3 md:gap-3 md:p-8 xl:grid-cols-8">
                     <div className="flex items-center justify-between bg-black/75 p-4 rounded-md animatable-card md:row-start-1 md:col-start-1 md:col-span-2 xl:col-span-2 2xl:px-6" data-animatable-card>
-                        <p className="flex flex-col font-secondary leading-tight xl:text-xl">
+                        <p className="flex flex-col font-secondary leading-tight 2xl:text-xl">
                             <span className="font-bold">Teléfono</span>
                             <span className="text-current/80">+52 618 291 9510</span>
                         </p>
-                        <a href="tel:+526182919510" className="block aspect-square bg-stone-600/70 p-4 rounded-full xl:p-5">
-                            <Phone className="size-5 xl:size-6" />
+                        <a href="tel:+526182919510" className="block aspect-square bg-stone-600/70 p-4 rounded-full 2xl:p-5">
+                            <Phone className="size-5 2xl:size-6" />
                         </a>
                     </div>
                     <div className="flex items-center justify-between bg-black/75 p-4 rounded-md animatable-card md:row-start-2 md:col-start-1 md:col-span-2 xl:col-span-2 2xl:px-6" data-animatable-card>
-                        <p className="flex flex-col font-secondary leading-tight xl:text-xl">
+                        <p className="flex flex-col font-secondary leading-tight 2xl:text-xl">
                             <span className="font-bold">Correo Electrónico</span>
                             <span className="text-current/80">contacto@nookcreativo.mx</span>
                         </p>
-                        <a href="mailto:contacto@nookcreativo.mx" className="block aspect-square bg-stone-600/70 p-4 rounded-full xl:p-5">
-                            <Mail className="size-5 xl:size-6" />
+                        <a href="mailto:contacto@nookcreativo.mx" className="block aspect-square bg-stone-600/70 p-4 rounded-full 2xl:p-5">
+                            <Mail className="size-5 2xl:size-6" />
                         </a>
                     </div>
                     <div className="relative w-full aspect-square bg-black/75 rounded-md overflow-hidden animatable-card md:col-span-1 xl:aspect-auto xl:row-start-1 xl:row-span-3 xl:col-span-3" data-animatable-card>
@@ -70,7 +70,7 @@ export default function Page() {
                             referrerPolicy="no-referrer-when-downgrade">
                         </iframe>
                         <div className="relative z-10 h-full flex flex-col justify-end bg-linear-to-t from-stone-900/75 from-10% to-transparent to-60% md:via-stone-600/90 md:via-20% xl:px-2 xl:py-4">
-                            <p className="text-3xl p-4 md:text-xl 2xl:text-4xl">Calle Nazas 100, Real Country, 34162 Durango, Dgo.</p>
+                            <p className="text-3xl p-4 md:text-xl xl:text-3xl 2xl:text-4xl">Calle Nazas 100, Real Country, 34162 Durango, Dgo.</p>
                         </div>
                     </div>
                     <div className="relative w-full bg-black/75 rounded-md p-4 space-y-12 animatable-card md:px-6 md:py-8 md:col-start-1 xl:justify-between xl:row-start-3 xl:col-start-1 xl:row-span-2 xl:col-span-2 2xl:space-y-16" data-animatable-card>
