@@ -74,7 +74,7 @@ export function ContactForm() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                     <Field>
-                        <FieldLabel htmlFor="name">Nombre</FieldLabel>
+                        <FieldLabel htmlFor="name" className="md:text-lg">Nombre</FieldLabel>
                         <Input
                             {...field}
                             id="name"
@@ -82,7 +82,7 @@ export function ContactForm() {
                             type="text"
                             aria-invalid={fieldState.invalid}
                             placeholder="Jorge López"
-                            className="w-full rounded-md bg-stone-600/40 p-4 text-current font-secondary font-semibold placeholder:text-current/60"
+                            className="w-full rounded-md bg-stone-600/40 p-4 text-current font-secondary font-semibold placeholder:text-current/60 md:text-lg md:py-5"
                             required
                         />
                         {fieldState.invalid && (
@@ -96,7 +96,7 @@ export function ContactForm() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                     <Field>
-                        <FieldLabel htmlFor="phone">Teléfono</FieldLabel>
+                        <FieldLabel htmlFor="phone" className="md:text-lg">Teléfono</FieldLabel>
                         <Input
                             {...field}
                             id="phone"
@@ -104,7 +104,7 @@ export function ContactForm() {
                             type="tel"
                             aria-invalid={fieldState.invalid}
                             placeholder="+526182919510"
-                            className="w-full rounded-md bg-stone-600/40 p-4 text-current font-secondary font-semibold placeholder:text-current/60"
+                            className="w-full rounded-md bg-stone-600/40 p-4 text-current font-secondary font-semibold placeholder:text-current/60 md:text-lg md:py-5"
                             required
                         />
                         {fieldState.invalid && (
@@ -134,7 +134,7 @@ export function ContactForm() {
                 )}
             />
             <div className="pt-6">
-                <Button className="w-full text-base capitalize bg-main" data-animate="button">
+                <Button className="w-full text-base capitalize bg-main xl:text-lg xl:py-5" data-animate="button">
                     Enviar
                 </Button>
             </div>
@@ -163,9 +163,9 @@ function ContactFormFeedback({ isOpen, setIsOpen, success, errorMsg }: {
 }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className="bg-black/90 border-current/30 backdrop-blur-sm">
+            <DialogContent className="bg-stone-100/90 border-current/30 backdrop-blur-sm">
                 <DialogHeader>
-                    <DialogTitle className="">{success
+                    <DialogTitle className="text-xl text-stone-900">{success
                         ? "Se ha enviado tu solicitud"
                         : errorMsg || "Ocurrió un error"
                     }</DialogTitle>
@@ -176,7 +176,7 @@ function ContactFormFeedback({ isOpen, setIsOpen, success, errorMsg }: {
                 }</DialogDescription>
                 <DialogFooter>
                     <Button
-                        className="bg-main font-bold text-base"
+                        className="bg-main font-bold text-base 2xl:text-lg"
                         onClick={() => setIsOpen(false)}
                     >
                         Continuar

@@ -20,7 +20,7 @@ export function TeamCarousel() {
             {
                 team.map(i => (
                     <div className={cn(
-                        "aspect-square h-[30vw]",
+                        "aspect-square h-full",
                         i % 2 === 0 ? "bg-stone-800/90" : "bg-gray-800/90",
                     )} key={i} data-team-carousel-item>
                     </div>
