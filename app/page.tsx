@@ -247,8 +247,10 @@ export default function PinnedScrollSections() {
                                 Diseñamos marcas, campañas y experiencias que convierten cada detalle en crecimiento real.
                             </span>
                         </p>
-                        <Button className="rounded-full border border-current capitalize" variant="ghost" data-animate="button">
-                            Ve nuestro trabajo
+                        <Button className="rounded-full border-2 border-current text-current/80 capitalize cursor-pointer hover:text-neutral-100 hover:bg-neutral-950  hover:shadow-lg active:text-neutral-100 active:bg-neutral-950 md:text-lg md:p-6" variant="ghost" asChild data-animate="button">
+                            <Link href="/nuestro-trabajo">
+                                Ver nuestro trabajo
+                            </Link>
                         </Button>
                     </div>
                     <div className="flex w-full justify-end px-6 py-6 mt-auto" data-animate="logo">
