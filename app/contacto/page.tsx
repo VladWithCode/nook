@@ -39,7 +39,7 @@ export default function Page() {
             <div className="fixed inset-0 w-full h-full z-0">
             </div>
             <div className="relative z-10 text-stone-50">
-                <section className="grid grid-cols-1 p-6 pt-14 gap-1 md:grid-cols-3 md:gap-3 md:p-8 xl:grid-cols-8">
+                <section className="grid grid-cols-1 p-6 pt-14 gap-1 md:grid-cols-5 md:gap-3 md:p-8 xl:grid-cols-8">
                     <div className="flex items-center justify-between bg-black/75 p-4 rounded-md animatable-card md:row-start-1 md:col-start-1 md:col-span-2 xl:col-span-2 2xl:px-6" data-animatable-card>
                         <p className="flex flex-col font-secondary leading-tight 2xl:text-xl">
                             <span className="font-bold">Teléfono</span>
@@ -58,7 +58,7 @@ export default function Page() {
                             <Mail className="size-5 2xl:size-6" />
                         </a>
                     </div>
-                    <div className="relative w-full aspect-square bg-black/75 rounded-md overflow-hidden animatable-card md:col-span-1 xl:aspect-auto xl:row-start-1 xl:row-span-3 xl:col-span-3" data-animatable-card>
+                    <div className="relative w-full aspect-square bg-black/75 rounded-md overflow-hidden animatable-card md:aspect-auto md:col-span-2 md:row-span-4 md:row-start-3 md:col-start-4 xl:row-start-1 xl:row-span-3 xl:col-span-3" data-animatable-card>
                         <iframe
                             className="absolute inset-0 z-0 w-full h-full overflow-hidden object-cover opacity-90"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227.80060299908374!2d-104.643469825387!3d24.002498011523645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x869bb9ee2648f965%3A0x67d72edb3d7d8299!2sPlaza%20San%20Sebasti%C3%A1n!5e0!3m2!1ses-419!2smx!4v1769123700550!5m2!1ses-419!2smx"
@@ -73,7 +73,7 @@ export default function Page() {
                             <p className="text-3xl p-4 md:text-xl xl:text-3xl 2xl:text-4xl">Calle Nazas 100, Real Country, 34162 Durango, Dgo.</p>
                         </div>
                     </div>
-                    <div className="relative w-full bg-black/75 rounded-md p-4 space-y-12 animatable-card md:px-6 md:py-8 md:col-start-1 xl:justify-between xl:row-start-3 xl:col-start-1 xl:row-span-2 xl:col-span-2 2xl:space-y-16" data-animatable-card>
+                    <div className="relative w-full bg-black/75 rounded-md p-4 space-y-12 animatable-card md:px-6 md:py-8 md:col-start-auto md:col-span-3 md:row-start-1 md:row-span-2 xl:justify-between xl:row-start-3 xl:col-start-1 xl:row-span-2 xl:col-span-2 2xl:space-y-16" data-animatable-card>
                         <p className="font-secondary font-medium text-current/80 2xl:text-lg">
                             Abierto de 9:00 a 18:00 horas.
                         </p>
@@ -85,10 +85,10 @@ export default function Page() {
                             <span>Viernes</span>
                         </h3>
                     </div>
-                    <div className="animatable-card col-span-full md:col-start-3 md:row-start-1 md:col-span-1 md:row-span-1 xl:row-start-4 xl:col-span-6 h-[15vw] *:h-full" data-animatable-card>
+                    <div className="animatable-card col-span-full md:col-start-4 md:col-span-2 md:row-span-1 md:row-start-7 xl:row-start-4 xl:col-span-6 h-[15vw] *:h-full" data-animatable-card>
                         <TeamCarousel />
                     </div>
-                    <div className="relative bg-black/75 rounded-md p-4 space-y-12 animatable-card md:col-span-2 md:row-start-3 md:col-start-2 md:row-span-2 md:py-12 md:px-8 md:space-y-28 xl:row-start-1 xl:col-start-auto xl:col-span-3 xl:row-span-3" data-animatable-card>
+                    <div className="relative bg-black/75 rounded-md p-4 space-y-12 animatable-card md:col-span-3 md:row-start-3 md:col-start-1 md:row-span-4 md:py-12 md:px-8 md:space-y-28 xl:row-start-1 xl:col-start-auto xl:col-span-3 xl:row-span-3" data-animatable-card>
                         <h1 className="text-4xl md:text-5xl">Contactanos</h1>
                         <ContactForm />
                     </div>
