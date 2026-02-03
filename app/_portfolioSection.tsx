@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export function PortfolioSection() {
     return (
-        <section className="w-full px-6 pt-8 xl:w-7xl xl:mx-auto 2xl:py-32">
+        <section className="w-full px-6 pt-8 xl:w-7xl xl:mx-auto 2xl:py-32" data-portfolio-section>
             <ScrollArea>
                 <ul className="relative flex gap-6 md:gap-9">
                     {
