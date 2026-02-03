@@ -26,7 +26,7 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
                 </Button>
             </div>
             <nav className="hidden relative z-10 2xl:block ml-auto mr-8">
-                <ul className="flex gap-4 text-lg text-center capitalize">
+                <ul className="flex gap-4 text-xl text-center capitalize">
                     {/* <li> */}
                     {/*     <Link href="/" onClick={onNavigationCb}>Inicio</Link> */}
                     {/* </li> */}
