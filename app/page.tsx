@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from 'react';
+import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -21,6 +21,7 @@ import sqsect2_3 from './sqsect2_3.webp';
 import sqsect2_4 from './sqsect2_4.webp';
 import duckImg from './duck.webp';
 import { BydLogo } from '@/src/components/svg/byd';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +32,29 @@ export default function PinnedScrollSections() {
     const squaresSect2Ref = useRef<HTMLDivElement>(null);
     const isIntroDone = useIntroStore(state => state.isIntroDone);
     const shouldReplay = useIntroStore(state => state.shouldReplay);
+    const breakpoint = useBreakpoint();
+    const [sqSectionTriggerStart, setSqSectionTriggerStart] = useState("5% bottom");
+    const setSqSectionTriggerStartEvt = useEffectEvent((val: string) => setSqSectionTriggerStart(val));
+
+    useEffect(() => {
+        switch (breakpoint) {
+            case "sm":
+                setSqSectionTriggerStartEvt("5% bottom");
+                break;
+            case "md":
+                setSqSectionTriggerStartEvt("10% bottom");
+                break;
+            case "lg":
+                setSqSectionTriggerStartEvt("50% bottom");
+                break;
+            case "xl":
+                setSqSectionTriggerStartEvt("30% bottom");
+                break;
+            case "2xl":
+                setSqSectionTriggerStartEvt("35% bottom");
+                break;
+        }
+    }, [breakpoint])
 
     useGSAP(() => {
         if (!containerRef.current || !mainScrollRef.current || shouldReplay) {
@@ -162,7 +186,7 @@ export default function PinnedScrollSections() {
                 const bodyBgTl = gsap.timeline({
                     scrollTrigger: {
                         trigger: squaresSectRef.current.querySelector("[data-squares-grid]"),
-                        start: "5% bottom",
+                        start: sqSectionTriggerStart,
                         onEnter: () => {
                             bodyBgTl.play();
                         },
@@ -194,11 +218,11 @@ export default function PinnedScrollSections() {
                 stagger: 0.1,
                 scrollTrigger: {
                     trigger: squaresSect2Ref.current,
-                    start: "5% bottom",
+                    start: sqSectionTriggerStart,
                 }
             })
         }
-    }, { scope: containerRef, dependencies: [isIntroDone, shouldReplay] });
+    }, { scope: containerRef, dependencies: [isIntroDone, shouldReplay, sqSectionTriggerStart] });
 
     return (
         <div ref={containerRef} className="relative">
