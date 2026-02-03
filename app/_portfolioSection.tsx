@@ -2,16 +2,17 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import portfolioImg2 from './horsect_2.webp';
 import Image from 'next/image';
 import calienteDeDgo from './caliente_de_durango.webp';
+import Link from 'next/link';
 
 export function PortfolioSection() {
     return (
         <section className="w-full px-6 pt-8">
             <ScrollArea>
-                <ul className="relative flex gap-6">
+                <ul className="relative flex gap-6 md:gap-9">
                     {
                         portfolioItems.map((item) => (
-                            <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6 px-px" key={item.title}>
-                                <div className="w-full aspect-3/4 rounded-sm overflow-hidden shadow-lg">
+                            <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6 px-px md:w-1/2" key={item.title}>
+                                <div className="w-full aspect-3/4 rounded-sm overflow-hidden shadow-lg lg:rounded-lg">
                                     <ItemMedia item={item} />
                                     {
                                         item.titleIconAsMainImg
@@ -19,15 +20,17 @@ export function PortfolioSection() {
                                             : null
                                     }
                                 </div>
-                                <h3 className="text-xl uppercase">
-                                    <span className={item.titleIcon && !item.titleIconAsMainImg ? "sr-only" : undefined}>{item.title}</span>
-                                    {
-                                        !item.titleIconAsMainImg && item.titleIcon
-                                            ? (item as any).titleIcon
-                                            : null
-                                    }
-                                </h3>
-                                <p className="text-sm text-current/60 font-secondary uppercase">{item.description}</p>
+                                <PortfolioLink item={item}>
+                                    <h3 className="text-xl uppercase lg:text-3xl lg:pt-4">
+                                        <span className={item.titleIcon && !item.titleIconAsMainImg ? "sr-only" : undefined}>{item.title}</span>
+                                        {
+                                            !item.titleIconAsMainImg && item.titleIcon
+                                                ? (item as typeof portfolioItems[number]).titleIcon
+                                                : null
+                                        }
+                                    </h3>
+                                </PortfolioLink>
+                                <p className="text-sm text-current/60 font-secondary font-medium uppercase lg:text-base">{item.description}</p>
                             </li>
                         ))
                     }
@@ -36,6 +39,23 @@ export function PortfolioSection() {
             </ScrollArea>
         </section>
     );
+}
+
+function PortfolioLink({ children, item }: React.PropsWithChildren<{ item: typeof portfolioItems[number] }>) {
+    switch (item.href) {
+        case "/nuestros-servicios":
+            return (
+                <Link href={item.href}>
+                    {children}
+                </Link>
+            );
+        default:
+            return (
+                <a href={item.href} target="_blank">
+                    {children}
+                </a>
+            );
+    }
 }
 
 const portfolioItems = [
@@ -52,6 +72,7 @@ const portfolioItems = [
         src: "/byd.webm",
         sourceType: "video",
         mimeType: "video/webm",
+        href: "https://www.byd.com/mx"
     } as const,
     {
         title: "Caliente MX",
@@ -65,6 +86,7 @@ const portfolioItems = [
         src: portfolioImg2,
         sourceType: null,
         mimeType: null,
+        href: "https://www.instagram.com/calientedgo/"
     } as const,
     {
         title: "Q&R",
@@ -74,6 +96,7 @@ const portfolioItems = [
         src: "/qnr.webm",
         sourceType: "video",
         mimeType: "video/webm",
+        href: "https://qrestrellas.com/"
     } as const,
     {
         title: "Puedes ser tú",
@@ -83,11 +106,12 @@ const portfolioItems = [
         src: "",
         sourceType: "",
         mimeType: "",
+        href: "/nuestros-servicios"
     } as const
 ] as const;
 
 function ItemMedia({ item }: { item: typeof portfolioItems[number] }) {
-    switch (item.sourceType as any) {
+    switch (item.sourceType as 'image' | 'video' | null) {
         case "image":
             return (
                 <Image src={item.src} alt={item.description} className="h-full w-full object-cover scale-105" width={720} height={900} />
