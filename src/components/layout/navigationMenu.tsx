@@ -20,13 +20,32 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
 
     return (
         <>
-            <div className="relative z-60 ml-auto pr-2 py-2">
+            <div className="relative z-60 ml-auto pr-2 py-2 2xl:hidden">
                 <Button className="text-inherit" size="icon" variant="ghost" onClick={() => setIsOpen((isOpen) => !isOpen)}>
-                    <MenuIcon className="size-6 stroke-current" />
+                    <MenuIcon className="size-6 stroke-current md:size-7 lg:size-8" />
                 </Button>
             </div>
+            <nav className="hidden relative z-10 2xl:block ml-auto mr-8">
+                <ul className="flex gap-4 text-lg text-center capitalize">
+                    {/* <li> */}
+                    {/*     <Link href="/" onClick={onNavigationCb}>Inicio</Link> */}
+                    {/* </li> */}
+                    <li>
+                        <Link href="/nuestros-servicios" onClick={onNavigationCb}>Nuestros Servicios</Link>
+                    </li>
+                    <li>
+                        <Link href="/nuestro-trabajo" onClick={onNavigationCb}>Nuestro Trabajo</Link>
+                    </li>
+                    <li>
+                        <Link href="/acerca-de-nosotros" onClick={onNavigationCb}>Acerca de Nöok</Link>
+                    </li>
+                    <li>
+                        <Link href="/contacto" onClick={onNavigationCb}>Contacto</Link>
+                    </li>
+                </ul>
+            </nav>
             {isOpen ? (
-                <div className="fixed inset-0 z-50 flex flex-col items-center gap-20 bg-main text-gray-50 px-12 py-[25vw]">
+                <div className="fixed inset-0 z-50 flex flex-col items-center gap-20 bg-main text-gray-50 px-12 py-[25vw] xl:py-32">
                     <Link href="/" onClick={onNavigationCb}>
                         <NookLogo className="h-24" />
                     </Link>
