@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 export function PortfolioSection() {
     return (
-        <section className="w-full px-6 pt-8">
+        <section className="w-full px-6 pt-8 xl:w-7xl xl:mx-auto 2xl:py-32">
             <ScrollArea>
                 <ul className="relative flex gap-6 md:gap-9">
                     {
                         portfolioItems.map((item) => (
-                            <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6 px-px md:w-1/2" key={item.title}>
+                            <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6 px-px md:w-1/2 xl:w-1/3" key={item.title}>
                                 <div className="w-full aspect-3/4 rounded-sm overflow-hidden shadow-lg lg:rounded-lg">
                                     <ItemMedia item={item} />
                                     {

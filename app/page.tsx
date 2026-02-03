@@ -33,25 +33,46 @@ export default function PinnedScrollSections() {
     const isIntroDone = useIntroStore(state => state.isIntroDone);
     const shouldReplay = useIntroStore(state => state.shouldReplay);
     const breakpoint = useBreakpoint();
+    const [socialProofSepType, setSocialProofSepType] = useState<"horizontal" | "vertical">("horizontal");
     const [sqSectionTriggerStart, setSqSectionTriggerStart] = useState("5% bottom");
+    const [squaresGridVariant, setSquaresGridVariant] = useState<Array<number>>([]);
+    const [showHeroVideo, setShowHeroVideo] = useState(false);
     const setSqSectionTriggerStartEvt = useEffectEvent((val: string) => setSqSectionTriggerStart(val));
+    const setSocialProofSepTypeEvt = useEffectEvent((val: "horizontal" | "vertical") => setSocialProofSepType(val));
+    const setSquaresGridVariantEvt = useEffectEvent((val: Array<number>) => setSquaresGridVariant(val));
+    const setHeroVideoEvt = useEffectEvent((val: boolean) => setShowHeroVideo(val));
 
     useEffect(() => {
         switch (breakpoint) {
             case "sm":
                 setSqSectionTriggerStartEvt("5% bottom");
+                setSocialProofSepTypeEvt("horizontal");
+                setSquaresGridVariantEvt(squareVariants.small);
+                setHeroVideoEvt(false);
                 break;
             case "md":
                 setSqSectionTriggerStartEvt("10% bottom");
+                setSocialProofSepTypeEvt("horizontal");
+                setSquaresGridVariantEvt(squareVariants.small);
+                setHeroVideoEvt(false);
                 break;
             case "lg":
                 setSqSectionTriggerStartEvt("50% bottom");
+                setSocialProofSepTypeEvt("horizontal");
+                setSquaresGridVariantEvt(squareVariants.medium);
+                setHeroVideoEvt(false);
                 break;
             case "xl":
                 setSqSectionTriggerStartEvt("30% bottom");
+                setSocialProofSepTypeEvt("vertical");
+                setSquaresGridVariantEvt(squareVariants.large);
+                setHeroVideoEvt(false);
                 break;
             case "2xl":
                 setSqSectionTriggerStartEvt("35% bottom");
+                setSocialProofSepTypeEvt("vertical");
+                setSquaresGridVariantEvt(squareVariants.large);
+                setHeroVideoEvt(true);
                 break;
         }
     }, [breakpoint])
@@ -139,6 +160,9 @@ export default function PinnedScrollSections() {
                         // @ts-expect-error - TS doesn't know that elt is a HTMLElement
                         elt = sections[i - 1];
                     }
+                    if (!elt) {
+                        continue;
+                    }
 
                     if (!animation.exitVars) {
                         tl.to(sections[i - 1], { zIndex: sections.length - i - 1 });
@@ -225,23 +249,32 @@ export default function PinnedScrollSections() {
     }, { scope: containerRef, dependencies: [isIntroDone, shouldReplay, sqSectionTriggerStart] });
 
     return (
-        <div ref={containerRef} className="relative">
-            <div className="h-dvh w-full grid grid-cols-1 grid-rows-1 [&>section]:col-start-1 [&>section]:row-start-1" ref={mainScrollRef}>
+        <div ref={containerRef} className="relative md:space-y-6">
+            <div className="h-dvh w-dvw grid grid-cols-1 grid-rows-1 [&>section]:col-start-1 [&>section]:row-start-1" ref={mainScrollRef}>
                 <section className="h-full w-full" data-animation="hero" data-animation-tl="main">
                     <video id="hero-video" className="absolute inset-0 z-0 h-full w-full object-cover" autoPlay loop muted playsInline>
                         <source src="/nook_hero.webm" type="video/webm" />
                     </video>
-                    <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6">
-                        <h1 className="flex flex-col gap-6 text-7xl mx-auto mt-auto">
-                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40" />
-                            <div className="flex text-center text-2xl mx-auto">
+                    <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6 2xl:grid 2xl:grid-cols-[40%_60%] 2xl:grid-rows-[1fr_auto] 2xl:gap-x-32">
+                        {
+                            showHeroVideo ? (
+                                <div className="col-start-1 row-start-1 m-auto mr-0">
+                                    <video className="w-128 aspect-9/16 rounded-lg" autoPlay loop muted playsInline>
+                                        <source src="/nook_hero.webm" type="video/webm" />
+                                    </video>
+                                </div>
+                            ) : null
+                        }
+                        <h1 className="flex flex-col gap-6 text-7xl mx-auto mt-auto 2xl:col-start-2 2xl:m-auto 2xl:ml-0">
+                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40 lg:h-52" />
+                            <div className="flex text-center text-2xl mx-auto lg:text-4xl">
                                 <i className="sr-only">Nook:</i>
                                 <div className="" data-animate="hero-slogan">minuciosa</div>
                                 <span className="inline-block h-0">&nbsp;</span>
                                 <div className="" data-animate="hero-slogan">perfección</div>
                             </div>
                         </h1>
-                        <div className="mt-auto">
+                        <div className="mt-auto 2xl:col-span-full 2xl:row-start-2 2xl:mx-auto">
                             <Button id="continue-reading" className="flex flex-col items-center text-sm text-gray-200 animate-bounce" variant="ghost">
                                 <span className="sr-only">Continua leyendo</span>
                                 <ChevronDown className="relative size-4 z-0" />
@@ -250,101 +283,120 @@ export default function PinnedScrollSections() {
                         </div>
                     </div>
                 </section>
-                <section className="h-full w-full flex flex-col pt-[5vh]" data-animation="social-proof" data-animation-tl="main">
-                    <ul className="flex gap-6 px-6 py-[15vw] [&>li]:flex-1">
+                <section className="h-screen w-screen flex flex-col pt-[5vh] xl:grid xl:grid-cols-[auto_auto_1fr] xl:pt-0 2xl:px-32" data-animation="social-proof" data-animation-tl="main">
+                    <ul className="flex gap-2 px-6 py-[15vw] [&>li]:flex-1 md:gap-8 xl:flex-col xl:col-start-1 xl:row-span-2 xl:py-32">
                         {
                             awards.map((award, i) => (
                                 <AwardItem key={i} award={award} />
                             ))
                         }
                     </ul>
-                    <div className="h-px w-9/10 bg-current mx-auto" data-animate="separator">
-                        <span className="sr-only">Separador de contenido</span>
+                    <div className="flex items-center justify-center col-start-2 row-span-2 xl:px-12">
+                        {
+                            socialProofSepType === "horizontal"
+                                ? (
+                                    <div className="h-px w-9/10 bg-current mx-auto" data-animate="separator-hor">
+                                        <span className="sr-only">Separador de contenido</span>
+                                    </div>
+                                )
+                                : (
+                                    <div className="w-px h-9/10 bg-current mx-auto xl:col-start-2 xl:row-span-2 xl:w-px xl:h-9/10" data-animate="separator-ver">
+                                        <span className="sr-only">Separador de contenido</span>
+                                    </div>
+                                )
+                        }
                     </div>
-                    <div className="space-y-6 pt-8 px-6">
-                        <p className="font-light text-xl" data-animate="paragraph">
+                    <div className="space-y-6 pt-8 px-6 md:pt-12 md:space-y-8 lg:pt-20 lg:space-y-16">
+                        <p className="font-light md:text-xl lg:text-2xl" data-animate="paragraph">
                             <span className="inline-block pr-2 pl-1">
-                                <NookLogo className="h-8" />
+                                <NookLogo className="h-8 md:h-10 lg:h-14" />
                             </span>
-                            <span className="font-secondary font-medium">
+                            <span className="font-secondary font-normal">
                                 es una agencia digital mexicana que impulsa negocios con precisión quirúrgica.
                                 Diseñamos marcas, campañas y experiencias que convierten cada detalle en crecimiento real.
                             </span>
                         </p>
-                        <Button className="rounded-full border-2 border-current text-current/80 capitalize cursor-pointer hover:text-neutral-100 hover:bg-neutral-950  hover:shadow-lg active:text-neutral-100 active:bg-neutral-950 md:text-lg md:p-6" variant="ghost" asChild data-animate="button">
-                            <Link href="/nuestro-trabajo">
+                        <Button className="rounded-full border-2 border-current text-current/80 capitalize cursor-pointer hover:text-neutral-100 hover:bg-neutral-950  hover:shadow-lg active:text-neutral-100 active:bg-neutral-950 md:text-lg md:p-6 lg:text-xl lg:p-6.5" variant="ghost" asChild data-animate="button">
+                            <a href="/nuestro-trabajo">
                                 Ver nuestro trabajo
-                            </Link>
+                            </a>
                         </Button>
                     </div>
                     <div className="flex w-full justify-end px-6 py-6 mt-auto" data-animate="logo">
-                        <NookLogo className="h-24 w-auto" />
+                        <NookLogo className="h-24 w-auto lg:h-40" />
                     </div>
                 </section>
-                <section className="h-full w-full flex flex-col items-center justify-center" data-animation="duck" data-animation-tl="main">
-                    <Image className="-0" src={duckImg} alt="Pato" width={1024} height={1024} data-animate="duck-img" />
-                    <h2 className="space-y-2">
-                        <NookLogo className="h-24 w-auto" data-animate="logo" />
-                        <span>
+                <section className="h-full w-full flex flex-col items-center justify-center gap-4" data-animation="duck" data-animation-tl="main">
+                    <Image className="w-auto h-72 md:h-128" src={duckImg} alt="Pato" width={1024} height={1024} data-animate="duck-img" />
+                    <h2 className="space-y-2 md:text-center">
+                        <NookLogo className="h-24 w-auto md:h-40" data-animate="logo" />
+                        <span className="text-xl md:text-3xl">
                             <i className="sr-only">Nook:</i>
-                            <span className="inline-block text-xl" data-animate="slogan">minuciosa</span>
+                            <span className="inline-block" data-animate="slogan">minuciosa</span>
                             &nbsp;
-                            <span className="inline-block text-xl" data-animate="slogan">perfección</span>
+                            <span className="inline-block" data-animate="slogan">perfección</span>
                         </span>
                     </h2>
                 </section>
             </div>
             <PortfolioSection />
-            <section className="w-full px-6 overflow-hidden">
-                <h2 className="text-3xl">Campañas desctacadas</h2>
+            <section className="w-full px-6 overflow-hidden lg:pt-8 xl:py-32">
+                <h2 className="text-3xl lg:text-4xl xl:w-7xl xl:mx-auto">Campañas desctacadas</h2>
                 <ScrollArea className="w-full">
-                    <ul className="flex gap-6 py-24">
-                        <li className="shrink-0 grow-0 w-1/2">
-                            <Image className="h-20 w-auto" width={512} height={141} src={chLogo} alt="Logo de AT&T" loading="lazy" />
-                            <div className="relative mt-4 pt-8">
-                                <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
-                                <h5 className="text-xl uppercase">Villa Chenacolo</h5>
-                            </div>
-                            <p className="text-current/60 text-sm font-secondary mt-4.5">
-                                Branding y sistema visual de alto lujo para Villa Chenacolo,
-                                un salón de eventos exclusivo que fusiona elegancia arquitectónica y
-                                experiencias memorables en cada celebración.
-                            </p>
+                    <ul className="flex gap-6 py-24 2xl:gap-20 2xl:px-12">
+                        <li className="shrink-0 grow-0 w-1/2 2xl:w-1/3">
+                            <a href="https://villachenacolo.com/" target="_blank">
+                                <Image className="h-20 w-auto" width={512} height={141} src={chLogo} alt="Logo de AT&T" loading="lazy" />
+                                <div className="relative mt-4 pt-8">
+                                    <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
+                                    <h5 className="text-xl uppercase md:text-2xl">Villa Chenacolo</h5>
+                                </div>
+                                <p className="text-current/60 text-sm font-secondary mt-4.5 md:text-base">
+                                    Branding y sistema visual de alto lujo para Villa Chenacolo,
+                                    un salón de eventos exclusivo que fusiona elegancia arquitectónica y
+                                    experiencias memorables en cada celebración.
+                                </p>
+                            </a>
                         </li>
-                        <li className="shrink-0 grow-0 w-1/2">
-                            {/* <Image width={128} height={40} src={googleLogo} alt="Logo de Google" loading="lazy" /> */}
-                            <BydLogo className="h-20" />
-                            <div className="relative mt-4 pt-8">
-                                <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
-                                <h5 className="text-xl uppercase">BYD Durango</h5>
-                            </div>
-                            <p className="text-current/60 text-sm font-secondary mt-4.5">Una experiencia digital creada para impulsar la nueva era de movilidad eléctrica en México.</p>
+                        <li className="shrink-0 grow-0 w-1/2 xl:w-1/3">
+                            <a href="https://www.byd.com/mx" target="_blank">
+                                <BydLogo className="h-20" />
+                                <div className="relative mt-4 pt-8">
+                                    <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
+                                    <h5 className="text-xl uppercase md:text-2xl">BYD Durango</h5>
+                                </div>
+                                <p className="text-current/60 text-sm font-secondary mt-4.5 md:text-base">Una experiencia digital creada para impulsar la nueva era de movilidad eléctrica en México.</p>
+                            </a>
                         </li>
-                        <li className="shrink-0 grow-0 w-1/2">
-                            <Image className="size-20 aspect-square" width={128} height={128} src={calienteDeDgo} alt="Logo de Caliente de Durango" loading="lazy" />
-                            <div className="relative mt-4 pt-8">
-                                <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
-                                <h5 className="text-xl uppercase">Caliente de Durango</h5>
-                            </div>
-                            <p className="text-current/60 text-sm font-secondary mt-4.5">Campañas digitales enfocadas en conversión y presencia local en Durango.</p>
+                        <li className="shrink-0 grow-0 w-1/2 xl:w-1/3">
+                            <a href="https://www.instagram.com/calientedgo/">
+                                <Image className="size-20 aspect-square" width={128} height={128} src={calienteDeDgo} alt="Logo de Caliente de Durango" loading="lazy" />
+                                <div className="relative mt-4 pt-8">
+                                    <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
+                                    <h5 className="text-xl uppercase md:text-2xl">Caliente de Durango</h5>
+                                </div>
+                                <p className="text-current/60 text-sm font-secondary mt-4.5 md:text-base">Campañas digitales enfocadas en conversión y presencia local en Durango.</p>
+                            </a>
                         </li>
-                        <li className="shrink-0 grow-0 w-1/2">
-                            <Image className="h-20 w-auto" width={256} height={124} src={qrLogo} alt="Logo de Wilson" loading="lazy" />
-                            <div className="relative mt-4 pt-8">
-                                <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
-                                <h5 className="text-xl uppercase">Q&R Estrellas de la Limpieza</h5>
-                            </div>
-                            <p className="text-current/60 text-sm font-secondary mt-4.5">Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.</p>
+                        <li className="shrink-0 grow-0 w-1/2 xl:w-1/3">
+                            <a href="https://qrestrellas.com/" target="_blank">
+                                <Image className="h-20 w-auto" width={256} height={124} src={qrLogo} alt="Logo de Wilson" loading="lazy" />
+                                <div className="relative mt-4 pt-8">
+                                    <span className="absolute top-0 left-0 w-6 h-0.5 bg-current"></span>
+                                    <h5 className="text-xl uppercase md:text-2xl">Q&R Estrellas de la Limpieza</h5>
+                                </div>
+                                <p className="text-current/60 text-sm font-secondary mt-4.5 md:text-base">Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.</p>
+                            </a>
                         </li>
                     </ul>
                     <ScrollBar orientation="horizontal" />
                 </ScrollArea>
             </section>
-            <section className="px-6" ref={squaresSectRef}>
+            <section className="px-6 xl:w-7xl xl:mx-auto" ref={squaresSectRef}>
                 <h2 className="font-secondary text-6xl font-light pt-6 pb-24">Creamos experiencias para hacerte notar y ayudarte a crecer</h2>
-                <div className="grid grid-cols-6 gap-3" data-squares-grid>
+                <div className="grid grid-cols-6 gap-3 xl:grid-cols-12" data-squares-grid>
                     {
-                        [1, 2, 3, -1, 4, 5, 6, 7, 8, 9, -2, 10].map(v => {
+                        squaresGridVariant.map(v => {
                             if (v < 0) {
                                 return (
                                     <div className="col-span-2 aspect-square h-full" key={v}></div>
@@ -358,6 +410,7 @@ export default function PinnedScrollSections() {
                                             autoPlay
                                             muted
                                             playsInline
+                                            loop
                                         >
                                         </video>
                                     </div>
@@ -366,12 +419,14 @@ export default function PinnedScrollSections() {
                         })
                     }
                 </div>
-                <p className="font-secondary text-center py-12">
+                <p className="font-secondary text-center py-12 md:text-lg lg:pt-16">
                     Nuestra experiencia nos ha dado una envidiable reputación por siempre dar ese factor &quot;WOW&quot;,
                     apoyada con diseño inteligente y bien pensado enfocado a darte la mayor ganancia sobre tu
                     inversión.
                 </p>
-                <div className="-mx-6 grid grid-cols-2 grid-rows-2 aspect-3/4" ref={squaresSect2Ref}>
+            </section>
+            <section>
+                <div className="grid grid-cols-2 aspect-3/4 xl:grid-cols-4 xl:aspect-auto xl:h-96" ref={squaresSect2Ref}>
                     <div className="relative h-full w-full overflow-hidden scale-0 -rotate-180" data-animate-square>
                         <Image className="transform-none w-full h-full object-cover" src={sqsect2_1} alt="Imagen de la sección de squares" />
                     </div>
@@ -432,10 +487,16 @@ function getSectionAnimations(section: HTMLElement): TSectionAnimation[] {
                 exitVars: { opacity: 0, x: "3.5rem", stagger: 0.05 },
                 position: "<50%"
             }, {
-                element: '[data-animate="separator"]',
-                toVars: { width: "90%" },
-                fromVars: { width: "0%" },
-                exitVars: { width: "0%" },
+                element: '[data-animate="separator-hor"]',
+                toVars: { scaleX: 0.9 },
+                fromVars: { scaleX: 0 },
+                exitVars: { scaleX: 0 },
+                position: "<90%",
+            }, {
+                element: '[data-animate="separator-ver"]',
+                toVars: { scaleY: 0.9 },
+                fromVars: { scaleY: 0 },
+                exitVars: { scaleY: 0 },
                 position: "<90%",
             }, {
                 element: '[data-animate="paragraph"]',
@@ -520,9 +581,9 @@ type TAwardProps = {
 function AwardItem({ award }: TAwardProps) {
     return (
         <li>
-            <a className="flex flex-col gap-2" href={award.href}>
-                <span className="text-4xl">{award.title}</span>
-                <span className="text-sm font-secondary">{award.label}</span>
+            <a className="flex flex-col gap-2 md:gap-4" href={award.href}>
+                <span className="text-3xl md:text-5xl lg:text-6xl xl:text-8xl">{award.title}</span>
+                <span className="text-xs text-current/80 font-secondary font-normal leading-tight md:text-lg lg:text-xl xl:text-lg xl:text-current/60">{award.label}</span>
             </a>
         </li>
     );
@@ -548,3 +609,9 @@ const awards = [
         href: "#"
     }
 ];
+
+const squareVariants = {
+    "small": [1, 2, 3, -1, 4, 5, 6, 7, 8, 9, -2, 10],
+    "medium": [1, 2, 3, -1, 4, 5, 6, -2, 7, 8, 9, -3, 10, 11, 12, -4, 13, 14, 15, 16, -5, 17, 18],
+    "large": [1, 2, 3, -1, 4, 5, 6, -2, 7, 8, 9, -3, 10, 11, 12, -4, 13, 14, 15, 16, -5, 17, 18, 19, 20, -6, 21, 22, 23, 24, -7, 25, 26, 27, 28, -8]
+}
