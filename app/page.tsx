@@ -255,19 +255,19 @@ export default function PinnedScrollSections() {
                     <video id="hero-video" className="absolute inset-0 z-0 h-full w-full object-cover" autoPlay loop muted playsInline>
                         <source src="/nook_hero.webm" type="video/webm" />
                     </video>
-                    <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6 2xl:grid 2xl:grid-cols-[40%_60%] 2xl:grid-rows-[1fr_auto] 2xl:gap-x-32">
+                    <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6 2xl:grid 2xl:grid-cols-[40%_60%] 2xl:grid-rows-[1fr_auto] 2xl:gap-x-32 2xl:pt-24">
                         {
                             showHeroVideo ? (
                                 <div className="col-start-1 row-start-1 m-auto mr-0">
-                                    <video className="w-128 aspect-9/16 rounded-lg" autoPlay loop muted playsInline>
+                                    <video className="w-96 aspect-9/16 rounded-lg" autoPlay loop muted playsInline>
                                         <source src="/nook_hero.webm" type="video/webm" />
                                     </video>
                                 </div>
                             ) : null
                         }
                         <h1 className="flex flex-col gap-6 text-7xl mx-auto mt-auto 2xl:col-start-2 2xl:m-auto 2xl:ml-0">
-                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40 lg:h-52" />
-                            <div className="flex text-center text-2xl mx-auto lg:text-4xl">
+                            <NookLogo id="start-hero-logo" className="aspect-2/1 h-40 lg:h-52 2xl:h-36" />
+                            <div className="flex text-center text-2xl mx-auto lg:text-4xl 2xl:text-3xl">
                                 <i className="sr-only">Nook:</i>
                                 <div className="" data-animate="hero-slogan">minuciosa</div>
                                 <span className="inline-block h-0">&nbsp;</span>
