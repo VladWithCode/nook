@@ -252,14 +252,14 @@ export default function PinnedScrollSections() {
         <div ref={containerRef} className="relative md:space-y-6">
             <div className="h-dvh w-dvw grid grid-cols-1 grid-rows-1 [&>section]:col-start-1 [&>section]:row-start-1" ref={mainScrollRef}>
                 <section className="h-full w-full" data-animation="hero" data-animation-tl="main">
-                    <video id="hero-video" className="absolute inset-0 z-0 h-full w-full object-cover" autoPlay loop muted playsInline>
+                    <video id="hero-video" className="absolute inset-0 z-0 h-full w-full object-cover 2xl:blur-md" autoPlay loop muted playsInline>
                         <source src="/nook_hero.webm" type="video/webm" />
                     </video>
                     <div className="relative z-10 h-full w-full flex flex-col justify-center items-center gap-8 bg-gray-800/75 p-6 2xl:grid 2xl:grid-cols-[40%_60%] 2xl:grid-rows-[1fr_auto] 2xl:gap-x-32 2xl:pt-24">
                         {
                             showHeroVideo ? (
                                 <div className="col-start-1 row-start-1 m-auto mr-0">
-                                    <video className="w-96 aspect-9/16 rounded-lg" autoPlay loop muted playsInline>
+                                    <video id="hero-video-big" className="w-96 aspect-9/16 rounded-lg" autoPlay loop muted playsInline>
                                         <source src="/nook_hero.webm" type="video/webm" />
                                     </video>
                                 </div>
@@ -463,6 +463,11 @@ function getSectionAnimations(section: HTMLElement): TSectionAnimation[] {
                 toVars: { opacity: 1, scale: 1 },
                 fromVars: { opacity: 0, scale: 97 },
                 exitVars: { opacity: 0, scale: 1.05 },
+            }, {
+                element: "#hero-video-big",
+                toVars: { opacity: 1, scale: 1, y: "0rem" },
+                fromVars: { opacity: 0, scale: .97, y: "6rem" },
+                exitVars: { opacity: 0, scale: .97, y: "-6rem" },
             }, {
                 element: '[data-animate="hero-slogan"]',
                 toVars: { y: "0rem", opacity: 1 },
