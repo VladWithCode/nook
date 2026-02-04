@@ -46,6 +46,8 @@
 
     --font-main: var(--font-main), Arial, Helvetica, sans-serif;
     --font-secondary: var(--font-secondary);
+
+    --breakpoint-xs: 22.5rem;
 }
 
 @theme inline {
