@@ -14,54 +14,72 @@ Features:
 - current() - returns the current index (if an animation is in-progress, it reflects the final index)
 - times - an Array of the times on the timeline where each element hits the "starting" spot. There's also a label added accordingly, so "label1" is when the 2nd element reaches the start.
 */
-export function horizontalLoop(items: NodeListOf<Element>, config: GSAPTimelineVars) {
+export function horizontalLoop(
+    items: NodeListOf<Element> | Element[] | string,
+    config?: {
+        speed?: number;
+        paused?: boolean;
+        repeat?: number;
+        reversed?: boolean;
+        paddingRight?: string | number;
+        snap?: boolean | number;
+    }
+): gsap.core.Timeline & {
+    next: (vars?: gsap.TweenVars) => gsap.core.Tween;
+    previous: (vars?: gsap.TweenVars) => gsap.core.Tween;
+    current: () => number;
+    toIndex: (index: number, vars?: gsap.TweenVars) => gsap.core.Tween;
+    times: number[];
+} {
     items = gsap.utils.toArray(items);
     config = config || {};
-    let tl = gsap.timeline({
+    const tl = gsap.timeline({
         repeat: config.repeat,
         paused: config.paused,
         defaults: { ease: "none" },
-        onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100),
+        onReverseComplete: () => {
+            tl.totalTime(tl.rawTime() + tl.duration() * 100);
+            return undefined;
+        },
     }),
         length = items.length,
-        startX = items[0].offsetLeft,
-        times = [],
-        widths = [],
-        xPercents = [],
-        curIndex = 0,
+        startX = (items[0] as HTMLElement).offsetLeft,
+        times: number[] = [],
+        widths: number[] = [],
+        xPercents: number[] = [],
         pixelsPerSecond = (config.speed || 1) * 100,
-        snap = config.snap === false ? (v) => v : gsap.utils.snap(config.snap || 1), // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
-        totalWidth,
-        curX,
-        distanceToStart,
-        distanceToLoop,
-        item,
-        i;
+        snap = config.snap === false ? (v: number) => v : gsap.utils.snap(config.snap === true ? 1 : config.snap || 1); // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
+    let curIndex = 0,
+        curX: number,
+        distanceToStart: number,
+        distanceToLoop: number,
+        item: Element,
+        i: number;
     gsap.set(items, {
         // convert "x" to "xPercent" to make things responsive, and populate the widths/xPercents Arrays to make lookups faster.
         xPercent: (i, el) => {
-            const w = (widths[i] = parseFloat(gsap.getProperty(el, "width", "px")));
+            const w = (widths[i] = parseFloat(gsap.getProperty(el, "width", "px") as string));
             xPercents[i] = snap(
-                (parseFloat(gsap.getProperty(el, "x", "px")) / w) * 100 +
-                gsap.getProperty(el, "xPercent")
+                (parseFloat(gsap.getProperty(el, "x", "px") as string) / w) * 100 +
+                (gsap.getProperty(el, "xPercent") as number)
             );
             return xPercents[i];
         },
     });
     gsap.set(items, { x: 0 });
-    totalWidth =
-        items[length - 1].offsetLeft +
+    const totalWidth =
+        (items[length - 1] as HTMLElement).offsetLeft +
         (xPercents[length - 1] / 100) * widths[length - 1] -
         startX +
-        items[length - 1].offsetWidth *
-        gsap.getProperty(items[length - 1], "scaleX") +
-        (parseFloat(config.paddingRight) || 0);
+        (items[length - 1] as HTMLElement).offsetWidth *
+        (gsap.getProperty(items[length - 1], "scaleX") as number) +
+        (parseFloat(config.paddingRight as string) || 0);
     for (i = 0; i < length; i++) {
         item = items[i];
         curX = (xPercents[i] / 100) * widths[i];
-        distanceToStart = item.offsetLeft + curX - startX;
+        distanceToStart = (item as HTMLElement).offsetLeft + curX - startX;
         distanceToLoop =
-            distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+            distanceToStart + widths[i] * (gsap.getProperty(item, "scaleX") as number);
         tl.to(
             item,
             {
@@ -88,7 +106,7 @@ export function horizontalLoop(items: NodeListOf<Element>, config: GSAPTimelineV
             .add("label" + i, distanceToStart / pixelsPerSecond);
         times[i] = distanceToStart / pixelsPerSecond;
     }
-    function toIndex(index, vars) {
+    function toIndex(index: number, vars?: gsap.TweenVars) {
         vars = vars || {};
         Math.abs(index - curIndex) > length / 2 &&
             (index += index > curIndex ? -length : length); // always go in the shortest direction
@@ -103,15 +121,21 @@ export function horizontalLoop(items: NodeListOf<Element>, config: GSAPTimelineV
         vars.overwrite = true;
         return tl.tweenTo(time, vars);
     }
-    tl.next = (vars) => toIndex(curIndex + 1, vars);
-    tl.previous = (vars) => toIndex(curIndex - 1, vars);
+    tl.next = (vars?: gsap.TweenVars) => toIndex(curIndex + 1, vars);
+    tl.previous = (vars?: gsap.TweenVars) => toIndex(curIndex - 1, vars);
     tl.current = () => curIndex;
-    tl.toIndex = (index, vars) => toIndex(index, vars);
+    tl.toIndex = (index: number, vars?: gsap.TweenVars) => toIndex(index, vars);
     tl.times = times;
     tl.progress(1, true).progress(0, true); // pre-render for performance
     if (config.reversed) {
-        tl.vars.onReverseComplete();
+        tl.vars.onReverseComplete?.();
         tl.reverse();
     }
-    return tl;
+    return tl as gsap.core.Timeline & {
+        next: (vars?: gsap.TweenVars) => gsap.core.Tween;
+        previous: (vars?: gsap.TweenVars) => gsap.core.Tween;
+        current: () => number;
+        toIndex: (index: number, vars?: gsap.TweenVars) => gsap.core.Tween;
+        times: number[];
+    };
 }
