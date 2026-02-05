@@ -16,7 +16,8 @@
 }
 
 .shutter.animate>.flap {
-    animation: shutterClick 1.5s cubic-bezier(0.5, 0, 0.5, 1) 0.1s forwards;
+    animation: shutterClick cubic-bezier(0.5, 0, 0.5, 1) 0.1s forwards;
+    animation-duration: var(--shutter-duration, 1.5s);
 }
 
 @keyframes shutterClick {

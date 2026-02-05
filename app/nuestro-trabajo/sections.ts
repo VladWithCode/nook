@@ -25,12 +25,22 @@ export type TMedia = {
 
 export type TSection = {
     title: string,
+    description: string,
+    bg: string | StaticImageData,
+    bgKind: "image" | "video",
+    bgMimeType: string,
+    link?: string,
     media: Array<TMedia>,
 }
 
 export const sections: Array<TSection> = [
     {
         title: "BYD",
+        description: "Una empresa de automóviles de alta tecnología que se dedica a la construcción de vehículos de alta velocidad y alta precisión, diseñados para atraer a los clientes más atractivos.",
+        bg: "byd.webm",
+        bgKind: "video",
+        bgMimeType: "video/webm",
+        link: "https://www.byd.com/mx",
         media: [
             {
                 src: byd,
@@ -53,6 +63,11 @@ export const sections: Array<TSection> = [
     },
     {
         title: "Limpieza Q&R",
+        description: "Limpieza Q&R ofrece servicios profesionales de limpieza para hogares y oficinas, garantizando espacios impecables y saludables para nuestros clientes.",
+        bg: "qnr.webm",
+        bgKind: "video",
+        bgMimeType: "video/webm",
+        link: "https://qrestrellas.com/",
         media: [
             {
                 src: qnr1,

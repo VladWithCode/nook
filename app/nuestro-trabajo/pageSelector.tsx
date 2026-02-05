@@ -2,8 +2,13 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import MobilePage from "./mobilePage";
 import DesktopPage from "./desktopPage";
 import { TSection } from "./sections";
+import { ContextSafeFunc } from "@gsap/react";
 
-export default function PageSelector({ sections, isShutterDone }: { sections: TSection[], isShutterDone: boolean }) {
+export default function PageSelector({ sections, isShutterDone, contextSafe }: {
+    sections: TSection[],
+    isShutterDone: boolean,
+    contextSafe: ContextSafeFunc,
+}) {
     const breakpoint = useBreakpoint();
     let isMobile = false;
     switch (breakpoint) {
@@ -22,6 +27,6 @@ export default function PageSelector({ sections, isShutterDone }: { sections: TS
     return (
         isMobile
             ? <MobilePage sections={sections} animatePage={isShutterDone} />
-            : <DesktopPage sections={sections} animtePage={isShutterDone} />
+            : <DesktopPage sections={sections} animatePage={isShutterDone} contextSafe={contextSafe} />
     );
 }
