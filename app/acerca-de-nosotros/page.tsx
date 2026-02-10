@@ -12,148 +12,31 @@ import Image from "next/image";
 import chenacoloSm from "../chenacolo-sm.webp";
 import chenacoloShowcase from "../chenacolo_showcase.webp";
 import limpiezaQr from "../qr_icon.webp";
-import gridCh from "./ch_grid.webp";
-import gridBor from "./gridBor.webp";
-import gridCrea from "./gridCrea.webp";
-import gridNeg from "./gridNeg.webp";
-import gridLume from "./gridLume.webp";
-import gridTat from "./gridTat.webp";
-import gridWand from "./gridWand.webp";
-import gridFru from "./gridFru.webp";
 import { BydLogo } from "@/src/components/svg/byd";
+import { MasonrySection } from "./masonrySection";
+import "./masonryStyle.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const scrollSectionRef = useRef<HTMLDivElement>(null);
     const isIntroDone = useIntroStore(state => state.isIntroDone);
     const [showPage, setShowPage] = useState(false);
 
-    useGSAP(() => {
-        if (!isIntroDone) {
-            return;
-        }
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: scrollSectionRef.current,
-                start: "top top",
-                end: "+=250%",
-                scrub: 1,
-                pin: true,
-                anticipatePin: 1,
-                onUpdate: (self) => {
-                    if (Number(self.progress.toFixed(2)) >= 0.90) {
-                        setShowPage(true);
-                    } else {
-                        setShowPage(false);
-                    }
-                },
-            }
-        });
-
-        tl.to('[data-animatable-column="left"]', {
-            x: "-6rem",
-            opacity: 0,
-            y: "-2.5rem",
-        })
-            .to('[data-animatable-column="center"] [data-animatable-cell="up"]', {
-                opacity: 0,
-                y: "-6rem",
-            }, "<")
-            .to('[data-animatable-column="center"] [data-animatable-cell="down"]', {
-                opacity: 0,
-                y: "6rem",
-            }, "<")
-            .to('[data-animatable-column="right"]', {
-                x: "6rem",
-                opacity: 0,
-                y: "-2.5rem",
-            }, "<")
-            .to('[data-animatable-video]', {
-                aspectRatio: "16 / 9",
-                width: "100%",
-            }, "<")
-            .to('[data-animatable-heading]', {
-                opacity: 1,
-                y: "0rem",
-            }, "<15%");
+    const { contextSafe } = useGSAP(() => {
     }, { scope: containerRef, dependencies: [isIntroDone] });
 
     return (
         <>
             <div className="text-foreground" ref={containerRef}>
-                <section className="relative z-0 h-screen" ref={scrollSectionRef}>
-                    <div className="fixed inset-0 z-0 h-full w-full grid grid-cols-[repeat(3,50vw)] grid-rows-[100%] gap-5 animated-grid py-4 pointer-events-none">
-                        <div className="flex flex-col gap-5 h-full" data-animatable-column="left">
-                            <div className="grow shrink basis-1/4 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-left" data-animatable-cell="left">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridCh} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                            <div className="grow shrink basis-1/2 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-left" data-animatable-cell="left">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridBor} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                            <div className="grow shrink basis-2/6 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-left" data-animatable-cell="left">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridTat} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-5 h-full" data-animatable-column="center">
-                            <div className="grow shrink basis-1/4 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-center" data-animatable-cell="up">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridCrea} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                            <div className="grow shrink basis-full rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-center" data-animatable-cell="up">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridNeg} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                            <div className="grow-0 shrink-0 aspect-3/4 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-center">
-                            </div>
-                            <div className="h-12 flex items-center bg-blue-100 basis-auto grow-0 shrink-0 rounded-full animated-grid-cell animated-grid-cell-center" data-animatable-cell="down">
-                                <ChevronsDown className="mx-auto" />
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-5 h-full" data-animatable-column="right">
-                            <div className="grow shrink basis-3/5 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-right" data-animatable-cell="right">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridLume} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                            <div className="grow shrink basis-2/5 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-right" data-animatable-cell="right">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridFru} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                            <div className="grow shrink basis-1/5 rounded-lg w-full overflow-hidden animated-grid-cell animated-grid-cell-right" data-animatable-cell="right">
-                                <div className="w-full h-full bg-gray-800">
-                                    <Image className="w-full h-full object-cover" src={gridWand} alt="Imagen de galeria 1" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="relative z-10 h-full grid grid-cols-1 grid-rows-1 justify-items-center items-end mt-auto *:col-span-full *:row-span-full">
-                        <div className="flex flex-col items-center justify-center px-4">
-                            <div className="flex flex-col items-center justify-center opacity-0 translate-y-12" data-animatable-heading>
-                                <h1 className="text-4xl text-center">NÖOK: La agencia de publicidad para ti.</h1>
-                            </div>
-                            <div className="w-[50vw] aspect-3/4 bg-red-800 rounded-lg mt-8 mb-20 overflow-hidden animated-grid-cell" data-animatable-cell data-animatable-video>
-                                <video className="object-cover rounded-lg bg-gray-800" autoPlay loop muted playsInline>
-                                    <source src="/nook_hero.webm" type="video/webm" />
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <MasonrySection
+                    isIntroDone={isIntroDone}
+                    contextSafe={contextSafe}
+                    setShowPage={setShowPage}
+                />
                 {
                     showPage ? (
-                        <div className="relative z-10 px-6 pb-[10vw] -mt-12 space-y-24">
+                        <div className="relative z-10 px-6 pb-[10vw] -mt-0 space-y-24 md:w-4/5 md:mx-auto xl:w-6xl xl:space-y-48">
                             <section className="grid grid-cols-2 gap-4 font-medium font-secondary leading-tight" data-animate-section>
                                 <p className="text-current/60">
                                     NÖOK es una agencia digital mexicana que impulsa negocios con precisión quirúrgica.
@@ -168,13 +51,17 @@ export default function Page() {
                                     <br />
                                     No más teléfono descompuesto.
                                 </h2>
-                                <div className="flex flex-col items-center justify-center aspect-square">
+                                <div className="flex flex-col items-center justify-center aspect-square w-fit mx-auto">
                                     <p className="font-secondary max-w-80 text-center">Reserva tu lugar. Desarrollemos tu proyecto, juntos.</p>
-                                    <div className="py-8"></div>
+                                    <div className="py-8">
+                                        <Button className="bg-main rounded-full p-6 px-20 text-base" asChild>
+                                            <Link href="/contacto">Agendar Cita</Link>
+                                        </Button>
+                                    </div>
                                     <p className="font-secondary max-w-80 text-center">Somos todo oidos&mdash;no hay ideas locas, en NÖOK no juzgamos.</p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-6 font-secondary leading-tight text-current/60">
-                                    <div className="space-y-4">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p className="">
                                             Construir tu marca o sitio web deberia ser emocionante
                                             &mdash;y debe generar resultados...
@@ -189,7 +76,7 @@ export default function Page() {
                                             NÖOK es tu lugar para hacerlo.
                                         </p>
                                     </div>
-                                    <div className="space-y-4">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p className="">
                                             Con 14 años de experiencia, somos del tamaño justo&mdash;ni muy grandes, ni muy pequeños, exactamente lo necesario&mdash;la experiencia de un estudio de talla mundial con la flexibilidad de una agencia boutique&mdash;sin las complicaciones.
                                         </p>
@@ -199,20 +86,22 @@ export default function Page() {
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-center">
-                                    <Button className="bg-special text-stone-50 text-lg">Contratanos</Button>
+                                    <Button className="bg-special text-stone-50 text-base p-6 px-20 rounded-full" asChild>
+                                        <Link href="/contacto">Contactanos ya</Link>
+                                    </Button>
                                 </div>
                             </section>
-                            <section className="space-y-4">
+                            <section className="space-y-4 xl:space-y-6">
                                 <div className="space-y-1">
                                     <h2 className="font-secondary">Una formula simple y efectiva.</h2>
-                                    <p className="text-3xl tracking-tighter">
+                                    <p className="text-3xl tracking-tighter xl:text-4xl">
                                         Sexy primero. Inteligente siempre.
                                         <br />
                                         Una estrategia 500 millones de años en desarrollo.
                                     </p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-6 font-secondary leading-tight text-current/60">
-                                    <div className="space-y-4">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p>
                                             &quot;Sexy & Smart&quot; es como llamamos a nuestro enfoque 100% orgánico,
                                             inspirado por la estratega definitiva: la Madre Naturaleza.
@@ -224,7 +113,7 @@ export default function Page() {
                                         </p>
                                         <p>Para tu marca, la seducción es la clave del éxito.</p>
                                     </div>
-                                    <div className="space-y-4">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p>
                                             Por hacerte irresistible a primera vista, cautivamos a tu audiencia.
                                             Si el momento se siente correcto, darán el siguiente paso: interactuar con tu oferta.
@@ -242,7 +131,7 @@ export default function Page() {
                                     </div>
                                 </div>
                             </section>
-                            <section className="border-t border-current/10 py-3 space-y-2">
+                            <section className="border-t border-current/10 py-3 space-y-2 xl:space-y-4">
                                 <div className="flex items-center justify-between">
                                     <h2 className="text-lg">Mira nuestros proyectos</h2>
                                     <Link href="/" className="flex items-center gap-1 text-blue-500">
@@ -250,8 +139,8 @@ export default function Page() {
                                         <ArrowRight className="size-5" />
                                     </Link>
                                 </div>
-                                <div className="flex gap-2">
-                                    <div className="aspect-3/4 basis-1/3 grow-0 shrink-0 grid grid-cols-3 grid-rows-4 gap-2">
+                                <div className="flex gap-2 xl:gap-8">
+                                    <div className="aspect-3/4 basis-1/3 grow-0 shrink-0 grid grid-cols-3 grid-rows-4 gap-2 xl:gap-8 xl:shrink">
                                         <div className="col-span-3 row-span-3">
                                             <Image className="w-full h-full object-cover rounded-xl" src={chenacoloShowcase} alt="Demostración de Villa Chenacolo" />
                                         </div>
@@ -259,40 +148,40 @@ export default function Page() {
                                             <Image src={chenacoloSm} alt="Logo de Villa Chenacolo" />
                                         </div>
                                         <div className="col-span-2 flex items-center">
-                                            <p className="text-xs">Villa Chenacolo</p>
+                                            <p className="text-xs xl:text-base">Villa Chenacolo</p>
                                             {/* <p className="text-xs text-current/60">Recreación</p> */}
                                         </div>
                                     </div>
-                                    <div className="aspect-3/4 basis-1/3 grow-0 shrink-0 grid grid-cols-3 grid-rows-4 gap-2">
+                                    <div className="aspect-3/4 basis-1/3 grow-0 shrink-0 grid grid-cols-3 grid-rows-4 gap-2 xl:gap-8 xl:shrink">
                                         <div className="col-span-3 row-span-3 bg-blue-600 rounded-xl"></div>
                                         <div className="aspect-square bg-blue-100 rounded-lg p-1">
                                             <Image className="h-full" src={limpiezaQr} alt="Logo de Limpieza Q&R" />
                                         </div>
                                         <div className="col-span-2 flex items-center">
-                                            <p className="text-xs">Limpieza Q&R</p>
+                                            <p className="text-xs xl:text-base">Limpieza Q&R</p>
                                             {/* <p className="text-xs text-current/60">Limpieza</p> */}
                                         </div>
                                     </div>
-                                    <div className="aspect-3/4 basis-1/3 grow-0 shrink-0 grid grid-cols-3 grid-rows-4 gap-2">
+                                    <div className="aspect-3/4 basis-1/3 grow-0 shrink-0 grid grid-cols-3 grid-rows-4 gap-2 xl:gap-8 xl:shrink">
                                         <div className="col-span-3 row-span-3 bg-stone-900 rounded-xl">
                                         </div>
                                         <div className="flex items-center aspect-square bg-stone-200 rounded-lg p-1">
                                             <BydLogo />
                                         </div>
                                         <div className="col-span-2 flex items-center">
-                                            <p className="text-xs">BYD</p>
+                                            <p className="text-xs xl:text-base">BYD</p>
                                             {/* <p className="text-xs text-current/60"></p> */}
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <section className="space-y-4">
-                                <h2 className="text-3xl tracking-tighter">
+                            <section className="space-y-4 xl:space-y-6">
+                                <h2 className="text-3xl tracking-tighter xl:text-4xl">
                                     Ayudamos a marcas desafiantes de todos los tamaños a enfrentar&mdash;
                                     y destronar&mdash;a los líderes del mercado.
                                 </h2>
                                 <div className="grid grid-cols-2 gap-6 font-secondary leading-tight text-current/60">
-                                    <div className="space-y-4">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p>
                                             Los líderes del mercado, en su intento por proteger su territorio,
                                             a menudo se vuelven cautelosos—demasiado cautelosos.
@@ -305,7 +194,7 @@ export default function Page() {
                                             diferentes requieren movimientos diferentes.
                                         </p>
                                     </div>
-                                    <div className="space-y-4">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p>Y aquí estás tú.</p>
                                         <p>
                                             No navegando el sitio web de una agencia tradicional, sino el nuestro.
@@ -318,7 +207,7 @@ export default function Page() {
                                     </div>
                                 </div>
                             </section>
-                            <section className="grid grid-cols-2 auto-rows-[27vh] gap-3 border-t border-current/10 py-3 space-y-2">
+                            <section className="grid grid-cols-2 auto-rows-[27vh] gap-3 border-t border-current/10 py-3 xl:grid-cols-3 xl:gap-5 xl:py-6">
                                 <div className="flex flex-col justify-between w-full h-full bg-linear-to-b from-fuchsia-400 to-orange-300 rounded-lg p-3">
                                     <h3 className="text-lg tracking-tight leading-tight">Dale a tu negocio una identidad que destaque.</h3>
                                     <div className="flex items-end justify-between leading-none">
@@ -362,10 +251,10 @@ export default function Page() {
                                     </div>
                                 </div>
                             </section>
-                            <section className="space-y-4">
-                                <h2 className="text-3xl tracking-tighter">¿Cómo es trabajar con nosotros?</h2>
-                                <div className="grid grid-cols-2 gap-6 font-secondary leading-tight text-current/60">
-                                    <div className="space-y-4">
+                            <section className="space-y-4 xl:space-y-0 xl:gap-8 xl:grid xl:grid-cols-3">
+                                <h2 className="text-3xl tracking-tighter xl:text-4xl xl:col-span-full">¿Cómo es trabajar con nosotros?</h2>
+                                <div className="grid grid-cols-2 gap-6 font-secondary leading-tight text-current/60 xl:col-start-2 xl:col-span-2">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p>
                                             Claro, escuchar puede no parecer la razón más
                                             llamativa para confiarnos tu proyecto,
@@ -376,7 +265,7 @@ export default function Page() {
                                             lo que marca la diferencia.
                                         </p>
                                     </div>
-                                    <div className="space-y-4">
+                                    <div className="space-y-4 xl:space-y-6">
                                         <p>
                                             Combina eso con un ambiente colaborativo y lleno de confianza,
                                             y tienes la salsa secreta para desbloquear lo mejor de nuestro equipo.
@@ -389,7 +278,7 @@ export default function Page() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="py-6">
+                                <div className="py-6 xl:col-start-1 xl:row-start-2 xl:py-0">
                                     <video className="aspect-9/16 rounded-lg bg-gray-800" autoPlay muted playsInline>
                                         <source src="/nook_hero.webm" type="video/webm" />
                                     </video>
@@ -472,12 +361,12 @@ export default function Page() {
                                         </h3>
                                         <ul className="divide-y divide-current/30 *:first:pt-0 *:last:pb-0">
                                             <li className="grid grid-cols-[auto_1fr] gap-2 py-2.5">
-                                                <UserCircle className="size-8 my-auto stroke-current/30" />
-                                                <h4 className="text-sm font-secondary font-semibold">Nely Marian&mdash;CEO y Fundadora</h4>
+                                                <UserCircle className="size-8 my-auto stroke-current/30 xl:size-10" />
+                                                <h4 className="text-sm font-secondary font-semibold xl:text-base">Nely Marian&mdash;CEO y Fundadora</h4>
                                             </li>
                                             <li className="grid grid-cols-[auto_1fr] gap-2 py-2.5">
-                                                <UserCircle className="size-8 my-auto stroke-current/30" />
-                                                <h4 className="text-sm font-secondary font-semibold">Nely Marian&mdash;CEO y Fundadora</h4>
+                                                <UserCircle className="size-8 my-auto stroke-current/30 xl:size-10" />
+                                                <h4 className="text-sm font-secondary font-semibold xl:text-base">Nely Marian&mdash;CEO y Fundadora</h4>
                                             </li>
                                         </ul>
                                     </li>
