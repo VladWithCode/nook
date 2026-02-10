@@ -45,7 +45,7 @@ export function NavigationMenu({ }: TNavigationMenuProps) {
                 </ul>
             </nav>
             {isOpen ? (
-                <div className="fixed inset-0 z-50 flex flex-col items-center gap-20 bg-main text-gray-50 px-12 py-[25vw] xl:py-32">
+                <div className="fixed inset-0 h-dvh w-dvw z-50 flex flex-col items-center gap-20 bg-main text-gray-50 px-12 py-[25vw] xl:py-32">
                     <Link href="/" onClick={onNavigationCb}>
                         <NookLogo className="h-24" />
                     </Link>
