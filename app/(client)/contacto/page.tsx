@@ -7,7 +7,7 @@ import { Mail, Phone } from "lucide-react";
 import { TeamCarousel } from "./teamCarousel";
 import { ContactForm } from "./contactForm";
 import { ScrollTrigger } from "gsap/all";
-import { useIntroStore } from "../Intro";
+import { useIntroStore } from "../(client)/Introtro";
 
 gsap.registerPlugin(ScrollTrigger);
 

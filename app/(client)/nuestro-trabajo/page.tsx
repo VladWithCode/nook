@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useIntroStore } from "../Intro";
+import { useIntroStore } from "../(client)/Introtro";
 import { Shutter } from "./shutter";
 import { sections } from "./sections";
 import './shutter.css';
