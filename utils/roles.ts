@@ -1,5 +1,5 @@
 import { Roles } from '@/types/globals'
-import { auth } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs/server'
 
 /**
  * Check if the current user has a specific role (server-side)
@@ -7,8 +7,10 @@ import { auth } from '@clerk/nextjs/server'
  * @returns Promise<boolean> - True if user has the role, false otherwise
  */
 export const checkRole = async (role: Roles): Promise<boolean> => {
-    const { sessionClaims } = await auth()
-    return sessionClaims?.metadata?.role === role
+    const u = await currentUser()
+    if (!u) return false
+
+    return u.publicMetadata?.role === role
 }
 
 /**
