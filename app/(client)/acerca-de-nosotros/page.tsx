@@ -3,9 +3,9 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { ArrowLeft, ArrowRight, ChevronRight, ChevronsDown, CircleDot, Clock, HashIcon, Link2, ThumbsUp, User, UserCircle } from "lucide-react";
+import { ArrowRight, ChevronRight, CircleDot, Clock, HashIcon, Link2, ThumbsUp, User, UserCircle } from "lucide-react";
 import { useRef, useState } from "react";
-import { useIntroStore } from "../../Intront)/Intro";
+import { useIntroStore } from "../Intro";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";

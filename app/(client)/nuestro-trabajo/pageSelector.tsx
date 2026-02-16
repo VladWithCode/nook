@@ -3,12 +3,15 @@ import MobilePage from "./mobilePage";
 import DesktopPage from "./desktopPage";
 import { TSection } from "./sections";
 import { ContextSafeFunc } from "@gsap/react";
+import { PortfolioContent } from "@/types/content";
+import { use } from "react";
 
-export default function PageSelector({ sections, isShutterDone, contextSafe }: {
-    sections: TSection[],
+export default function PageSelector({ isShutterDone, contextSafe, contentPromise }: {
     isShutterDone: boolean,
     contextSafe: ContextSafeFunc,
+    contentPromise: Promise<PortfolioContent>
 }) {
+    const content = use(contentPromise)
     const breakpoint = useBreakpoint();
     let isMobile = false;
     switch (breakpoint) {
@@ -26,7 +29,7 @@ export default function PageSelector({ sections, isShutterDone, contextSafe }: {
 
     return (
         isMobile
-            ? <MobilePage sections={sections} animatePage={isShutterDone} />
-            : <DesktopPage sections={sections} animatePage={isShutterDone} contextSafe={contextSafe} />
+            ? <MobilePage content={content} animatePage={isShutterDone} />
+            : <DesktopPage content={content} animatePage={isShutterDone} contextSafe={contextSafe} />
     );
 }

@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useEffectEvent, useRef } from "react";
-import { TMedia, TMediaImage, TMediaVideo, TSection } from "./sections";
 import Image from "next/image";
 import { ContextSafeFunc } from "@gsap/react";
 import gsap from "gsap";
+import { PortfolioContent, PortfolioMedia } from "@/types/content";
 
-export default function DesktopPage({ sections, animatePage, contextSafe }: {
-    sections: TSection[],
+export default function DesktopPage({ content, animatePage, contextSafe }: {
+    content: PortfolioContent,
     animatePage: boolean,
     contextSafe: ContextSafeFunc,
 }) {
@@ -15,8 +15,8 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
     const sectionRefs = useRef<Array<HTMLElement | null>>([]);
     const titleRefs = useRef<Array<HTMLHeadingElement | null>>([]);
     const descRefs = useRef<Array<HTMLParagraphElement | null>>([]);
-    const videoBackgroundRefs = useRef<Array<HTMLDivElement | null>>([]);
     const mediaContainerRefs = useRef<Array<HTMLDivElement | null>>([]);
+    const { projects } = content;
 
     /* eslint-disable */
     const animateInitialSection = contextSafe(() => {
@@ -78,7 +78,7 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
             scrollTrigger: {
                 trigger: mainScrollRef.current,
                 start: "top top",
-                end: () => `+=${sections.length * 250}%`,
+                end: () => `+=${projects.length * 250}%`,
                 scrub: 1,
                 pin: true,
             },
@@ -88,8 +88,8 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
             }
         });
 
-        sections.forEach((_, sectionIndex) => {
-            const sectionEl = sectionRefs.current[sectionIndex];
+        projects.forEach((_, idx) => {
+            const sectionEl = sectionRefs.current[idx];
             const selector = gsap.utils.selector(sectionEl);
 
             if (!sectionEl) return;
@@ -104,9 +104,9 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
 
             // For first section, skip intro animation (already played)
             // For other sections, play the intro animation
-            if (sectionIndex > 0) {
+            if (idx > 0) {
                 // INTRO ANIMATION
-                const introLabel = `section-${sectionIndex}-intro`;
+                const introLabel = `section-${idx}-intro`;
                 masterTimeline.addLabel(introLabel);
 
                 // Set initial states
@@ -138,7 +138,7 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
             }
 
             // SCROLLING ANIMATION
-            const scrollLabel = `section-${sectionIndex}-scroll`;
+            const scrollLabel = `section-${idx}-scroll`;
             masterTimeline.addLabel(scrollLabel);
 
             // For each media card, scroll it to center and scale it up
@@ -164,8 +164,8 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
             }
 
             // OUTRO ANIMATION (if not last section)
-            if (sectionIndex < sections.length - 1) {
-                const outroLabel = `section-${sectionIndex}-outro`;
+            if (idx < projects.length - 1) {
+                const outroLabel = `section-${idx}-outro`;
                 masterTimeline.addLabel(outroLabel);
 
                 // Fade out and translate up title and description
@@ -213,7 +213,7 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
 
     return (
         <div className="h-dvh w-dvw grid grid-cols-1 grid-rows-1 [&>section]:col-start-1 [&>section]:row-start-1 bg-neutral-950" ref={mainScrollRef}>
-            {sections.map((section, index) => (
+            {projects.map((project, index) => (
                 <section
                     key={`section-${index}`}
                     ref={el => { sectionRefs.current[index] = el }}
@@ -222,14 +222,13 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
                     <div className="relative w-full overflow-hidden">
                         <div
                             className="absolute z-10 inset-0 opacity-0 scale-110"
-                            ref={el => { videoBackgroundRefs.current[index] = el }}
                             data-details-video-background
                         >
                             {
-                                section.bgKind === "image"
-                                    ? <Image className="h-full w-full object-cover object-center" src={"/" + section.bg} alt={section.title} width={section.media[0].width} height={section.media[0].height} />
+                                project.bgKind === "image"
+                                    ? <Image className="h-full w-full object-cover object-center" src={project.bg} alt={project.title} />
                                     : <video className="h-full w-full object-cover object-center" autoPlay muted playsInline loop>
-                                        <source src={"/" + section.bg} type={section.media[0].mimeType} />
+                                        <source src={project.bg} type={project.bgMimeType} />
                                     </video>
                             }
                         </div>
@@ -242,14 +241,14 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
                                 ref={el => { titleRefs.current[index] = el }}
                                 data-details-title
                             >
-                                {section.title}
+                                {project.title}
                             </h2>
                             <p
                                 className="text-current/80 opacity-0 transltate-y-24"
                                 ref={el => { descRefs.current[index] = el }}
                                 data-details-description
                             >
-                                {section.description}
+                                {project.description}
                             </p>
                         </div>
                     </div>
@@ -258,10 +257,10 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
                         ref={el => { mediaContainerRefs.current[index] = el }}
                         data-media-container
                     >
-                        {section.media.map(media => <MediaCard media={media} key={media.key} />)}
-                        {section.media.map(media => <MediaCard media={media} key={`${media.key}-2`} />)}
-                        {section.media.map(media => <MediaCard media={media} key={`${media.key}-3`} />)}
-                        {section.media.map(media => <MediaCard media={media} key={`${media.key}-4`} />)}
+                        {project.media.map(media => <MediaCard media={media} key={media.key} />)}
+                        {project.media.map(media => <MediaCard media={media} key={`${media.key}-2`} />)}
+                        {project.media.map(media => <MediaCard media={media} key={`${media.key}-3`} />)}
+                        {project.media.map(media => <MediaCard media={media} key={`${media.key}-4`} />)}
                     </div>
                 </section>
             ))}
@@ -269,7 +268,7 @@ export default function DesktopPage({ sections, animatePage, contextSafe }: {
     );
 }
 
-function MediaCard({ media }: { media: TMedia }) {
+function MediaCard({ media }: { media: PortfolioMedia }) {
     return (
         <div
             className="media-card w-96 grow-0 shrink-0 rounded-lg bg-gray-950 overflow-hidden scale-85 z-0 opacity-0 translate-x-24"
@@ -285,7 +284,7 @@ function MediaCard({ media }: { media: TMedia }) {
     )
 }
 
-function MediaImg({ media }: { media: TMedia & TMediaImage }) {
+function MediaImg({ media }: { media: PortfolioMedia }) {
     return (
         <Image
             className="w-full h-full object-cover z-0"
@@ -299,7 +298,7 @@ function MediaImg({ media }: { media: TMedia & TMediaImage }) {
     )
 }
 
-function MediaVideo({ media }: { media: TMedia & TMediaVideo }) {
+function MediaVideo({ media }: { media: PortfolioMedia }) {
     return (
         <video
             height={media.height}

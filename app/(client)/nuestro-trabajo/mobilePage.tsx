@@ -7,9 +7,14 @@ import Image from "next/image";
 import { TMedia, TMediaImage, TSection } from "./sections";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { PortfolioContent } from "@/types/content";
 
-export default function MobilePage({ sections, animatePage }: { sections: TSection[], animatePage: boolean }) {
+export default function MobilePage({ animatePage, content }: {
+    animatePage: boolean,
+    content: PortfolioContent,
+}) {
     const scrollSectionRef = useRef<HTMLDivElement>(null);
+    const { projects } = content;
 
     useEffect(() => {
         if (!animatePage) {
@@ -87,8 +92,8 @@ export default function MobilePage({ sections, animatePage }: { sections: TSecti
         <div className="py-[10vh]" ref={scrollSectionRef}>
             <div className="text-stone-50 px-2 space-y-[10vw]" data-sections-wrapper>
                 {
-                    sections.map((section) => (
-                        <GallerySection key={section.title} sectionData={section} />
+                    projects.map((project) => (
+                        <GallerySection key={project.title} sectionData={project} />
                     ))
                 }
             </div>
