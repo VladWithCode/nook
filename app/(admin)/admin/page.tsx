@@ -1,59 +1,62 @@
-import { AdminOnly } from '@/components/auth/admin-only'
+import { MessageSquare, Users, FileText } from "lucide-react";
+import Link from "next/link";
 
-/**
- * Protected admin dashboard page
- * Only users with admin role can access this content
- */
 export default function AdminPage() {
+    const quickActions = [
+        {
+            title: "Ver Contactos",
+            description: "Revisa las solicitudes de contacto recibidas",
+            href: "/admin/contacts/details",
+            icon: MessageSquare,
+        },
+        {
+            title: "Gestionar Usuarios",
+            description: "Administra los usuarios del sistema",
+            href: "/admin/users",
+            icon: Users,
+        },
+        {
+            title: "Editar Contenido",
+            description: "Actualiza el contenido del sitio web",
+            href: "/admin/content",
+            icon: FileText,
+        },
+    ];
+
     return (
-        <AdminOnly fallback={
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center space-y-4">
-                    <h1 className="text-2xl font-bold">Access Denied</h1>
-                    <p>You need admin privileges to access this page.</p>
-                    <p className="text-sm text-current/60">
-                        Please sign in with an admin account or contact your administrator.
-                    </p>
-                </div>
+        <div className="space-y-6">
+            <div>
+                <h1 className="text-3xl font-bold">Bienvenido al Panel de Administración</h1>
+                <p className="text-white/70 mt-2">
+                    Aquí puedes administrar el contenido y los usuarios del sitio
+                </p>
             </div>
-        }>
-            <div className="min-h-screen p-6">
-                <div className="max-w-6xl mx-auto space-y-8">
-                    <div className="border-b border-white/10 pb-4">
-                        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-                        <p className="text-current/70 mt-2">Welcome to the Nook admin control panel</p>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div className="p-6 border border-white/20 rounded-lg bg-black/50">
-                            <h2 className="text-xl font-semibold mb-3">Contact Forms</h2>
-                            <p className="text-current/70 mb-4">View and manage contact form submissions</p>
-                            <div className="text-2xl font-bold text-current/50">0</div>
-                        </div>
-                        
-                        <div className="p-6 border border-white/20 rounded-lg bg-black/50">
-                            <h2 className="text-xl font-semibold mb-3">Analytics</h2>
-                            <p className="text-current/70 mb-4">Website traffic and user statistics</p>
-                            <div className="text-2xl font-bold text-current/50">Coming Soon</div>
-                        </div>
-                        
-                        <div className="p-6 border border-white/20 rounded-lg bg-black/50">
-                            <h2 className="text-xl font-semibold mb-3">Content Management</h2>
-                            <p className="text-current/70 mb-4">Update website content and pages</p>
-                            <div className="text-2xl font-bold text-current/50">Coming Soon</div>
-                        </div>
-                    </div>
-                    
-                    <div className="mt-12 p-6 border border-green-500/30 rounded-lg bg-green-950/10">
-                        <h2 className="text-xl font-semibold mb-3 text-green-400">Quick Actions</h2>
-                        <div className="space-y-2">
-                            <p className="text-current/80">• View recent contact form submissions</p>
-                            <p className="text-current/80">• Manage admin users</p>
-                            <p className="text-current/80">• Update website settings</p>
-                        </div>
-                    </div>
-                </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+                {quickActions.map((action) => {
+                    const Icon = action.icon;
+                    return (
+                        <Link
+                            key={action.href}
+                            href={action.href}
+                            className="group relative flex flex-col gap-2 rounded-lg border border-white/10 bg-white/5 p-6 transition-all hover:bg-white/10"
+                        >
+                            <Icon className="h-8 w-8 text-white/60" />
+                            <h2 className="text-xl font-semibold">{action.title}</h2>
+                            <p className="text-white/70">{action.description}</p>
+                        </Link>
+                    );
+                })}
             </div>
-        </AdminOnly>
+
+            <div className="rounded-lg border border-green-500/30 bg-green-950/10 p-6">
+                <h2 className="text-xl font-semibold text-green-400">Acciones Rápidas</h2>
+                <ul className="mt-4 space-y-2 text-white/80">
+                    <li>• Revisar las solicitudes de contacto más recientes</li>
+                    <li>• Gestionar los usuarios del sistema</li>
+                    <li>• Actualizar el contenido de las páginas</li>
+                </ul>
+            </div>
+        </div>
     );
 }
