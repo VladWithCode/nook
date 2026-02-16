@@ -1,0 +1,175 @@
+{
+  "home": {
+    "heroVideo": "/nook_hero.webm",
+    "slogan1": "minuciosa",
+    "slogan2": "perfección",
+    "introText": "es una agencia digital mexicana que impulsa negocios con precisión quirúrgica. Diseñamos marcas, campañas y experiencias que convierten cada detalle en crecimiento real.",
+    "ctaText": "Ver nuestro trabajo",
+    "featuredProjects": [
+      "byd",
+      "limpieza-qr",
+      "villa-chenacolo",
+      "caliente-dgo"
+    ]
+  },
+  "services": {
+    "heroVideo": "/byd.webm",
+    "marqueeText": "POSICIONATE",
+    "introText1": "Tu éxito es nuestro éxito. Por eso, nuestra oferta está enfocada en darte el mayor valor por tu inversión.",
+    "introText2": "Posiciona tu negocio, sé la primera opción para tus clientes.",
+    "ctaText": "Ver Paquetes",
+    "plans": [
+      {
+        "id": "basico",
+        "title": "Plan Básico",
+        "price": "$5,000 MXN/mes",
+        "features": [
+          "Diseño de marca",
+          "Estrategias de crecimiento",
+          "Planificación de ventas",
+          "Gestión de clientes",
+          "Marketing digital"
+        ],
+        "image": "/nook_plan_1.webp",
+        "ctaText": "Contratar ahora",
+        "theme": "default"
+      },
+      {
+        "id": "avanzado",
+        "title": "Plan Avanzado",
+        "price": "$8,500 MXN/mes",
+        "features": [
+          "Incluye servicios del plan Básico",
+          "Diseño de marca",
+          "Estrategias de crecimiento",
+          "Planificación de ventas",
+          "Gestión de clientes",
+          "Marketing digital"
+        ],
+        "image": "/nook_plan_3.webp",
+        "ctaText": "Contratar ahora",
+        "theme": "dark"
+      },
+      {
+        "id": "enterprise",
+        "title": "Plan Enterprise",
+        "price": "$14,000 MXN/mes",
+        "features": [
+          "Incluye servicios del plan Avanzado",
+          "Diseño de marca",
+          "Estrategias de crecimiento",
+          "Planificación de ventas",
+          "Gestión de clientes",
+          "Marketing digital"
+        ],
+        "image": "/nook_plan_2.webp",
+        "ctaText": "Contratar ahora",
+        "theme": "special"
+      }
+    ]
+  },
+  "about": {
+    "heroImages": [
+      "/chenacolo-sm.webp",
+      "/chenacolo_showcase.webp",
+      "/qr_icon.webp"
+    ],
+    "introText": "NÖOK es una agencia digital mexicana que impulsa negocios con precisión quirúrgica. Diseñamos marcas, campañas y experiencias que convierten cada detalle en crecimiento real.",
+    "sections": [
+      {
+        "id": "intro",
+        "title": "Todos los expertos, un techo. No más teléfono descompuesto.",
+        "content": "Reserva tu lugar. Desarrollemos tu proyecto, juntos. Somos todo oídos—no hay ideas locas, en NÖOK no juzgamos.",
+        "images": []
+      },
+      {
+        "id": "experience",
+        "title": "Nuestra experiencia",
+        "content": "Con 14 años de experiencia, somos del tamaño justo—ni muy grandes, ni muy pequeños, exactamente lo necesario—la experiencia de un estudio de talla mundial con la flexibilidad de una agencia boutique—sin las complicaciones. Sin juegos de teléfono. Sin pérdidas de energía. Solo excelente trabajo y buenas vibras. Hacemos que todo funcione.",
+        "images": []
+      },
+      {
+        "id": "methodology",
+        "title": "Una fórmula simple y efectiva",
+        "content": "Sexy primero. Inteligente siempre. Una estrategia 500 millones de años en desarrollo.",
+        "images": []
+      }
+    ],
+    "ctaText": "Agendar Cita"
+  },
+  "portfolio": {
+    "projects": [
+      {
+        "id": "byd",
+        "title": "BYD",
+        "description": "Una empresa de automóviles de alta tecnología que se dedica a la construcción de vehículos de alta velocidad y alta precisión, diseñados para atraer a los clientes más atractivos.",
+        "bg": "/byd.webm",
+        "bgKind": "video",
+        "bgMimeType": "video/webm",
+        "link": "https://www.byd.com/mx",
+        "media": [
+          {
+            "src": "/byd.webp",
+            "alt": "Imagen de galería de la campaña BYD",
+            "kind": "image",
+            "width": 600,
+            "height": 600,
+            "key": "byd-image-1"
+          },
+          {
+            "src": "/byd.webm",
+            "kind": "video",
+            "width": 1080,
+            "height": 1920,
+            "position": "full",
+            "mimeType": "video/webm",
+            "key": "byd-video-1"
+          }
+        ]
+      },
+      {
+        "id": "limpieza-qr",
+        "title": "Limpieza QR",
+        "description": "Limpieza Q&R ofrece servicios profesionales de limpieza para hogares y oficinas, garantizando espacios impecables y saludables para nuestros clientes.",
+        "bg": "/qnr.webm",
+        "bgKind": "video",
+        "bgMimeType": "video/webm",
+        "link": "https://qrestrellas.com/",
+        "media": [
+          {
+            "src": "/qnr1.webp",
+            "alt": "Imagen de la Q&R",
+            "kind": "image",
+            "width": 1080,
+            "height": 1620,
+            "key": "qnr-image-1"
+          },
+          {
+            "src": "/qnr2.webp",
+            "alt": "Imagen de la campaña de Q&R",
+            "kind": "image",
+            "width": 1080,
+            "height": 1620,
+            "key": "qnr-image-2"
+          },
+          {
+            "src": "/qnr.webm",
+            "kind": "video",
+            "width": 720,
+            "height": 1280,
+            "position": "full",
+            "mimeType": "video/webm",
+            "key": "qnr-video-1"
+          }
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "phone": "+52 618 291 9510",
+    "email": "contacto@nookcreativo.mx",
+    "address": "Calle Nazas 100, Real Country, 34162 Durango, Dgo.",
+    "hours": "9:00 a 18:00 horas",
+    "heroImage": ""
+  }
+}
