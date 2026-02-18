@@ -35,12 +35,8 @@ export const useIntroStore = create<TIntroStore>((set, get) => ({
         if (value === 0) {
             set({ progress: 0 });
         }
-        const newPg = get().progress + value || 0;
-        if (newPg >= 100) {
-            set({ progress: 100 });
-        } else {
-            set({ progress: newPg });
-        }
+        const newPg = Math.min(get().progress + value || 0, 100);
+        set({ progress: newPg });
 
         return newPg;
     },
@@ -118,7 +114,10 @@ export default function Intro() {
     return (
         <div
             ref={loaderRef}
-            className={cn("fixed inset-0 w-full h-full z-60 bg-main flex flex-col items-center justify-center overflow-hidden", shouldHideIntro && "hidden")}
+            className={cn(
+                "fixed inset-0 w-full h-dvh z-60 bg-[#488685] overflow-hidden",
+                shouldHideIntro && "hidden"
+            )}
             id="intro-wrapper"
         >
             {introComponent}
@@ -154,15 +153,27 @@ export function MainIntroAnimation() {
 
     return (
         <>
-            <div id="intro-overlay" className="absolute inset-0 z-10 bg-main translate-y-full"></div>
-            <div id="intro-content" className="relative z-0 text-center space-y-8">
-                <div className="w-64 h-2 rounded-full overflow-hidden">
-                    <div
-                        className="h-full bg-linear-to-r from-purple-500 to-pink-500 transition-[width] duration-300 ease-out"
-                        style={{ width: `${Math.min(progress, 100)}%` }}
-                    />
+            <div id="intro-overlay" className="absolute inset-0 z-10 bg-[#488685] translate-y-full"></div>
+            <div id="intro-content" className="relative z-0 h-full w-full text-center">
+                {/* <div className="w-64 h-2 rounded-full overflow-hidden"> */}
+                {/*     <div */}
+                {/*         className="h-full bg-linear-to-r from-purple-500 to-pink-500 transition-[width] duration-300 ease-out" */}
+                {/*         style={{ width: `${Math.min(progress, 100)}%` }} */}
+                {/*     /> */}
+                {/* </div> */}
+                <div className="absolute z-10 inset-x-0 bottom-24">
+                    <p className="text-xl">Cargando...</p>
                 </div>
-                <AnimatedLogoLoad />
+                <video
+                    id="intro-video"
+                    className="fixed inset-0 z-0 h-full w-full"
+                    src="/intro-animation.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls={false}
+                />
             </div>
         </>
     )

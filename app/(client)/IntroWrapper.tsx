@@ -24,8 +24,8 @@ export default function IntroWrapper() {
             case "/produccion-y-medios":
                 introComponentEvt(<MainIntroAnimation />);
                 break;
-            default:
             case "/":
+            default:
                 introComponentEvt(<MainIntroAnimation />);
                 break;
         }

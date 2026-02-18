@@ -148,6 +148,10 @@ body {
     body {
         @apply bg-background text-foreground w-screen overflow-x-hidden overflow-y-auto;
     }
+
+    body {
+        @apply min-h-dvh;
+    }
 }
 
 .marquee {
