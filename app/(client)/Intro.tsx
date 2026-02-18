@@ -1,11 +1,12 @@
 "use client";
 
 import { createRef, useEffect, useEffectEvent, useRef } from 'react';
-import { AnimatedLogoLoad } from '@/src/components/logo/animatedLogoLoad';
 import { create } from 'zustand';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import pato2 from '@/app/(client)/pato2.webp';
 
 export type TIntroStore = {
     progress: number;
@@ -154,26 +155,27 @@ export function MainIntroAnimation() {
     return (
         <>
             <div id="intro-overlay" className="absolute inset-0 z-10 bg-[#488685] translate-y-full"></div>
-            <div id="intro-content" className="relative z-0 h-full w-full text-center">
-                {/* <div className="w-64 h-2 rounded-full overflow-hidden"> */}
-                {/*     <div */}
-                {/*         className="h-full bg-linear-to-r from-purple-500 to-pink-500 transition-[width] duration-300 ease-out" */}
-                {/*         style={{ width: `${Math.min(progress, 100)}%` }} */}
-                {/*     /> */}
-                {/* </div> */}
-                <div className="absolute z-10 inset-x-0 bottom-24">
-                    <p className="text-xl">Cargando...</p>
+            <div id="intro-content" className="relative z-0 flex items-center justify-center h-full w-full text-center">
+                <div className="absolute top-1/2 left-1/2 -translate-1/2 aspect-16/9 h-120">
+                    <Image
+                        className="w-auto h-full"
+                        src={pato2}
+                        alt="pato2"
+                    />
                 </div>
-                <video
-                    id="intro-video"
-                    className="fixed inset-0 z-0 h-full w-full"
-                    src="/intro-animation.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    controls={false}
-                />
+                <div className="absolute z-10 inset-x-0 bottom-40">
+                    <p className="text-2xl">Cargando...</p>
+                </div>
+                {/* <video */}
+                {/*     id="intro-video" */}
+                {/*     className="fixed inset-0 z-0 h-full w-full" */}
+                {/*     src="/intro-animation.webm" */}
+                {/*     autoPlay */}
+                {/*     loop */}
+                {/*     muted */}
+                {/*     playsInline */}
+                {/*     controls={false} */}
+                {/* /> */}
             </div>
         </>
     )
