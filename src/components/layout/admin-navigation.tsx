@@ -30,7 +30,7 @@ export function AdminNavigation() {
                     </nav>
                 </div>
                 <div className="flex items-center space-x-4">
-                    <Button variant="outline" size="sm" asChild>
+                    <Button size="sm" asChild>
                         <Link href="/">View Site</Link>
                     </Button>
                     <UserButton afterSignOutUrl="/" />
