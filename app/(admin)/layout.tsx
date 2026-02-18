@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AdminSidebar } from "@/src/components/admin/admin-sidebar";
 import { Toaster } from "@/src/components/layout/toaster";
 import { AdminOnly } from "@/components/auth/admin-only";
+// import "@uploadthing/react/styles.css";
 
 export default function AdminLayout({
     children,
@@ -22,9 +23,9 @@ export default function AdminLayout({
             </div>
         }>
             <div className="min-h-screen bg-gray-950 text-gray-50">
-                <AdminSidebar 
-                    collapsed={sidebarCollapsed} 
-                    onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} 
+                <AdminSidebar
+                    collapsed={sidebarCollapsed}
+                    onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
                 />
                 <main className={`
                     transition-all duration-300
