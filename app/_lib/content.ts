@@ -37,7 +37,7 @@ export async function getContactContent(): Promise<ContactContent> {
 }
 
 export async function saveContent(content: SiteContent): Promise<void> {
-    fs.writeFileSync(CONFIG_PATH, JSON.stringify(content, null, 2), 'utf-8');
+    fs.writeFileSync(CONFIG_PATH, JSON.stringify(content, null, 4), 'utf-8');
 }
 
 export async function saveServicesContent(services: ServicesContent): Promise<void> {

@@ -1,34 +1,21 @@
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import portfolioImg2 from './horsect_2.webp';
 import Image from 'next/image';
-import calienteDeDgo from './caliente_de_durango.webp';
 import Link from 'next/link';
+import { HomeBigCard } from '@/types/content';
 
-export function PortfolioSection() {
+export function PortfolioSection({ items }: { items: HomeBigCard[] }) {
     return (
         <section className="w-full px-6 pt-8 xl:w-7xl xl:mx-auto 2xl:py-32" data-portfolio-section>
             <ScrollArea>
                 <ul className="relative flex gap-6 md:gap-9">
                     {
-                        portfolioItems.map((item) => (
+                        items.map((item) => (
                             <li className="flex flex-col gap-4 shrink-0 grow-0 w-3/4 py-6 px-px md:w-1/2 xl:w-1/3" key={item.title}>
-                                <div className="w-full aspect-3/4 rounded-sm overflow-hidden shadow-lg lg:rounded-lg">
+                                <div className="flex items-center w-full aspect-3/4 rounded-sm overflow-hidden shadow-lg lg:rounded-lg">
                                     <ItemMedia item={item} />
-                                    {
-                                        item.titleIconAsMainImg
-                                            ? item.titleIcon
-                                            : null
-                                    }
                                 </div>
-                                <PortfolioLink item={item}>
-                                    <h3 className="text-xl uppercase lg:text-3xl lg:pt-4">
-                                        <span className={item.titleIcon && !item.titleIconAsMainImg ? "sr-only" : undefined}>{item.title}</span>
-                                        {
-                                            !item.titleIconAsMainImg && item.titleIcon
-                                                ? (item as typeof portfolioItems[number]).titleIcon
-                                                : null
-                                        }
-                                    </h3>
+                                <PortfolioLink link={item.link}>
+                                    <h3 className="text-xl uppercase lg:text-3xl lg:pt-4">{item.title}</h3>
                                 </PortfolioLink>
                                 <p className="text-sm text-current/60 font-secondary font-medium uppercase lg:text-base">{item.description}</p>
                             </li>
@@ -41,80 +28,31 @@ export function PortfolioSection() {
     );
 }
 
-function PortfolioLink({ children, item }: React.PropsWithChildren<{ item: typeof portfolioItems[number] }>) {
-    switch (item.href) {
-        case "/nuestros-servicios":
-            return (
-                <Link href={item.href}>
-                    {children}
-                </Link>
-            );
-        default:
-            return (
-                <a href={item.href} target="_blank">
-                    {children}
-                </a>
-            );
+function PortfolioLink({ children, link }: React.PropsWithChildren<{ link: string }>) {
+    if (!link) {
+        return children;
     }
+
+    if (link.startsWith("https://")) {
+        return (
+            <a href={link} target="_blank">
+                {children}
+            </a>
+        );
+    }
+
+    return (
+        <Link href={link}>
+            {children}
+        </Link>
+    );
 }
 
-const portfolioItems = [
-    {
-        title: "BYD Durango",
-        // titleIcon: (
-        //     <div className="h-full flex flex-col p-4">
-        //         <BydLogo className="w-full my-auto" />
-        //     </div>
-        // ),
-        titleIcon: null,
-        titleIconAsMainImg: false,
-        description: "Una experiencia digital creada para impulsar la nueva era de movilidad eléctrica en México.",
-        src: "/byd.webm",
-        sourceType: "video",
-        mimeType: "video/webm",
-        href: "https://www.byd.com/mx"
-    } as const,
-    {
-        title: "Caliente MX",
-        titleIcon: (
-            <div className="h-full flex flex-col p-4">
-                <Image className="w-full my-auto" src={calienteDeDgo} alt="Logo de Caliente de Durango" />
-            </div>
-        ),
-        titleIconAsMainImg: true,
-        description: "Campañas digitales enfocadas en conversión y presencia local en Durango.",
-        src: portfolioImg2,
-        sourceType: null,
-        mimeType: null,
-        href: "https://www.instagram.com/calientedgo/"
-    } as const,
-    {
-        title: "Q&R",
-        titleIcon: null,
-        titleIconAsMainImg: false,
-        description: "Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.",
-        src: "/qnr.webm",
-        sourceType: "video",
-        mimeType: "video/webm",
-        href: "https://qrestrellas.com/"
-    } as const,
-    {
-        title: "Puedes ser tú",
-        titleIcon: null,
-        titleIconAsMainImg: false,
-        description: "Identidad visual y estrategia digital para tu negocio!.",
-        src: "",
-        sourceType: "",
-        mimeType: "",
-        href: "/nuestros-servicios"
-    } as const
-] as const;
-
-function ItemMedia({ item }: { item: typeof portfolioItems[number] }) {
-    switch (item.sourceType as 'image' | 'video' | null) {
+function ItemMedia({ item }: { item: HomeBigCard }) {
+    switch (item.mediaKind) {
         case "image":
             return (
-                <Image src={item.src} alt={item.description} className="h-full w-full object-cover scale-105" width={720} height={900} />
+                <Image src={item.media} alt={item.description} className="h-auto w-full object-cover" width={720} height={900} />
             );
         case "video":
             return (
@@ -124,7 +62,7 @@ function ItemMedia({ item }: { item: typeof portfolioItems[number] }) {
                     loop
                     autoPlay
                     playsInline>
-                    <source src={item.src as string} type={item.mimeType as string} />
+                    <source src={item.media} />
                 </video>
             );
         case null:
@@ -132,7 +70,7 @@ function ItemMedia({ item }: { item: typeof portfolioItems[number] }) {
 
         default:
             return (
-                <div className="h-full w-full bg-primary"> </div>
+                <div className="h-full w-full bg-primary"></div>
             );
     }
 }

@@ -1,10 +1,38 @@
+export interface HomeFeaturedProject {
+    title: string;
+    logo: string;
+    description: string;
+    link: string;
+}
+
+export interface HomeIncentiveItem {
+    title: string;
+    description: string;
+}
+
+export interface HomeBigCard {
+    title: string;
+    media: string;
+    mediaKind: "image" | "video";
+    description: string;
+    link: string;
+}
+
 export interface HomeContent {
-    heroVideo: string;
+    heroMedia: string;
+    heroMediaKind: "image" | "video";
     slogan1: string;
     slogan2: string;
     introText: string;
+    introIncentives: HomeIncentiveItem[];
     ctaText: string;
-    featuredProjects: string[];
+    ctaLink: string;
+    featuredProjects: HomeFeaturedProject[];
+    bigCards: HomeBigCard[];
+    squaresSection: {
+        title: string;
+        description: string;
+    }
 }
 
 export interface ServicePlan {
