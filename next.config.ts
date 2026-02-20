@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
             new URL("https://utfs.io/**"),
         ],
     },
+    output: "standalone",
 };
 
 export default nextConfig;
