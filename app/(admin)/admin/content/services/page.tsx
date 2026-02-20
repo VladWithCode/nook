@@ -133,14 +133,14 @@ export default function ServicesContentPage() {
                 </Button>
             </div>
 
-            <div className="rounded-lg border border-white/10 bg-white/5 p-6 space-y-6">
-                <h2 className="text-xl font-semibold text-white">Hero Section</h2>
+            <div className="rounded-lg border border-gray-50/10 bg-white/5 p-6 space-y-6">
+                <h2 className="text-xl font-semibold text-white">Sección Hero</h2>
 
                 <MediaUploader
                     label="Video de fondo"
                     value={content.heroVideo}
                     onChange={(value) => setContent({ ...content, heroVideo: value })}
-                    accept="video/*"
+                    accept="video"
                 />
 
                 <TextEditor
@@ -241,7 +241,7 @@ export default function ServicesContentPage() {
                                     label="Imagen del plan"
                                     value={plan.image}
                                     onChange={(value) => updatePlan(plan.id, { image: value })}
-                                    accept="image/*"
+                                    accept="image"
                                 />
 
                                 <div className="space-y-2">

@@ -32,13 +32,15 @@
                 "title": "Caliente de Durango",
                 "media": "/caliente_de_durango.webp",
                 "mediaKind": "image",
-                "description": "Campañas digitales enfocadas en conversión y presencia local en Durango."
+                "description": "Campañas digitales enfocadas en conversión y presencia local en Durango.",
+                "link": "https://instagram.com"
             },
             {
                 "title": "Q&R",
                 "media": "/qnr.webm",
                 "mediaKind": "video",
-                "description": "Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial."
+                "description": "Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.",
+                "link": "https://qrestrellas.com"
             }
         ],
         "featuredProjects": [
@@ -220,41 +222,6 @@
                         "position": "full",
                         "mimeType": "video/webm",
                         "key": "qnr-video-1"
-                    }
-                ]
-            },
-            {
-                "id": "project-1771453700770",
-                "title": "Test",
-                "description": "Descripción del proyecto...",
-                "bg": "https://utfs.io/f/Wupxs8TCRnc38x3jUUAtyrLliNx2Y1KPX9nOV7oJQajTZ0DA",
-                "bgKind": "video",
-                "bgMimeType": "image/jpeg",
-                "link": "",
-                "media": [
-                    {
-                        "src": "https://utfs.io/f/Wupxs8TCRnc3QfuLrqKzMnL5GxCHArEIqfXk6Kypc9Se2mYD",
-                        "alt": "Nueva imagen",
-                        "kind": "image",
-                        "width": 800,
-                        "height": 600,
-                        "key": "media-1771453714012"
-                    },
-                    {
-                        "src": "https://utfs.io/f/Wupxs8TCRnc3yRdR11wQOmdBIAn7aeLHKojcxkEZSfp1rWQV",
-                        "alt": "Nueva imagen",
-                        "kind": "image",
-                        "width": 800,
-                        "height": 600,
-                        "key": "media-1771453720673"
-                    },
-                    {
-                        "src": "https://utfs.io/f/Wupxs8TCRnc39nJs2bhFkMgE1VvpCz6l7PHawrshxZf8iXmq",
-                        "alt": "Nueva imagen",
-                        "kind": "image",
-                        "width": 800,
-                        "height": 600,
-                        "key": "media-1771453727945"
                     }
                 ]
             }

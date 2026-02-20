@@ -12,16 +12,12 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
     contextSafe: ContextSafeFunc,
 }) {
     const mainScrollRef = useRef<HTMLDivElement>(null);
-    const sectionRefs = useRef<Array<HTMLElement | null>>([]);
-    const titleRefs = useRef<Array<HTMLHeadingElement | null>>([]);
-    const descRefs = useRef<Array<HTMLParagraphElement | null>>([]);
-    const mediaContainerRefs = useRef<Array<HTMLDivElement | null>>([]);
     const { projects } = content;
 
     /* eslint-disable */
     const animateInitialSection = contextSafe(() => {
         // Animate the first section in immediately when the page loads
-        const sectionEl = sectionRefs.current[0];
+        const sectionEl = document.getElementById(projects[0].id);
         if (!sectionEl) return;
 
         const selector = gsap.utils.selector(sectionEl);
@@ -30,7 +26,6 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
         if (mediaCards.length === 0) return;
 
         const cardWidth = mediaCards[0].clientWidth;
-
         const initialTimeline = gsap.timeline();
 
         // Set initial states
@@ -88,12 +83,12 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
             }
         });
 
-        projects.forEach((_, idx) => {
-            const sectionEl = sectionRefs.current[idx];
-            const selector = gsap.utils.selector(sectionEl);
+        projects.forEach((project, idx) => {
+            const sectionEl = document.getElementById(project.id);
 
             if (!sectionEl) return;
 
+            const selector = gsap.utils.selector(sectionEl);
             const mediaCards = selector('[data-media-card]');
             const mediaCount = mediaCards.length;
 
@@ -164,10 +159,10 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
             }
 
             // OUTRO ANIMATION (if not last section)
-            if (idx < projects.length - 1) {
-                const outroLabel = `section-${idx}-outro`;
-                masterTimeline.addLabel(outroLabel);
+            const outroLabel = `section-${idx}-outro`;
+            masterTimeline.addLabel(outroLabel);
 
+            if (idx === 0) {
                 // Fade out and translate up title and description
                 masterTimeline.fromTo(selector('[data-details-title], [data-details-description]'), {
                     opacity: 1,
@@ -194,6 +189,24 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
                     xPercent: -100,
                     opacity: 0,
                 }, outroLabel);
+            } else if (idx < projects.length - 1) {
+                // Fade out and translate up title and description
+                masterTimeline.to(selector('[data-details-title], [data-details-description]'), {
+                    opacity: 0,
+                    y: '-6rem',
+                }, outroLabel);
+
+                // Scale down and fade out video background
+                masterTimeline.to(selector('[data-details-video-background]'), {
+                    opacity: 0,
+                    scale: 0.9,
+                }, outroLabel);
+
+                // Translate left and fade out media
+                masterTimeline.to(selector('[data-media-container]'), {
+                    xPercent: -100,
+                    opacity: 0,
+                }, outroLabel);
             }
         });
     });
@@ -213,11 +226,11 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
 
     return (
         <div className="h-dvh w-dvw grid grid-cols-1 grid-rows-1 [&>section]:col-start-1 [&>section]:row-start-1 bg-neutral-950" ref={mainScrollRef}>
-            {projects.map((project, index) => (
+            {projects.map((project) => (
                 <section
-                    key={`section-${index}`}
-                    ref={el => { sectionRefs.current[index] = el }}
-                    className="h-full w-full grid grid-cols-[30%_60%] grid-rows-1"
+                    key={project.id}
+                    className="h-full w-full grid grid-cols-[30%_70%] grid-rows-1"
+                    id={project.id}
                 >
                     <div className="relative w-full overflow-hidden">
                         <div
@@ -226,9 +239,9 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
                         >
                             {
                                 project.bgKind === "image"
-                                    ? <Image className="h-full w-full object-cover object-center" src={project.bg} alt={project.title} />
+                                    ? <Image className="h-full w-full object-cover object-center" src={project.bg} alt={project.title} fill />
                                     : <video className="h-full w-full object-cover object-center" autoPlay muted playsInline loop>
-                                        <source src={project.bg} type={project.bgMimeType} />
+                                        <source src={project.bg} />
                                     </video>
                             }
                         </div>
@@ -238,14 +251,12 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
                         >
                             <h2
                                 className="text-7xl opacity-0 translate-y-24"
-                                ref={el => { titleRefs.current[index] = el }}
                                 data-details-title
                             >
                                 {project.title}
                             </h2>
                             <p
-                                className="text-current/80 opacity-0 transltate-y-24"
-                                ref={el => { descRefs.current[index] = el }}
+                                className="text-current/80 opacity-0 translate-y-24"
                                 data-details-description
                             >
                                 {project.description}
@@ -254,13 +265,9 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
                     </div>
                     <div
                         className="flex items-center space-x-20 px-16"
-                        ref={el => { mediaContainerRefs.current[index] = el }}
                         data-media-container
                     >
                         {project.media.map(media => <MediaCard media={media} key={media.key} />)}
-                        {project.media.map(media => <MediaCard media={media} key={`${media.key}-2`} />)}
-                        {project.media.map(media => <MediaCard media={media} key={`${media.key}-3`} />)}
-                        {project.media.map(media => <MediaCard media={media} key={`${media.key}-4`} />)}
                     </div>
                 </section>
             ))}
@@ -271,7 +278,7 @@ export default function DesktopPage({ content, animatePage, contextSafe }: {
 function MediaCard({ media }: { media: PortfolioMedia }) {
     return (
         <div
-            className="media-card w-96 grow-0 shrink-0 rounded-lg bg-gray-950 overflow-hidden scale-85 z-0 opacity-0 translate-x-24"
+            className="media-card flex items-center w-96 h-4/5 grow-0 shrink-0 rounded-lg bg-gray-950 overflow-hidden scale-85 z-0 opacity-0 translate-x-24"
             key={media.key}
             data-media-card
         >
@@ -285,15 +292,28 @@ function MediaCard({ media }: { media: PortfolioMedia }) {
 }
 
 function MediaImg({ media }: { media: PortfolioMedia }) {
+    if (media.src.startsWith("https://")) {
+        return (
+            <Image
+                className="w-auto h-full object-cover z-0"
+                src={media.src}
+                alt={media.alt}
+                data-media-elt
+                data-media-elt-img
+                fill
+            />
+        )
+    }
+
     return (
         <Image
-            className="w-full h-full object-cover z-0"
+            className="w-full h-auto object-cover z-0 rounded-lg"
             src={media.src}
             alt={media.alt}
-            width={media.width}
-            height={media.height}
             data-media-elt
             data-media-elt-img
+            height={media.height}
+            width={media.width}
         />
     )
 }
@@ -301,13 +321,14 @@ function MediaImg({ media }: { media: PortfolioMedia }) {
 function MediaVideo({ media }: { media: PortfolioMedia }) {
     return (
         <video
-            height={media.height}
-            width={media.width}
             autoPlay muted playsInline loop
             data-media-elt
             data-media-elt-video
         >
-            <source src={media.src} type={media.mimeType} />
+            <source
+                src={media.src}
+            // type={media.mimeType}
+            />
         </video>
     );
 }

@@ -11,7 +11,6 @@ import advancedPlan from "./nook_plan_3.webp";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ServicesContent, ServicePlan } from "@/types/content";
-import { getServicesContent } from "@/app/_lib/content";
 
 interface ServicesClientPageProps {
     contentPromise: Promise<ServicesContent>;

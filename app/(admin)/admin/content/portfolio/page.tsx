@@ -8,6 +8,7 @@ import { MediaUploader } from "@/components/admin/MediaUploader";
 import { Button } from "@/components/ui/button";
 import { Save, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { savePortfolioAction } from "./_actions";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function PortfolioContentPage() {
     const [content, setContent] = useState<PortfolioContent | null>(null);
@@ -186,8 +187,23 @@ export default function PortfolioContentPage() {
                                     label="Video de fondo"
                                     value={project.bg}
                                     onChange={(value) => updateProject(project.id, { bg: value })}
-                                    accept="video/*"
+                                    accept="all"
                                 />
+                                <SelectGroup>
+                                    <SelectLabel>Tipo de medio</SelectLabel>
+                                    <Select
+                                        defaultValue={project.bgKind}
+                                        onValueChange={(v) => updateProject(project.id, { bgKind: v as any })}
+                                    >
+                                        <SelectTrigger className="bg-gray-800 border border-white/20 text-white rounded-md px-3 py-2 text-sm">
+                                            <SelectValue placeholder="Selecciona un tipo de medio" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="image">Imagen</SelectItem>
+                                            <SelectItem value="video">Video</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </SelectGroup>
 
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between">
@@ -214,7 +230,8 @@ export default function PortfolioContentPage() {
                                                 </button>
                                             </div>
                                             <MediaUploader
-                                                label=""
+                                                label="Medios para el proyecto"
+                                                accept="all"
                                                 value={media.src}
                                                 onChange={(value) => updateMedia(project.id, mIndex, { src: value })}
                                             />
@@ -224,12 +241,12 @@ export default function PortfolioContentPage() {
                                                     value={media.alt}
                                                     onChange={(e) => updateMedia(project.id, mIndex, { alt: e.target.value })}
                                                     placeholder="Texto alternativo"
-                                                    className="bg-white/5 border border-white/10 text-white rounded-md px-3 py-2 text-sm"
+                                                    className="bg-gray-800 border border-white/20 text-white rounded-md px-3 py-2 text-sm"
                                                 />
                                                 <select
                                                     value={media.kind}
                                                     onChange={(e) => updateMedia(project.id, mIndex, { kind: e.target.value as "image" | "video" })}
-                                                    className="bg-white/5 border border-white/10 text-white rounded-md px-3 py-2 text-sm"
+                                                    className="bg-gray-800 border border-white/20 text-white rounded-md px-3 py-2 text-sm"
                                                 >
                                                     <option value="image">Imagen</option>
                                                     <option value="video">Video</option>

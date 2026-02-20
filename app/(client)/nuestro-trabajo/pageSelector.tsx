@@ -1,7 +1,6 @@
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import MobilePage from "./mobilePage";
 import DesktopPage from "./desktopPage";
-import { TSection } from "./sections";
 import { ContextSafeFunc } from "@gsap/react";
 import { PortfolioContent } from "@/types/content";
 import { use } from "react";
