@@ -99,7 +99,7 @@ export function PageContent({ contentPromise }: { contentPromise: Promise<AboutC
                                 newImages[index] = value;
                                 setDraft({ ...draft, heroImages: newImages });
                             }}
-                            accept="image/*"
+                            accept="image"
                         />
                     ))}
                 </div>
@@ -173,7 +173,7 @@ export function PageContent({ contentPromise }: { contentPromise: Promise<AboutC
                 <TextEditor
                     label="Texto del botón"
                     value={draft.ctaText}
-                    onChange={(value) => setdraft({ ...content, ctaText: value })}
+                    onChange={(value) => setDraft({ ...content, ctaText: value })}
                 />
             </div>
         </div>

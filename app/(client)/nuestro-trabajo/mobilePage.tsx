@@ -7,7 +7,7 @@ import Image from "next/image";
 import { TMedia, TMediaImage, TSection } from "./sections";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { PortfolioContent } from "@/types/content";
+import { PortfolioContent, PortfolioMedia, PortfolioProject } from "@/types/content";
 
 export default function MobilePage({ animatePage, content }: {
     animatePage: boolean,
@@ -101,7 +101,7 @@ export default function MobilePage({ animatePage, content }: {
     );
 }
 
-function GallerySection({ sectionData }: { sectionData: TSection }) {
+function GallerySection({ sectionData }: { sectionData: PortfolioProject }) {
     return (
         <div className="space-y-10 md:px-8 md:space-y-16" data-animatable-section>
             <h2
@@ -127,7 +127,7 @@ function GallerySection({ sectionData }: { sectionData: TSection }) {
     )
 }
 
-function GalleryMediaRow({ media, position }: { media: TMedia, position: keyof typeof mediaPositions }) {
+function GalleryMediaRow({ media, position }: { media: PortfolioMedia, position: keyof typeof mediaPositions }) {
     switch (media.kind) {
         case "image":
             return <GalleryImg media={media} position={position} />
@@ -145,7 +145,7 @@ const mediaPositions = {
 } as const;
 
 function GalleryImg({ media, position }: {
-    media: TMedia & TMediaImage,
+    media: PortfolioMedia,
     position: keyof typeof mediaPositions
 }) {
     const { src, alt, width, height, position: overridePosition } = media;
@@ -167,7 +167,7 @@ function GalleryImg({ media, position }: {
     );
 }
 
-function GalleryVideo({ video, position }: { video: { kind: "video", src: string, width: number, height: number, mimeType: string }, position: keyof typeof mediaPositions }) {
+function GalleryVideo({ video, position }: { video: PortfolioMedia, position: keyof typeof mediaPositions }) {
     return (
         <video
             className={cn(
