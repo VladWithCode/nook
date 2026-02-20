@@ -58,7 +58,7 @@ const navigation: NavGroup[] = [
         items: [
             {
                 title: "Página Principal",
-                href: "/admin/content",
+                href: "/admin/content/home",
                 icon: FileText,
             },
             {
