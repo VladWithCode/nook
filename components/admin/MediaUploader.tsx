@@ -9,7 +9,7 @@ interface MediaUploaderProps {
     label: string;
     value: string;
     onChange: (value: string) => void;
-    accept?: "image" | "video" | "all" | "image/*" | "video/*";
+    accept?: "image" | "video" | "all";
 }
 
 export function MediaUploader({ label, value, onChange, accept = "all" }: MediaUploaderProps) {
@@ -51,8 +51,8 @@ export function MediaUploader({ label, value, onChange, accept = "all" }: MediaU
         <div className="space-y-2">
             <Label className="text-white/80">{label}</Label>
 
-            {value ? (
-                <div className="relative rounded-lg border border-white/10 bg-white/5 p-4">
+            {value && !showDropzone ? (
+                <div className="relative rounded-lg border border-current/20 bg-gray-800 p-4">
                     {isVideo ? (
                         <div className="flex items-center gap-3">
                             <Video className="h-8 w-8 text-blue-400" />
@@ -131,7 +131,7 @@ export function MediaUploader({ label, value, onChange, accept = "all" }: MediaU
                             <button
                                 type="button"
                                 onClick={() => setShowDropzone(true)}
-                                className="px-4 py-2 rounded-md border border-white/20 text-white hover:bg-white/10"
+                                className="px-4 py-2 rounded-md border border-current/20 hover:bg-current/10"
                             >
                                 <Upload className="mr-2 h-4 w-4 inline" />
                                 Arrastrar
@@ -157,7 +157,7 @@ export function MediaUploader({ label, value, onChange, accept = "all" }: MediaU
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder="O ingresa la URL directamente..."
-                    className="w-full bg-white/5 border border-white/10 text-white rounded-md px-3 py-2 text-sm"
+                    className="w-full bg-gray-800 border border-current/20 rounded-md px-3 py-2 text-sm"
                 />
             </div>
         </div>
