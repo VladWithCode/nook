@@ -1,0 +1,371 @@
+{
+    "home": {
+        "heroMedia": "/nook_hero.webm",
+        "heroMediaKind": "video",
+        "slogan1": "minuciosa",
+        "slogan2": "perfección",
+        "introText": "es una agencia digital mexicana que impulsa negocios con precisión quirúrgica. Diseñamos marcas, campañas y experiencias que convierten cada detalle en crecimiento real.",
+        "introIncentives": [
+            {
+                "title": "Crea",
+                "description": "Diseño que convierte ideas en impacto real."
+            }, 
+            {
+                "title": "Innova",
+                "description": "Estrategias que redefinen cómo crece tu marca."
+            },
+            {
+                "title": "Crece",
+                "description": "Impulso digital que acelera tu negocio."
+            }
+        ],
+        "ctaText": "Ver nuestro trabajo",
+        "ctaLink": "/nuestro-trabajo",
+        "bigCards": [
+            {
+                "title": "BYD",
+                "media": "/byd.webm",
+                "mediaKind": "video",
+                "description": "Una experiencia digital creada para impulsar la nueva era de movilidad eléctrica en México."
+            },
+            {
+                "title": "Caliente de Durango",
+                "media": "/caliente_de_durango.webp",
+                "mediaKind": "image",
+                "description": "Campañas digitales enfocadas en conversión y presencia local en Durango.",
+                "link": "https://instagram.com"
+            },
+            {
+                "title": "Q&R",
+                "media": "/qnr.webm",
+                "mediaKind": "video",
+                "description": "Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.",
+                "link": "https://qrestrellas.com"
+            }
+        ],
+        "featuredProjects": [
+            {
+                "title": "Villa Chenacolo",
+                "logo": "/logo_ch.webp",
+                "description": "Branding y sistema visual de alto lujo para Villa Chenacolo, un salón de eventos exclusivo que fusiona elegancia arquitectónica y experiencias memorables en cada celebración.",
+                "link": "https://villachenacolo.com"
+            },
+            {
+                "title": "BYD",
+                "logo": "/bydLogo.webp",
+                "description": "Una experiencia digital creada para impulsar la nueva era de movilidad eléctrica en México.",
+                "link": "https://byd.com"
+            },
+            {
+                "title": "Caliente de Durango",
+                "logo": "/caliente_de_durango.webp",
+                "description": "Campañas digitales enfocadas en conversión y presencia local en Durango.",
+                "link": "https://instagram.com/calientedgo"
+            },
+            {
+                "title": "Q&R Estrellas de la Limpieza",
+                "logo": "/logo_qr.webp",
+                "description": "Branding y sistema visual profesional para una empresa dedicada a limpieza industrial y residencial.",
+                "link": "https://qrestrellas.com"
+            }
+        ],
+        "squaresSection": {
+            "title": "Creamos experiencia para hacerte notar y ayudarte a crecer",
+            "description": "Nuestra experiencia nos ha dado una envidiable reputación por siempre dar ese factor \"WOW\", apoyada con diseño inteligente y bien pensado, enfocado en darte la mayor ganacia por tu inversión."
+        }
+    },
+    "services": {
+        "heroVideo": "https://utfs.io/f/Wupxs8TCRnc3CJY3HG8CDdiompBlgYzx5MbkGUfFh4LquAnE",
+        "marqueeText": "POSICIONATE",
+        "introText1": "Tu éxito es nuestro éxito. Por eso, nuestra oferta está enfocada en darte el mayor valor por tu inversión.",
+        "introText2": "Posiciona tu negocio, sé la primera opción para tus clientes.",
+        "ctaText": "Ver Paquetes",
+        "plans": [
+            {
+                "id": "basico",
+                "title": "Primera Experiencia Nöok",
+                "price": "$7,000 MXN",
+                "features": [
+                    "8 reels orgánicos grabados en agencia",
+                    "10 fotografías profesionales editadas",
+                    "1 cobertura local (máx. 2 horas)",
+                    "Grabación + 2 reels derivados",
+                    "Vuelo de Dron"
+                ],
+                "image": "/nook_plan_1.webp",
+                "ctaText": "Contratar ahora",
+                "theme": "default"
+            },
+            {
+                "id": "avanzado",
+                "title": "Plan Pro",
+                "price": "$12,000 MXN/mes",
+                "features": [
+                    "12 reels orgánicos mensuales",
+                    "20 fotografías profesionales editadas",
+                    "1 cobertura local (máx. 2 horas)",
+                    "Grabación + 2 reels",
+                    "6 reels de marca generados con IA",
+                    "Vuelo de Dron",
+                    "Planificación mensual estratégica"
+                ],
+                "image": "/nook_plan_3.webp",
+                "ctaText": "Contratar ahora",
+                "theme": "dark"
+            },
+            {
+                "id": "enterprise",
+                "title": "Plan Premium",
+                "price": "$17,000 MXN/mes",
+                "features": [
+                    "18 reels orgánicos mensuales",
+                    "30 fotografías profesionales editadas",
+                    "2 cobertura local (máx. 3 horas cada una)",
+                    "Grabación + 2 reels por cobertura",
+                    "10 reels de marca generados con IA",
+                    "6 post gráficos (a solicitud)",
+                    "Vuelo de Dron",
+                    "Planeación estratégica avanzada y prioridad en la agenda"
+                ],
+                "image": "/nook_plan_2.webp",
+                "ctaText": "Contratar ahora",
+                "theme": "special"
+            }
+        ],
+        "planExtraServices": [
+            {
+                "title": "Reel extra",
+                "price": 800
+            },
+            {
+                "title": "Video institucional / cinematográfico",
+                "price": 2000
+            },
+            {
+                "title": "Banco extra de fotografías",
+                "price": 1000
+            },
+            {
+                "title": "Dron (precio por hora)",
+                "price": 1000
+            },
+            {
+                "title": "Cobertura adicional",
+                "price": 2200
+            }
+        ],
+        "serviceList": [
+            {
+                "title": "Diseño de Presentación",
+                "price": 900
+            },
+            {
+                "title": "Diseño Tríptico",
+                "price": 800
+            },
+            {
+                "title": "Catalogo simple foto + Nombre + Descripción + Precio, diseño editorial PDF 30 art.",
+                "price": 3080
+            },
+            {
+                "title": "Diseño de menús",
+                "price": 1930
+            },
+            {
+                "title": "Packaging simple",
+                "price": 1280
+            },
+            {
+                "title": "Mockups (precio por unidad)",
+                "price": 80
+            },
+            {
+                "title": "Video con IA estándar 8 segundos",
+                "price": 600
+            },
+            {
+                "title": "Canción con IA. (Letra personalizada 1:00 a 1:30 segundos + 10 cambios).",
+                "price": 2500
+            },
+            {
+                "title": "Diseño con IA",
+                "price": 300
+            },
+            {
+                "title": "Apertura de redes desde 0",
+                "price": 3000
+            },
+            {
+                "title": "Hora de Dron",
+                "price": 1500
+            },
+            {
+                "title": "Reel orgánico",
+                "price": 800
+            },
+            {
+                "title": "Reel con IA (no avatar)",
+                "price": 600
+            },
+            {
+                "title": "Edición express con material del cliente",
+                "price": 800
+            },
+            {
+                "title": "Optimización Whats App Business",
+                "price": 2000
+            }
+        ],
+        "packs": [
+            {
+                "title": "Gestión de pauta (% sobre inversión)",
+                "price": 30,
+                "omitFormat": true
+            },
+            {
+                "title": "Before we go",
+                "price": 9000
+            },
+            {
+                "title": "Business ready",
+                "price": 8000
+            },
+            {
+                "title": "Eat the brand",
+                "price": 10000
+            },
+            {
+                "title": "Make it wow",
+                "price": 6000
+            },
+            {
+                "title": "Live Aesthetic",
+                "price": 4000
+            },
+            {
+                "title": "The Build Up",
+                "price": 4000
+            },
+            {
+                "title": "Future Me",
+                "price": 1000
+            },
+            {
+                "title": "Class Code",
+                "price": 4000
+            },
+            {
+                "title": "Little adventures",
+                "price": 6000
+            },
+            {
+                "title": "This is you",
+                "price": 2500
+            }
+        ]
+    },
+    "about": {
+        "heroImages": [
+            "/chenacolo-sm.webp",
+            "/chenacolo_showcase.webp",
+            "/qr_icon.webp"
+        ],
+        "introText": "NÖOK es una agencia digital mexicana que impulsa negocios con precisión quirúrgica. Diseñamos marcas, campañas y experiencias que convierten cada detalle en crecimiento real.",
+        "sections": [
+            {
+                "id": "intro",
+                "title": "Todos los expertos, un techo. No más teléfono descompuesto.",
+                "content": "Reserva tu lugar. Desarrollemos tu proyecto, juntos. Somos todo oídos—no hay ideas locas, en NÖOK no juzgamos.",
+                "images": []
+            },
+            {
+                "id": "experience",
+                "title": "Nuestra experiencia",
+                "content": "Con 14 años de experiencia, somos del tamaño justo—ni muy grandes, ni muy pequeños, exactamente lo necesario—la experiencia de un estudio de talla mundial con la flexibilidad de una agencia boutique—sin las complicaciones. Sin juegos de teléfono. Sin pérdidas de energía. Solo excelente trabajo y buenas vibras. Hacemos que todo funcione.",
+                "images": []
+            },
+            {
+                "id": "methodology",
+                "title": "Una fórmula simple y efectiva",
+                "content": "Sexy primero. Inteligente siempre. Una estrategia 500 millones de años en desarrollo.",
+                "images": []
+            }
+        ],
+        "ctaText": "Agendar Cita"
+    },
+    "portfolio": {
+        "projects": [
+            {
+                "id": "byd",
+                "title": "BYD",
+                "description": "Una empresa de automóviles de alta tecnología que se dedica a la construcción de vehículos de alta velocidad y alta precisión, diseñados para atraer a los clientes más atractivos.",
+                "bg": "/byd.webm",
+                "bgKind": "video",
+                "bgMimeType": "video/webm",
+                "link": "https://www.byd.com/mx",
+                "media": [
+                    {
+                        "src": "/byd.webp",
+                        "alt": "Imagen de galería de la campaña BYD",
+                        "kind": "image",
+                        "width": 600,
+                        "height": 600,
+                        "key": "byd-image-1"
+                    },
+                    {
+                        "src": "/byd.webm",
+                        "kind": "video",
+                        "width": 1080,
+                        "height": 1920,
+                        "position": "full",
+                        "mimeType": "video/webm",
+                        "key": "byd-video-1"
+                    }
+                ]
+            },
+            {
+                "id": "limpieza-qr",
+                "title": "Limpieza QR",
+                "description": "Limpieza Q&R ofrece servicios profesionales de limpieza para hogares y oficinas, garantizando espacios impecables y saludables para nuestros clientes.",
+                "bg": "/qnr.webm",
+                "bgKind": "video",
+                "bgMimeType": "video/webm",
+                "link": "https://qrestrellas.com/",
+                "media": [
+                    {
+                        "src": "/qnr1.webp",
+                        "alt": "Imagen de la Q&R",
+                        "kind": "image",
+                        "width": 1080,
+                        "height": 1620,
+                        "key": "qnr-image-1"
+                    },
+                    {
+                        "src": "/qnr2.webp",
+                        "alt": "Imagen de la campaña de Q&R",
+                        "kind": "image",
+                        "width": 1080,
+                        "height": 1620,
+                        "key": "qnr-image-2"
+                    },
+                    {
+                        "src": "/qnr.webm",
+                        "kind": "video",
+                        "width": 720,
+                        "height": 1280,
+                        "position": "full",
+                        "mimeType": "video/webm",
+                        "key": "qnr-video-1"
+                    }
+                ]
+            }
+        ]
+    },
+    "contact": {
+        "phone": "6182919510",
+        "email": "contacto@nookcreativo.mx",
+        "address": "Calle Nazas 100, Real Country, 34162 Durango, Dgo.",
+        "hours": "9:00 a 18:00 horas",
+        "heroImage": "https://utfs.io/f/Wupxs8TCRnc3huEvGFzZ4dksaAFQBp5CROrGXUDyWw7qh2vH"
+    }
+}

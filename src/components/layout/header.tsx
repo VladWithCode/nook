@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { NookLogo } from "../svg/nook";
 import { NavigationMenu } from "./navigationMenu";
-import { useIntroStore } from "@/app/Intro";
+import { useIntroStore } from "@/app/(client)/Intro";
 import { useEffect, useState } from "react";
 
 export function Header() {

@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.animated-grid {
+    @apply -translate-x-[var(--translate-container)];
+}
