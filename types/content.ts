@@ -45,6 +45,22 @@ export interface ServicePlan {
     theme: "default" | "dark" | "special";
 }
 
+export interface ServicesPlanExtra {
+    title: string;
+    price: number;
+}
+
+export interface ServicesListItem {
+    title: string;
+    price: number;
+}
+
+export interface ServicesPack {
+    title: string;
+    price: number;
+    omitFormat?: boolean;
+}
+
 export interface ServicesContent {
     heroVideo: string;
     marqueeText: string;
@@ -52,6 +68,9 @@ export interface ServicesContent {
     introText2: string;
     ctaText: string;
     plans: ServicePlan[];
+    planExtraServices: ServicesPlanExtra[];
+    serviceList: ServicesListItem[];
+    packs: ServicesPack[];
 }
 
 export interface AboutSection {

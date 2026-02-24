@@ -11,6 +11,9 @@ import advancedPlan from "./nook_plan_3.webp";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ServicesContent, ServicePlan } from "@/types/content";
+import { formatPrice } from "@/lib/format";
+import { IndividualServices } from "./_IndividualServices";
+import { Packages } from "./_Packages";
 
 interface ServicesClientPageProps {
     contentPromise: Promise<ServicesContent>;
@@ -46,6 +49,17 @@ export function ServicesClientPage({ contentPromise }: ServicesClientPageProps) 
             default: return "bg-main [&_.showcase-img]:object-right";
         }
     };
+
+    const gradients = [
+        "bg-gradient-to-br from-blue-700 to-sky-500",
+        "bg-gradient-to-br from-main via-teal-600 to-yellow-500",
+        "bg-gradient-to-br from-rose-600 via-pink-500 to-rose-400",
+        "bg-gradient-to-br from-pink-600 to-fuchsia-500",
+        "bg-gradient-to-br from-sky-500 to-main",
+        "bg-gradient-to-br from-fuchsia-600 via-purple-500 to-fuchsia-400",
+    ];
+
+    const getGradient = (index: number) => gradients[index % gradients.length];
 
     return (
         <>
@@ -83,20 +97,42 @@ export function ServicesClientPage({ contentPromise }: ServicesClientPageProps) 
                         <p className="text-2xl font-extrabold font-secondary uppercase pr-4 text-end ml-auto sm:max-w-3/5">{content.introText2}</p>
                     </div>
                 </section>
-                <section className="flex flex-col items-center p-8 gap-y-8 md:p-12 md:gap-y-10 lg:p-18 lg:gap-y-16 xl:py-24 xl:gap-y-16 2xl:flex-row 2xl:items-stretch 2xl:gap-x-6">
-                    {content.plans.map((plan) => (
-                        <PlanCard
-                            key={plan.id}
-                            className={getPlanTheme(plan.theme)}
-                            title={plan.title}
-                            features={plan.features}
-                            price={plan.price}
-                            img={getPlanImage(plan.image)}
-                            imgAlt={`Imagen de ${plan.title}`}
-                            ctaText={plan.ctaText}
-                        />
-                    ))}
+                <section className="space-y-6 p-8 md:p-12 md:gap-y-10 lg:p-18 lg:gap-y-16 xl:py-24 xl:gap-y-16">
+                    <div className="flex flex-col items-center gap-y-8 2xl:flex-row 2xl:items-stretch 2xl:gap-x-6">
+                        {content.plans.map((plan) => (
+                            <PlanCard
+                                key={plan.id}
+                                className={getPlanTheme(plan.theme)}
+                                title={plan.title}
+                                features={plan.features}
+                                price={plan.price}
+                                img={getPlanImage(plan.image)}
+                                imgAlt={`Imagen de ${plan.title}`}
+                                ctaText={plan.ctaText}
+                            />
+                        ))}
+                    </div>
+                    <div className="space-y-2 xl:px-8 xl:max-w-7xl mx-auto">
+                        <h3 className="text-lg text-current/80">Servicios adicionales</h3>
+                        <ul className="max-w-2xl text-current/70 list-disc list-inside">
+                            {content.planExtraServices.map(svc => (
+                                <li key={svc.title} className="space-x-2 text-sm font-secondary">
+                                    <span>{svc.title}</span>
+                                    <span>&mdash;</span>
+                                    <span className="font-extrabold">{formatPrice(svc.price)} MXN</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </section>
+                <IndividualServices
+                    serviceList={content.serviceList}
+                    gradients={gradients}
+                />
+                <Packages 
+                    packs={content.packs} 
+                    gradients={gradients} 
+                />
                 <section className="flex flex-col justify-center items-center gap-8 bg-gray-800 px-6 py-20 xl:flex-row">
                     <button className="bg-main px-8 py-2 rounded-full text-xl text-stone-50 uppercase xl:py-3 xl:px-12">Contratar ahora</button>
                     <button className="bg-stone-50 px-8 py-2 rounded-full text-xl text-stone-900 uppercase xl:py-3 xl:px-12">Volver al inicio</button>
@@ -121,15 +157,15 @@ function PlanCard({ title, features, price, img, imgAlt, imgLeft, className, cta
             "bg-main text-stone-50 rounded-lg overflow-hidden sm:w-4/5 sm:aspect-square md:grid md:grid-cols-3 md:aspect-auto xl:grid-cols-4",
             className,
         )}>
-            <div className="h-full relative z-10 flex flex-col space-y-8 p-6 md:col-span-2 md:row-start-1 md:p-7 lg:p-9 xl:p-10">
+            <div className="h-full relative z-10 flex flex-col space-y-8 p-6 md:col-span-2 md:row-start-1 md:p-7 lg:p-9 xl:p-10 2xl:col-span-3">
                 <h2 className="text-4xl font-secondary font-extrabold uppercase mb-6">{title}</h2>
                 <ul className="space-y-3 list-disc list-inside text-start">
                     {features.map((feature, i) => (
                         <li key={i}>{feature}</li>
                     ))}
                 </ul>
-                <p className="text-4xl mt-4">{price}</p>
-                <Button className="cta mt-auto md:text-base md:p-5" asChild>
+                <p className="text-4xl mt-auto">{price}</p>
+                <Button className="cta md:text-base md:p-5" asChild>
                     <Link href="/contacto">{ctaText || "Contratar ahora"}</Link>
                 </Button>
             </div>

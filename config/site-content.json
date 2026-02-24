@@ -83,14 +83,14 @@
         "plans": [
             {
                 "id": "basico",
-                "title": "Plan Básico",
-                "price": "$5,000 MXN/mes",
+                "title": "Primera Experiencia Nöok",
+                "price": "$7,000 MXN",
                 "features": [
-                    "Diseño de marca",
-                    "Estrategias de crecimiento",
-                    "Planificación de ventas",
-                    "Gestión de clientes",
-                    "Marketing digital"
+                    "8 reels orgánicos grabados en agencia",
+                    "10 fotografías profesionales editadas",
+                    "1 cobertura local (máx. 2 horas)",
+                    "Grabación + 2 reels derivados",
+                    "Vuelo de Dron"
                 ],
                 "image": "/nook_plan_1.webp",
                 "ctaText": "Contratar ahora",
@@ -98,15 +98,16 @@
             },
             {
                 "id": "avanzado",
-                "title": "Plan Avanzado",
-                "price": "$8,500 MXN/mes",
+                "title": "Plan Pro",
+                "price": "$12,000 MXN/mes",
                 "features": [
-                    "Incluye servicios del plan Básico",
-                    "Diseño de marca",
-                    "Estrategias de crecimiento",
-                    "Planificación de ventas",
-                    "Gestión de clientes",
-                    "Marketing digital"
+                    "12 reels orgánicos mensuales",
+                    "20 fotografías profesionales editadas",
+                    "1 cobertura local (máx. 2 horas)",
+                    "Grabación + 2 reels",
+                    "6 reels de marca generados con IA",
+                    "Vuelo de Dron",
+                    "Planificación mensual estratégica"
                 ],
                 "image": "/nook_plan_3.webp",
                 "ctaText": "Contratar ahora",
@@ -114,19 +115,152 @@
             },
             {
                 "id": "enterprise",
-                "title": "Plan Enterprise",
-                "price": "$14,000 MXN/mes",
+                "title": "Plan Premium",
+                "price": "$17,000 MXN/mes",
                 "features": [
-                    "Incluye servicios del plan Avanzado",
-                    "Diseño de marca",
-                    "Estrategias de crecimiento",
-                    "Planificación de ventas",
-                    "Gestión de clientes",
-                    "Marketing digital"
+                    "18 reels orgánicos mensuales",
+                    "30 fotografías profesionales editadas",
+                    "2 cobertura local (máx. 3 horas cada una)",
+                    "Grabación + 2 reels por cobertura",
+                    "10 reels de marca generados con IA",
+                    "6 post gráficos (a solicitud)",
+                    "Vuelo de Dron",
+                    "Planeación estratégica avanzada y prioridad en la agenda"
                 ],
                 "image": "/nook_plan_2.webp",
                 "ctaText": "Contratar ahora",
                 "theme": "special"
+            }
+        ],
+        "planExtraServices": [
+            {
+                "title": "Reel extra",
+                "price": 800
+            },
+            {
+                "title": "Video institucional / cinematográfico",
+                "price": 2000
+            },
+            {
+                "title": "Banco extra de fotografías",
+                "price": 1000
+            },
+            {
+                "title": "Dron (precio por hora)",
+                "price": 1000
+            },
+            {
+                "title": "Cobertura adicional",
+                "price": 2200
+            }
+        ],
+        "serviceList": [
+            {
+                "title": "Diseño de Presentación",
+                "price": 900
+            },
+            {
+                "title": "Diseño Tríptico",
+                "price": 800
+            },
+            {
+                "title": "Catalogo simple foto + Nombre + Descripción + Precio, diseño editorial PDF 30 art.",
+                "price": 3080
+            },
+            {
+                "title": "Diseño de menús",
+                "price": 1930
+            },
+            {
+                "title": "Packaging simple",
+                "price": 1280
+            },
+            {
+                "title": "Mockups (precio por unidad)",
+                "price": 80
+            },
+            {
+                "title": "Video con IA estándar 8 segundos",
+                "price": 600
+            },
+            {
+                "title": "Canción con IA. (Letra personalizada 1:00 a 1:30 segundos + 10 cambios).",
+                "price": 2500
+            },
+            {
+                "title": "Diseño con IA",
+                "price": 300
+            },
+            {
+                "title": "Apertura de redes desde 0",
+                "price": 3000
+            },
+            {
+                "title": "Hora de Dron",
+                "price": 1500
+            },
+            {
+                "title": "Reel orgánico",
+                "price": 800
+            },
+            {
+                "title": "Reel con IA (no avatar)",
+                "price": 600
+            },
+            {
+                "title": "Edición express con material del cliente",
+                "price": 800
+            },
+            {
+                "title": "Optimización Whats App Business",
+                "price": 2000
+            }
+        ],
+        "packs": [
+            {
+                "title": "Gestión de pauta (% sobre inversión)",
+                "price": 30,
+                "omitFormat": true
+            },
+            {
+                "title": "Before we go",
+                "price": 9000
+            },
+            {
+                "title": "Business ready",
+                "price": 8000
+            },
+            {
+                "title": "Eat the brand",
+                "price": 10000
+            },
+            {
+                "title": "Make it wow",
+                "price": 6000
+            },
+            {
+                "title": "Live Aesthetic",
+                "price": 4000
+            },
+            {
+                "title": "The Build Up",
+                "price": 4000
+            },
+            {
+                "title": "Future Me",
+                "price": 1000
+            },
+            {
+                "title": "Class Code",
+                "price": 4000
+            },
+            {
+                "title": "Little adventures",
+                "price": 6000
+            },
+            {
+                "title": "This is you",
+                "price": 2500
             }
         ]
     },
