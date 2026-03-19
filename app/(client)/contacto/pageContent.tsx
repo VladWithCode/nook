@@ -9,7 +9,6 @@ import { ContactForm } from "./contactForm";
 import { ScrollTrigger } from "gsap/all";
 import { useIntroStore } from "../Intro";
 import { ContactContent } from "@/types/content";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
