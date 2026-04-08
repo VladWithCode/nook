@@ -129,13 +129,17 @@ export function ServicesClientPage({ contentPromise }: ServicesClientPageProps) 
                     serviceList={content.serviceList}
                     gradients={gradients}
                 />
-                <Packages 
-                    packs={content.packs} 
-                    gradients={gradients} 
+                <Packages
+                    packs={content.packs}
+                    gradients={gradients}
                 />
                 <section className="flex flex-col justify-center items-center gap-8 bg-gray-800 px-6 py-20 xl:flex-row">
-                    <button className="bg-main px-8 py-2 rounded-full text-xl text-stone-50 uppercase xl:py-3 xl:px-12">Contratar ahora</button>
-                    <button className="bg-stone-50 px-8 py-2 rounded-full text-xl text-stone-900 uppercase xl:py-3 xl:px-12">Volver al inicio</button>
+                    <Button className="bg-main px-8 py-2 rounded-full text-xl text-stone-50 uppercase xl:py-3 xl:px-12" asChild>
+                        <Link href="/contacto">Contratar ahora</Link>
+                    </Button>
+                    <Button className="bg-main px-8 py-2 rounded-full text-xl text-stone-50 uppercase xl:py-3 xl:px-12" asChild>
+                        <Link href="/">Volver al inicio</Link>
+                    </Button>
                 </section>
             </div>
         </>
