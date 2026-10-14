@@ -161,30 +161,3 @@ export async function sendWhatsAppContactRequest({
         notificationResponse: notificationResponse,
     };
 }
-
-// Test function for development
-export async function testWhatsAppMessage() {
-    const pNumber = process.env.WHATSAPP_NOTIFICATIONS_PHONE;
-    if (!pNumber) {
-        throw new Error('WhatsApp Notifications Phone is not defined');
-    }
-
-    try {
-        const response = await postCloudAPIMessage({
-            type: 'template',
-            toPhoneNumber: pNumber,
-            templateData: {
-                name: 'hello_world',
-                language: {
-                    code: 'en_US',
-                },
-            },
-        });
-        return response.messages;
-    } catch (error) {
-        throw {
-            message: 'Ocurrio un error al enviar el mensaje',
-            error: error,
-        };
-    }
-}

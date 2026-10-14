@@ -21,12 +21,6 @@ export function AdminNavigation() {
                         >
                             Dashboard
                         </Link>
-                        <Link
-                            href="/admin-test"
-                            className="text-sm font-medium transition-colors hover:text-gray-300"
-                        >
-                            Testing
-                        </Link>
                     </nav>
                 </div>
                 <div className="flex items-center space-x-4">
